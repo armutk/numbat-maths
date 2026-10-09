@@ -150,7 +150,7 @@ def _agent_body(tool_ids, prompt):
         "platform_settings": {
             "auth": {"enable_auth": False, "allowlist": [{"hostname": h} for h in ALLOWED_HOSTS], "require_origin_header": True},
             "privacy": {"record_voice": False, "retention_days": 1, "delete_audio": True, "delete_transcript_and_pii": False, "zero_retention_mode": False},
-            "call_limits": {"agent_concurrency_limit": 2, "daily_limit": 14, "bursting_enabled": False},
+            "call_limits": {"agent_concurrency_limit": 2, "daily_limit": 40, "bursting_enabled": False},
             "trust_context": "low",
             "overrides": {"conversation_config_override": {"conversation": {"text_only": True}, "agent": {"first_message": True}}, "custom_llm_extra_body": False},
             "guardrails": None if not GUARDRAILS else {
