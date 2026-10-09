@@ -183,8 +183,14 @@ if (!args.has('--raw-only')) {
   const exact = {};
   const templates = [];
   for (const e of L.inventory) {
-    if (e.kind === 'fixed') exact[e.text] = e.segments[0];
-    else if (e.kind === 'template') templates.push({ pattern: e.text, segments: e.segments });
+    // A fixed sentence is one whole clip. If it is built from several segments or has slots it must be a template
+    // (give the entry a `pattern`), otherwise the exact map would play only its first segment (the old clipped-line bug).
+    const multi = e.segments.length > 1 || e.segments.some((x) => x.startsWith('{') || x.startsWith('+'));
+    if (e.kind === 'fixed' && !multi) exact[e.text] = e.segments[0];
+    else if (e.kind === 'fixed' || e.kind === 'template') {
+      if (e.kind === 'fixed' && !e.pattern) throw new Error(`fixed sentence "${e.text}" has several segments: add a "pattern" with slots`);
+      templates.push({ pattern: e.pattern || e.text, segments: e.segments });
+    }
   }
   const manifest = {
     version: 1, voice: L.voice.name, gaps_ms: L.gaps_ms,

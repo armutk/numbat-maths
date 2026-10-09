@@ -15,7 +15,7 @@ const SEED = Number(arg('seed', 1));
 const ONLY = arg('modules', '') ? arg('modules', '').split(',') : null;
 const ORIENTS = arg('orient', '') ? [arg('orient', '')] : ['land', 'port'];
 const BASE = (process.env.BASE || 'http://127.0.0.1:8124/').replace(/\/?(\?.*)?$/, '/') + '?dev';
-const OUT = new URL('../screens/', import.meta.url).pathname;
+const OUT = process.env.QA_OUT || '/tmp/claude-1000/qa/shots/';
 mkdirSync(OUT, { recursive: true });
 const MODE = ENGINE === 'webkit' ? 'synthetic' : 'cdp';
 
@@ -34,7 +34,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 
 /* ---------- finger ---------- */
-async function makeFinger(context, page) {
+async function makeFingerOld(context, page) {
   if (MODE === 'cdp') {
     const cdp = await context.newCDPSession(page);
     const pts = new Map();
@@ -197,7 +197,7 @@ async function draggableCheck(page, f, rand) {
   return false;
 }
 
-/* ---------- scenarios ---------- */
+
 const randOf = (rand, arr) => arr[Math.floor(rand() * arr.length)];
 // a zone whose centre is at least 70 px from the item, so the gesture is a real drag and not an accidental tap
 const farZone = (rand, zones, it) => { const far = zones.filter((z) => Math.hypot(z.x - it.x, z.y - it.y) > 70); return randOf(rand, far.length ? far : zones); };
@@ -217,191 +217,137 @@ async function dragOne(page, f, rand, { steps = 12, dt = 12, to = 'zone' } = {})
   return true;
 }
 
-const SCENARIOS = {
-  async normal(page, f, m, rand) { for (let i = 0; i < 3; i++) { await dragOne(page, f, rand); await sleep(700); } },
-  async flick(page, f, m, rand) { for (let i = 0; i < 3; i++) { await dragOne(page, f, rand, { steps: 3, dt: 0 }); await sleep(300); } },
-  async offscreen(page, f, m, rand) { await dragOne(page, f, rand, { to: 'off', steps: 10 }); await sleep(300); await dragOne(page, f, rand, { to: 'empty' }); },
-  async secondFinger(page, f, m, rand) {
-    const items = await itemPoints(page); const zones = await zonePoints(page);
-    const it = randOf(rand, items), z = farZone(rand, zones, it);
-    await f.down(it.x, it.y); await sleep(20);
-    await glide(f, it, { x: (it.x + z.x) / 2, y: (it.y + z.y) / 2 }, 6, 12);
-    await f.down(40, 40, 2); await sleep(30);                        // palm / second finger
-    await glide(f, { x: (it.x + z.x) / 2, y: (it.y + z.y) / 2 }, z, 8, 12);
-    await f.move(60, 60, 2);
-    await f.up();                                                    // first finger lifts
-    await sleep(80);
-    await f.up(2);
+
+/* ---------- multi-touch aware finger (QA) ---------- */
+async function makeFinger2(context, page) {
+  if (MODE === 'cdp') return makeFingerOld(context, page);
+  // synthetic: each pointer id is bound to the element under it at pointerdown (pointer-capture semantics)
+  const last = new Map();
+  const fire = (type, x, y, id, grab) => page.evaluate(({ type, x, y, id, grab }) => {
+    window.__tgt = window.__tgt || {};
+    if (grab) { const u = document.elementFromPoint(x, y); window.__tgt[id] = u?.closest?.('.item') || u || document.body; }
+    const el = window.__tgt[id] || document.body;
+    const primary = id === 1;
+    el.dispatchEvent(new PointerEvent(type, { pointerId: id, pointerType: 'touch', isPrimary: primary, bubbles: true, cancelable: true, clientX: x, clientY: y, button: 0, buttons: type === 'pointerup' || type === 'pointercancel' ? 0 : 1 }));
+    if (type === 'pointerup' || type === 'pointercancel') delete window.__tgt[id];
+  }, { type, x, y, id, grab });
+  return {
+    down: async (x, y, id = 1) => { last.set(id, { x, y }); await fire('pointerdown', x, y, id, true); },
+    move: async (x, y, id = 1) => { last.set(id, { x, y }); await fire('pointermove', x, y, id, false); },
+    up: async (id = 1) => { const p = last.get(id) || { x: 0, y: 0 }; last.delete(id); await fire('pointerup', p.x, p.y, id, false); },
+    cancel: async () => { const p = last.get(1) || { x: 0, y: 0 }; last.clear(); await fire('pointercancel', p.x, p.y, 1, false); },
+  };
+}
+
+const SC = {
+  // 40 very fast taps on the same item, then a drag
+  async rapidTaps(page, f, m, rand) {
+    const items = await itemPoints(page); const it = randOf(rand, items);
+    for (let i = 0; i < 40; i++) { await f.down(it.x, it.y); await sleep(i % 3 ? 5 : 0); await f.up(); }
+    for (let i = 0; i < 10; i++) { await f.down(it.x, it.y); await f.up(); await f.down(it.x + 2, it.y + 1); await f.up(); }
+    const z = farZone(rand, await zonePoints(page), it);
+    await f.down(it.x, it.y); await glide(f, it, z, 8, 12);
+    const ghost = await page.evaluate(() => document.querySelectorAll('.drag-ghost').length);
+    if (ghost !== 1) throw new Error(`after rapid taps, drag produced ${ghost} ghosts (expected 1)`);
+    await f.up(); await sleep(400);
   },
-  async tapThenDrag(page, f, m, rand) {
-    for (let i = 0; i < 3; i++) {
-      const items = await itemPoints(page); if (!items.length) return;
-      const it = randOf(rand, items);
-      await f.down(it.x, it.y); await sleep(40); await f.up();       // accidental tap: picks the item
-      await sleep(60);
-      const zones = await zonePoints(page); const z = farZone(rand, zones, it);
-      await f.down(it.x, it.y); await sleep(15);
-      await glide(f, it, z, 10, 12);
-      const mid = await page.evaluate(() => { const g = document.querySelector('.drag-ghost'); return g ? g.style.transform : null; });
-      if (!mid) throw new Error('item did not follow the finger after a tap (no ghost)');
-      await f.up(); await sleep(650);
+  // two fingers on two different items at once, release in both orders
+  async twoFingers(page, f, m, rand) {
+    for (const order of [[1, 2], [2, 1]]) {
+      const items = await itemPoints(page); if (items.length < 2) return;
+      const a = items[0], b = items[items.length - 1];
+      const zs = await zonePoints(page); const za = farZone(rand, zs, a), zb = farZone(rand, zs, b);
+      await f.down(a.x, a.y, 1); await f.down(b.x, b.y, 2);
+      for (let i = 1; i <= 10; i++) { await f.move(a.x + (za.x - a.x) * i / 10, a.y + (za.y - a.y) * i / 10, 1); await f.move(b.x + (zb.x - b.x) * i / 10, b.y + (zb.y - b.y) * i / 10, 2); await sleep(10); }
+      await f.up(order[0]); await sleep(30); await f.up(order[1]); await sleep(700);
+    }
+    // and a pinch-ish: both fingers on the SAME item
+    const items = await itemPoints(page); if (items.length) { const a = items[0]; await f.down(a.x, a.y, 1); await f.down(a.x + 10, a.y + 6, 2); await sleep(40); await f.move(a.x + 40, a.y + 40, 1); await f.up(2); await sleep(30); await f.up(1); await sleep(600); }
+  },
+  // drag while recorded voice / SFX are playing and Pip ducking toggles
+  async dragWhileAudio(page, f, m, rand) {
+    await page.evaluate(async () => {
+      const au = await import(new URL('./js/audio.js', document.baseURI).href);
+      const vo = await import(new URL('./js/voice.js', document.baseURI).href);
+      au.unlockAudio(); await au.preloadSfx();
+      window.__vo = vo; window.__au = au;
+      vo.say('Put the socks in pairs. Each hoop needs 2 socks. How many socks altogether?', { interrupt: true });
+      window.__spk = setInterval(() => { vo.say('Every hoop has 2. Lovely pairs!', { interrupt: false }); au.duck(true); setTimeout(() => au.duck(false), 300); au.sfx.pop(); }, 250);
+    });
+    for (let i = 0; i < 6; i++) { await dragOne(page, f, rand, { steps: 8, dt: 15 }); await sleep(200); }
+    await page.evaluate(() => { clearInterval(window.__spk); window.__vo.stop(); });
+  },
+  // after Check (right or wrong), grab things immediately during the feedback/celebration
+  async dragDuringCheck(page, f, m, rand) {
+    const clickCheck = () => page.evaluate(() => { const b = document.querySelector('.actions button:not([disabled])'); if (b) { b.click(); return true; } return false; });
+    for (const delay of [0, 60, 250, 700, 1500]) {
+      // fill (roughly even, alternate zones) then Check, then drag at `delay`
+      const items = await itemPoints(page); if (!items.length) break;
+      const zs = (await page.evaluate(() => [...document.querySelectorAll('[data-drop]:not(.tray)')].map((e) => { const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })));
+      for (let i = 0; i < items.length; i++) {
+        const cur = await itemPoints(page); const it = cur.find((p) => true); if (!it) break;
+        const z = zs[i % zs.length]; await f.down(it.x, it.y); await glide(f, it, z, 5, 6); await f.up(); await sleep(120);
+      }
+      await settle(page, 2500);
+      const clicked = await clickCheck();
+      await sleep(delay);
+      for (let k = 0; k < 3; k++) { await dragOne(page, f, rand, { steps: 6, dt: 8 }).catch(() => {}); await sleep(30); }
+      await sleep(1200);
+      const s = await state(page);
+      if (s.nonIdle || s.lifted || s.ghosts) throw new Error(`delay ${delay} (check ${clicked}): stuck state ${JSON.stringify(s)}`);
+      if (!(await page.evaluate((sel) => document.querySelectorAll(sel).length, ITEMS))) break; // advanced
     }
   },
-  async doubleTap(page, f, m, rand) {
-    const items = await itemPoints(page); const it = randOf(rand, items);
-    for (let i = 0; i < 2; i++) { await f.down(it.x, it.y); await sleep(30); await f.up(); await sleep(50); }
-    await sleep(200);
-  },
-  async feedbackDrag(page, f, m, rand) {
-    // fill the board randomly, tap Check (wrong layout), and drag again right away
-    for (let i = 0; i < 12; i++) { const items = await itemPoints(page); if (!items.length) break; await dragOne(page, f, rand, { steps: 6, dt: 6 }); await sleep(90); }
-    await settle(page);
-    const clicked = await page.evaluate(() => { const b = document.querySelector('.actions .btn:not([disabled]), .actions button:not([disabled])'); if (b) { b.click(); return true; } return false; });
-    await sleep(clicked ? 60 : 0);
-    await dragOne(page, f, rand, { steps: 8, dt: 10 });
-    await sleep(900);
-    await dragOne(page, f, rand, { steps: 8, dt: 10 });
-  },
-  async questionChange(page, f, m, rand) {
-    const items = await itemPoints(page); const zones = await zonePoints(page);
-    const it = randOf(rand, items), z = farZone(rand, zones, it);
-    await f.down(it.x, it.y); await sleep(20);
-    await glide(f, it, z, 6, 14);
-    await page.evaluate(([id, l]) => window.__numbat.mountTask(id, l), [m.skill, m.level]);   // question changes mid-drag
-    await sleep(60);
-    await glide(f, z, { x: z.x + 20, y: z.y + 20 }, 3, 10);
-    await f.up();
-    await sleep(900);
-    await snapshot(page);
-  },
-  async rotate(page, f, m, rand) {
-    const vp = page.viewportSize();
-    const items = await itemPoints(page); const zones = await zonePoints(page);
-    const it = randOf(rand, items), z = farZone(rand, zones, it);
-    await f.down(it.x, it.y); await sleep(20);
-    await glide(f, it, z, 6, 14);
-    await page.setViewportSize({ width: vp.height, height: vp.width });
-    await sleep(150);
-    await f.move(z.x * 0.5, z.y * 0.5).catch(() => {});
-    await f.up().catch(() => {});
-    await sleep(500);
-    const items2 = await itemPoints(page);
-    await page.setViewportSize(vp);
-    await sleep(700);
-    void items2;
-  },
-  async background(page, f, m, rand) {
-    const items = await itemPoints(page); const zones = await zonePoints(page);
-    const it = randOf(rand, items), z = farZone(rand, zones, it);
-    await f.down(it.x, it.y); await sleep(20);
-    await glide(f, it, z, 6, 14);
-    await page.evaluate(() => {
-      Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
-      document.dispatchEvent(new Event('visibilitychange'));
-      window.dispatchEvent(new Event('pagehide'));
-    });
-    await sleep(120);
-    await page.evaluate(() => {
-      Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
-      document.dispatchEvent(new Event('visibilitychange'));
-      window.dispatchEvent(new Event('pageshow'));
-    });
-    await f.up().catch(() => {});
-    await sleep(600);
-  },
-  async touchcancel(page, f, m, rand) {
-    const items = await itemPoints(page); const zones = await zonePoints(page);
-    const it = randOf(rand, items), z = farZone(rand, zones, it);
-    await f.down(it.x, it.y); await sleep(20);
-    await glide(f, it, z, 8, 12);
-    await f.cancel();
-    await sleep(600);
-  },
-  async holdStill(page, f, m, rand) {
-    const items = await itemPoints(page); const it = randOf(rand, items);
-    await f.down(it.x, it.y);
-    await sleep(900);                     // long hold: lifts, wobbles, then released in place
-    await f.up();
-    await sleep(600);
-  },
-  async pickExpiry(page, f, m, rand) {
-    const items = await itemPoints(page); const it = randOf(rand, items);
-    await f.down(it.x, it.y); await sleep(40); await f.up();
-    await sleep(300);
-    const n = await page.evaluate(() => document.querySelectorAll('.is-picked').length);
-    if (n !== 1) throw new Error(`tap did not pick (picked=${n})`);
-    await sleep(4300);                                   // auto-expires after 4 s
-  },
-  async random(page, f, m, rand) {
-    for (let i = 0; i < RANDOM; i++) {
+  // a flurry of random gestures including cancel mid-flight, over many iterations at once with two fingers
+  async chaos(page, f, m, rand) {
+    for (let i = 0; i < 120; i++) {
+      const items = await itemPoints(page); if (!items.length) break;
+      const a = randOf(rand, items), b = randOf(rand, items);
+      const zs = await zonePoints(page); const za = randOf(rand, zs), zb = randOf(rand, zs);
+      const two = rand() < 0.4;
+      await f.down(a.x, a.y, 1); if (two) await f.down(b.x, b.y, 2);
+      const n = 2 + Math.floor(rand() * 6);
+      for (let s = 1; s <= n; s++) { await f.move(a.x + (za.x - a.x) * s / n, a.y + (za.y - a.y) * s / n, 1); if (two) await f.move(b.x + (zb.x - b.x) * s / n, b.y + (zb.y - b.y) * s / n, 2); }
       const r = rand();
-      if (r < 0.06) {                                                    // tap, then drag the same item
-        const items = await itemPoints(page); if (items.length) { const it = randOf(rand, items); await f.down(it.x, it.y); await sleep(25); await f.up(); await sleep(30); const z = farZone(rand, await zonePoints(page), it); await f.down(it.x, it.y); await glide(f, it, z, 7, 8); await f.up(); }
-      } else if (r < 0.2) await dragOne(page, f, rand, { to: 'empty', steps: 6, dt: 6 });
-      else if (r < 0.35) await dragOne(page, f, rand, { steps: 3, dt: 0 });
-      else await dragOne(page, f, rand, { steps: 5 + Math.floor(rand() * 9), dt: 5 });
-      await sleep(40 + Math.floor(rand() * 90));
-      if (i % 40 === 39) { const s = await state(page); if (s.nonIdle > 1) await sleep(500); }
-      // the question may have advanced on its own: keep going on whatever is mounted
-      const live = await page.evaluate((s) => document.querySelectorAll(s).length, ITEMS);
-      if (!live) break;
+      if (r < 0.15) await f.cancel(); else if (two && r < 0.5) { await f.up(2); await f.up(1); } else { await f.up(1); if (two) await f.up(2); }
+      await sleep(Math.floor(rand() * 60));
     }
   },
 };
 
-/* ---------- runner ---------- */
-const table = [];
-let failures = 0;
-
-async function runCombo(browser, orient) {
+const table2 = []; let fails = 0;
+const MODS2 = [{ name: 'sharing.two', skill: 'sharing.two', level: 1, conserve: true }, { name: 'groups.pairs', skill: 'groups.pairs', level: 1, conserve: true }, { name: 'sharing.groups', skill: 'sharing.groups', level: 2, conserve: true }, { name: 'groups.pairs.L4', skill: 'groups.pairs', level: 4, conserve: true }];
+async function runCombo2(browser, orient) {
   const devName = orient === 'land' ? 'iPad (gen 7) landscape' : 'iPad (gen 7)';
   const context = await browser.newContext({ ...devices[devName], locale: 'en-AU', serviceWorkers: 'block' });
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await boot(page);
-  const f = await makeFinger(context, page);
-  for (const m of MODULES) {
-    const row = { engine: ENGINE, orient, module: m.name, results: {}, resets: 0 };
-    table.push(row);
-    const rand = rng(SEED * 7919 + m.name.length * 31 + (orient === 'land' ? 1 : 2));
-    for (const [name, fn] of Object.entries(SCENARIOS)) {
-      const t0 = Date.now();
+  const f = await makeFinger2(context, page);
+  for (const m of MODS2.filter((x) => !ONLY || ONLY.includes(x.name))) {
+    const rand = rng(SEED * 31 + m.name.length + (orient === 'land' ? 1 : 2));
+    for (const [name, fn] of Object.entries(SC)) {
       let problems = [];
       errors.length = 0;
       try {
         await mount(page, m);
         await page.evaluate(() => { window.__drag.resetAllDrags(); });
-        const r0 = await page.evaluate(() => window.__drag.dragStats().resets);
         await fn(page, f, m, rand);
-        problems = await verify(page, m, rand, { skipPick: name !== 'pickExpiry' });
+        problems = await verify(page, m, rand, { skipPick: true });
         if (!problems.length && !(await draggableCheck(page, f, rand))) problems.push('items no longer draggable into any target');
         if (!problems.length) problems.push(...(await verify(page, m, rand, { skipPick: true })));
-        const r1 = await page.evaluate(() => window.__drag.dragStats().resets);
-        row.resets += r1 - r0;
         if (errors.length) problems.push(`page error: ${errors[0]}`);
       } catch (e) { problems.push(`exception: ${String(e.message).split('\n')[0]}`); }
-      const ok = problems.length === 0;
-      row.results[name] = ok ? 'pass' : 'FAIL';
-      if (!ok) {
-        failures++;
-        console.log(`FAIL ${ENGINE}/${orient}/${m.name}/${name}: ${problems.join('; ')}`);
-        await page.screenshot({ path: `${OUT}fuzz-fail-${ENGINE}-${orient}-${m.name}-${name}.png` }).catch(() => {});
-        // recover for the next scenario
-        await page.evaluate(() => window.__drag.resetAllDrags()).catch(() => {});
-        await f.cancel().catch(() => {});
-      } else console.log(`ok   ${ENGINE}/${orient}/${m.name}/${name} (${Date.now() - t0} ms)`);
+      const ok = !problems.length;
+      console.log(`${ok ? 'ok  ' : 'FAIL'} ${ENGINE}/${orient}/${m.name}/${name}${ok ? '' : ': ' + problems.join('; ')}`);
+      if (!ok) { fails++; mkdirSync(OUT, { recursive: true }); await page.screenshot({ path: `${OUT}extra-fail-${ENGINE}-${orient}-${m.name}-${name}.png` }).catch(() => {}); await page.evaluate(() => window.__drag.resetAllDrags()).catch(() => {}); await f.cancel().catch(() => {}); }
     }
   }
   await context.close();
 }
-
-const browser = await (ENGINE === 'webkit' ? webkit : chromium).launch();
-await Promise.all(ORIENTS.map((o) => runCombo(browser, o)));
-await browser.close();
-
-const names = Object.keys(SCENARIOS);
-console.log('\n' + ['engine', 'orient', 'module', ...names, 'resets'].join('\t'));
-for (const r of table) console.log([r.engine, r.orient, r.module, ...names.map((n) => r.results[n] || '-'), r.resets].join('\t'));
-console.log(`\n${failures ? 'FAILED' : 'ALL PASS'}: ${failures} failing scenario(s)`);
-process.exit(failures ? 1 : 0);
+const browser2 = await (ENGINE === 'webkit' ? webkit : chromium).launch();
+await Promise.all(ORIENTS.map((o) => runCombo2(browser2, o)));
+await browser2.close();
+console.log(fails ? `FAILED ${fails}` : 'ALL PASS');
+process.exit(fails ? 1 : 0);

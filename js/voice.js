@@ -123,9 +123,17 @@ function expand(man, c, tpl, caps, out, missing, gaps) {
   }
 }
 
+/** Key of a whole-sentence recording: lower-case, straight quotes, single spaces, punctuation kept (so "." and "!" differ). */
+export function sentenceKey(s) {
+  return String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/…/g, '...').replace(/\s+/g, ' ').trim();
+}
+
 function resolveSentence(man, c, sentence, gaps) {
   const n = norm(sentence);
   if (!n) return { items: [], missing: [] };
+  // 1. a recording of this exact sentence: one file, no stitching (natural prosody)
+  const whole = (man.sentences || {})[sentenceKey(sentence)];
+  if (whole) return { items: [{ file: whole, key: 'sentence', gap: 0 }], missing: [], whole: true };
   const ex = c.exact.get(n);
   if (ex) { const f = clipFile(man, ex); return f ? { items: [{ file: f, key: ex, gap: 0 }], missing: [] } : { items: [], missing: [ex] }; }
   if (/^(\d{1,3}|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|no)$/.test(n)) {
@@ -152,18 +160,19 @@ function resolveSentence(man, c, sentence, gaps) {
 export function resolve(text, manifest) {
   const gaps = Object.assign({ between_segments: 60, between_sentences: 220, list: 140 }, manifest.gaps_ms || {});
   const c = compile(manifest);
-  const items = [], missing = [];
+  const items = [], missing = [], stitched = [];
   const whole = resolveSentence(manifest, c, String(text ?? ''), gaps);
-  if (whole.items.length) return { ok: true, missing: [], items: whole.items };
+  if (whole.items.length) return { ok: true, missing: [], stitched: whole.whole ? [] : [String(text).trim()], items: whole.items };
   for (const s of splitSentences(text)) {
     const r = resolveSentence(manifest, c, s, gaps);
+    if (r.items.length && !r.whole) stitched.push(s);
     if (r.items.length) {
       const [head, ...rest] = r.items;
       items.push({ ...head, gap: items.length ? gaps.between_sentences : 0 }, ...rest);
     }
     missing.push(...r.missing);
   }
-  return { ok: missing.length === 0, missing, items };
+  return { ok: missing.length === 0, missing, stitched, items };
 }
 
 
@@ -273,6 +282,10 @@ async function speak(text) {
   if (!man || my !== token) return;
   const plan = resolve(text, man);
   if (dev() && plan.missing.length) for (const m of plan.missing) console.info('voice:miss', m);
+  if (plan.stitched && plan.stitched.length) {           // last-resort word stitching: log it so the sentence can be recorded
+    try { (window.__voiceStitched = window.__voiceStitched || new Set()).add(plan.stitched.join(' | ')); } catch {}
+    if (dev()) for (const m of plan.stitched) console.info('voice:stitched', m);
+  }
   if (!plan.items.length) return;
   const loaded = await Promise.all(plan.items.map((it) => loadBuf(it.file)));
   if (my !== token || !isUnlocked()) return;

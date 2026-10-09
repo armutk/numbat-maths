@@ -65,7 +65,7 @@ async function runEngine(engine, launcher, mode) {
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   await seed(page);
-  await page.evaluate(async () => { const d = await import('/js/drag.js'); d.installPressFeedback(document); });
+  await page.evaluate(async () => { const d = await import(new URL('./js/drag.js', document.baseURI).href); d.installPressFeedback(document); });
   await page.evaluate(() => window.__numbat.mountTask('sharing.two', 1));
   await page.waitForSelector('.tray .item', { timeout: 5000 });
   await page.waitForTimeout(700);

@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 MSG="${1:?commit message}"
 git add -A
 if git diff --cached --quiet; then echo "nothing to commit"; else
-  git -c user.name="Omi" -c user.email="109920547+armutk@users.noreply.github.com" commit -q -m "$MSG" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
+  git -c user.name="Omi" -c user.email="109920547+armutk@users.noreply.github.com" commit -q -m "$MSG" -m "Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 fi
 GH_T=$(ssh -o BatchMode=yes hermes 'secrets get GITHUB_TOKEN_ARMUTK' 2>/dev/null)
 [ -n "$GH_T" ] || { echo "no token"; exit 1; }

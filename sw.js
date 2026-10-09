@@ -1,6 +1,6 @@
 // Offline-first service worker: precache the app shell, serve from cache, refresh in the background.
 // Voice clips and SFX are cached best-effort in a second pass so one missing file never blocks install.
-const VERSION = 'numbat-maths-v3';
+const VERSION = 'numbat-maths-v4';
 const SHELL = [
   './',
   './index.html',
@@ -21,7 +21,10 @@ self.addEventListener('install', (e) => {
     const c = await caches.open(VERSION);
     await c.addAll(SHELL);
     // best effort, in small batches so Safari does not choke
-    const extra = [...SFX, ...VOICE];
+    // whole-sentence recordings are listed in the voice manifest
+    let sent = [];
+    try { const m = await (await fetch('./assets/voice/manifest.json', { cache: 'no-cache' })).json(); sent = [...new Set(Object.values(m.sentences || {}))].map((f) => './assets/voice/' + f); } catch {}
+    const extra = [...SFX, ...VOICE, ...sent];
     for (let i = 0; i < extra.length; i += 20) {
       await Promise.all(extra.slice(i, i + 20).map((u) => fetch(u).then((r) => (r.ok ? c.put(u, r) : null)).catch(() => null)));
     }

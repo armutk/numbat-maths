@@ -12,7 +12,7 @@ Live at https://armutk.github.io/numbat-maths/ (offline-first PWA: Add to Home S
 | `js/board.js`, `css/board.css` | Pip's whiteboard: items, plates/groups with avatars, number line, 120 chart, ten frames, choices, keypad, highlight, demonstrate, celebrate. `tests/board-dev.html` exercises it standalone. |
 | `js/camera.js` | Camera mode. JPEG snapshots (max 640 px) go to the Hermes proxy, which asks Gemini Flash to count objects; frames are never stored. |
 | `js/memory.js`, `js/profile-config.js` | Learner profile (seed + what Pip learns), session history, parent summaries, daily/session caps. All on the device (`localStorage`). |
-| `js/voice.js`, `assets/voice/` | Offline voice: 444 recorded clips of the same ElevenLabs voice, stitched gap-free on the Web Audio clock. No `speechSynthesis` anywhere. |
+| `js/voice.js`, `assets/voice/` | Offline voice: whole-sentence recordings (`assets/voice/sent/`, `tools/gen-sentences.mjs`) played as one file each; sentences not yet recorded fall back to 444 word/phrase clips stitched on the Web Audio clock (logged in dev as `voice:stitched`). No `speechSynthesis` anywhere. |
 | `js/audio.js`, `assets/sfx/` | Web Audio engine (iOS unlock, voice/SFX buses, ducking) and a CC0 SFX set from Kenney.nl. |
 | `js/drag.js` | One hardened touch drag engine for every screen (pointer capture, state machine, watchdog, spring/lift/snap feel). |
 | `js/modules/*` | The original four islands, kept as "Practise on my own" (works offline). |
@@ -29,6 +29,7 @@ Tests (Playwright; Chromium runs natively, WebKit runs through Docker with `test
 - `tests/tutor-check.mjs` live agent wiring with a fake board (text-only session): connection, first response, tool calls, move reporting, Ask Pip.
 - `tests/board-check.mjs` whiteboard API + touch drags + screenshots.
 - `tests/drag-fuzz.mjs` adversarial touch fuzzing of every module (gate for deploys).
+- `tests/qa-*.mjs`, `tests/qa-fuzz-all-live.sh`: layout (Ask Pip overlap), audio, voice coverage (`qa-voice-cover.mjs`), service worker, live drag fuzz.
 - `tests/touch-check.mjs`, `tests/audio-check.mjs`, `tests/voice-check.mjs`, `tests/play.mjs` (scripted practice quest).
 
 Fonts: Fredoka and Nunito (SIL OFL), bundled. Illustrations are original SVG. SFX: Kenney.nl, CC0 (see `assets/sfx/LICENSE.txt`). ElevenLabs browser SDK vendored in `js/vendor/` (MIT).

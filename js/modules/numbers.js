@@ -54,8 +54,9 @@ const CSS = `
 .nb-piece.nb-in { animation: popin 0.35s var(--ease-pop); }
 .nb-piece.nb-out { transition: transform 0.18s, opacity 0.18s; transform: scale(0.2) !important; opacity: 0; }
 @media (orientation: portrait) {
-  .nb-build { --unit: 26px; flex-direction: column; }
-  .nb-build.is-big { --unit: 22px; }
+  /* block size follows the viewport height so rods, mat and tray always fit above the Ask Pip strip (short Safari-chrome portrait too) */
+  .nb-build { --unit: clamp(14px, calc((100vh - 700px) / 20), 26px); flex-direction: column; }
+  .nb-build.is-big { --unit: clamp(12px, calc((100vh - 700px) / 24), 22px); }
   .nb-build .tray { flex-direction: row; width: auto; align-items: flex-end; justify-content: space-around; gap: 40px; padding: 10px 30px; }
   .nb-build .mat-col .big { font-size: 2.6rem; }
 }

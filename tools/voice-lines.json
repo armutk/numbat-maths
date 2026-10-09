@@ -1267,7 +1267,8 @@
     "needs",
     "{n}",
     "{many2}"
-   ]
+   ],
+   "pattern": "Each {many} needs {n} {many2}."
   },
   {
    "text": "Every {many} has {n}.",
@@ -1311,7 +1312,8 @@
    "segments": [
     "that-is",
     "{n}"
-   ]
+   ],
+   "pattern": "That is {n}!"
   },
   {
    "text": "Have another look.",

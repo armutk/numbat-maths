@@ -560,6 +560,16 @@ input { font: inherit; }
   box-shadow: 0 6px 0 var(--sand-deep), 0 14px 28px rgba(43, 39, 64, 0.16);
   animation: pip-breathe 4.2s ease-in-out infinite;
 }
+/* Reserve the button's corner so it never covers anything interactive: landscape screens keep a clear
+   right-hand strip, portrait screens a clear bottom strip, as big as the button (88px + 18px margin + 8px air). */
+:root { --pip-reserve: calc(88px + 18px + 8px); }
+@media (orientation: landscape) {
+  .screen:not(.first-run) { padding-right: calc(var(--safe-right) + var(--pip-reserve)); }
+}
+@media (orientation: portrait) {
+  /* the bottom row (Check etc.) is centred, so only the stage above it needs to clear the button's top edge */
+  .screen:not(.first-run) { padding-bottom: calc(var(--safe-bottom) + 40px); }
+}
 .ask-pip .face { width: 52px; height: 52px; margin-top: 2px; flex: 0 0 auto; }
 .ask-pip .label { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; line-height: 1; margin-top: 1px; letter-spacing: 0.01em; }
 .ask-pip .hand, .ask-pip .badge {
