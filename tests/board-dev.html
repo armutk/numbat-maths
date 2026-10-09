@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <title>Pip board dev harness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/board.css">
+  <style>
+    #app { display: flex; flex-direction: column; padding: 8px 12px 8px; gap: 8px; }
+    .dev-bar { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 6px; max-height: 148px; overflow-y: auto; touch-action: pan-y; }
+    .dev-bar button { font: 600 13px/1 var(--font-display); padding: 8px 10px; border-radius: 10px; background: #fff; box-shadow: 0 2px 0 var(--sand-deep); min-height: 34px; }
+    .dev-bar button.hot { background: var(--yellow-soft); }
+    .dev-board { flex: 1 1 auto; min-height: 0; position: relative; }
+    #log { flex: 0 0 auto; margin: 0; height: 108px; overflow: auto; font: 11px/1.35 ui-monospace, Menlo, monospace; background: #2b2740; color: #e8e4f5; border-radius: 10px; padding: 8px; white-space: pre-wrap; touch-action: pan-y; -webkit-user-select: text; user-select: text; }
+    body.clean .dev-bar, body.clean #log { display: none; }
+    body.clean #app { padding: 10px 16px; }
+    canvas#fx { position: absolute; inset: 0; z-index: 90; pointer-events: none; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="dev-bar" id="bar"></div>
+    <div class="dev-board" id="stage"></div>
+    <pre id="log"></pre>
+  </div>
+  <canvas id="fx"></canvas>
+  <script type="module">
+    import createBoard from '../js/board.js';
+    import { makeDraggable, makeDropTarget } from '../js/drag.js';
+    import { h, svg, flipMove, wait } from '../js/ui.js';
+    import { items, friend, mascot, avatarFor } from '../js/art.js';
+    import * as audio from '../js/audio.js';
+
+    const params = new URLSearchParams(location.search);
+    if (params.has('clean')) document.body.classList.add('clean');
+    const sfx = audio.sfx || {};
+    const unlock = () => { try { audio.unlockAudio?.(); } catch {} };
+    addEventListener('pointerdown', unlock, { once: true });
+
+    const board = createBoard(document.getElementById('stage'), {
+      sfx, draggable: makeDraggable, dropTarget: makeDropTarget, flipMove, h, svg, items, friend, mascot, avatarFor, wait,
+    });
+    window.board = board;
+    window.__errors = [];
+    addEventListener('error', (e) => window.__errors.push(String(e.message)));
+    addEventListener('unhandledrejection', (e) => window.__errors.push(String(e.reason)));
+
+    const log = document.getElementById('log');
+    window.__events = [];
+    const out = (line) => { log.textContent += line + '\n'; log.scrollTop = log.scrollHeight; };
+    for (const ev of ['move', 'pickup', 'reject', 'answer', 'tap', 'tap-request', 'demo']) {
+      board.on(ev, (p) => { window.__events.push({ ev, p }); out(`EVENT ${ev} ${JSON.stringify(p)}`); });
+    }
+    const report = (label) => {
+      out(`> ${label}`);
+      out(`  state: ${JSON.stringify(board.getState())}`);
+      out(`  describe: ${board.describe()}`);
+    };
+
+    const SHARE = { kind: 'share', items: { kind: 'timtam', count: 12 }, groups: [{ id: 'g0', name: 'Arisha', role: 'child' }, { id: 'g1', name: 'Mum', role: 'mum' }, { id: 'g2', name: 'Dad', role: 'dad' }], leftovers: true };
+    const actions = [
+      ['setScene 12 Tim Tams / 3 + bowl', () => board.setScene(SHARE)],
+      ['setScene 8 cookies / 2 plates', () => board.setScene({ kind: 'share', items: { kind: 'cookie', count: 8 }, groups: [{ id: 'g0', name: 'Arisha', role: 'child' }, { id: 'g1', name: 'Nan', role: 'nan' }], leftovers: false })],
+      ['setScene 15 stars / 5 hoops', () => board.setScene({ kind: 'share', items: { kind: 'star', count: 15 }, groups: ['Arisha:child', 'Mum:mum', 'Dad:dad', 'Pop:pop', 'Ms Lee:teacher'].map((s, i) => ({ id: `g${i}`, name: s.split(':')[0], role: s.split(':')[1], kind: 'hoop' })), leftovers: true })],
+      ['setScene 60 apples (tens) / 3 baskets', () => board.setScene({ kind: 'share', items: { kind: 'apple', count: 60, unit: 10 }, groups: [{ id: 'g0', name: 'Sis', role: 'sister', kind: 'basket' }, { id: 'g1', name: 'Bro', role: 'brother', kind: 'basket' }, { id: 'g2', name: 'Pip', role: 'pip', kind: 'basket' }] })],
+      ['spawnItems cracker x3', () => board.spawnItems('cracker', 3)],
+      ['spawnItems dinosaur x2 -> g0', () => board.spawnItems('dinosaur', 2, { toGroup: 'g0' })],
+      ['makeGroups (g0 Arisha, g1 Mum box)', () => board.makeGroups([{ id: 'g0', name: 'Arisha', role: 'child' }, { id: 'g1', name: 'Mum', role: 'mum', kind: 'box' }])],
+      ['removeItems 2', () => board.removeItems(2)],
+      ['demonstrateMove tray -> all-groups', () => board.demonstrateMove({ from: 'tray', to: 'all-groups' })],
+      ['demonstrateMove tray -> g1 x2', () => board.demonstrateMove({ from: 'tray', to: 'group:g1', count: 2 })],
+      ['highlight group:g1', () => board.highlight('group:g1')],
+      ['highlight tray', () => board.highlight('tray')],
+      ['highlight item:0', () => board.highlight('item:0')],
+      ['highlight all-groups', () => board.highlight('all-groups')],
+      ['highlight check', () => board.highlight('check')],
+      ['showCounts on', () => board.showCounts(true)],
+      ['showCounts off', () => board.showCounts(false)],
+      ['showNumberLine 0-20 mark 12', () => board.showNumberLine({ from: 0, to: 20, mark: 12 })],
+      ['number line mark 15', () => board.showNumberLine({ from: 0, to: 20, mark: 15 })],
+      ['number line 0-100 by 10', () => board.showNumberLine({ from: 0, to: 100, step: 10, mark: 60, hide: [60] })],
+      ['showChart120 highlight 12,24', () => board.showChart120({ highlight: [12, 24] })],
+      ['showChart120 hideFrom 61', () => board.showChart120({ highlight: [50], hideFrom: 61 })],
+      ['highlight cell:24', () => board.highlight('cell:24')],
+      ['showTenFrame 7', () => board.showTenFrame({ filled: 7 })],
+      ['showTenFrame 7 + 5', () => board.showTenFrame({ filled: 7, second: 5, colour: 'orange' })],
+      ['showTenFrame 14', () => board.showTenFrame({ filled: 14, colour: 'green' })],
+      ['showNumber 47', () => board.showNumber(47, { label: 'How many?' })],
+      ['showChoices [3,4,5]', () => board.showChoices([3, 4, 5], { prompt: 'How many each?' })],
+      ['showChoices yes/no', () => board.showChoices(['yes', 'no'], { prompt: 'Is it fair?' })],
+      ['showKeypad max 120', () => board.showKeypad({ max: 120 })],
+      ['hideInput', () => board.hideInput()],
+      ['celebrate small', () => board.celebrate('small')],
+      ['celebrate big', () => board.celebrate('big')],
+      ['setLocked true', () => board.setLocked(true)],
+      ['setLocked false', () => board.setLocked(false)],
+      ['clear', () => board.clear()],
+    ];
+    const bar = document.getElementById('bar');
+    window.__actions = actions.map((a) => a[0]);
+    actions.forEach(([label, fn], i) => {
+      const b = h('button', { type: 'button', dataset: { act: String(i) } }, label);
+      b.addEventListener('click', async () => {
+        b.classList.add('hot');
+        try { await fn(); } catch (e) { window.__errors.push(String(e)); out('ERROR ' + e); }
+        report(label);
+        setTimeout(() => b.classList.remove('hot'), 400);
+      });
+      bar.append(b);
+    });
+    window.__ready = true;
+    out('board dev ready');
+    // ?scene=share|numberline|chart|tenframe auto-starts a scene (used by screenshots)
+    const auto = params.get('scene');
+    if (auto === 'share') board.setScene(SHARE);
+    else if (auto === 'numberline') board.showNumberLine({ from: 0, to: 20, mark: 12 });
+    else if (auto === 'chart') board.showChart120({ highlight: [12, 24], hideFrom: 101 });
+    else if (auto === 'tenframe') board.showTenFrame({ filled: 7 });
+  </script>
+</body>
+</html>

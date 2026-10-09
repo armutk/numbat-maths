@@ -1,0 +1,12 @@
+Sound effects in this folder are derived from Kenney (www.kenney.nl) audio packs,
+released under Creative Commons CC0 1.0 Universal (public domain dedication):
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Sources:
+  Kenney "Interface Sounds"  https://kenney.nl/assets/interface-sounds
+  Kenney "UI Audio"          https://kenney.nl/assets/ui-audio
+  Kenney "Impact Sounds"     https://kenney.nl/assets/impact-sounds
+
+Modifications: trimmed, pitch-shifted/layered/low-passed in places, normalised to
+-3 dBFS peak and converted to 16-bit PCM mono 24000 Hz WAV. The per-sound source
+files are listed in manifest.json ("src"). Credit is not required but appreciated.

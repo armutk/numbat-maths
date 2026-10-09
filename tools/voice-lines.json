@@ -1,0 +1,2729 @@
+{
+ "voice": {
+  "name": "Sally - Kind Australian Voice",
+  "voice_id": "5GZaeOOG7yqLdoTRsaa6",
+  "model_id": "eleven_multilingual_v2",
+  "language_code": "en",
+  "output_format": "mp3_44100_64",
+  "voice_settings": {
+   "stability": 0.6,
+   "similarity_boost": 0.8,
+   "style": 0.25,
+   "use_speaker_boost": true
+  }
+ },
+ "gaps_ms": {
+  "within_phrase": 0,
+  "between_segments": 60,
+  "between_sentences": 220,
+  "list": 140
+ },
+ "budget": {
+  "limit_chars": 9000,
+  "segments": 4147,
+  "numbers": 1373,
+  "nouns": 355,
+  "total": 5875
+ },
+ "numbers": [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
+  "twenty",
+  "twenty-one",
+  "twenty-two",
+  "twenty-three",
+  "twenty-four",
+  "twenty-five",
+  "twenty-six",
+  "twenty-seven",
+  "twenty-eight",
+  "twenty-nine",
+  "thirty",
+  "thirty-one",
+  "thirty-two",
+  "thirty-three",
+  "thirty-four",
+  "thirty-five",
+  "thirty-six",
+  "thirty-seven",
+  "thirty-eight",
+  "thirty-nine",
+  "forty",
+  "forty-one",
+  "forty-two",
+  "forty-three",
+  "forty-four",
+  "forty-five",
+  "forty-six",
+  "forty-seven",
+  "forty-eight",
+  "forty-nine",
+  "fifty",
+  "fifty-one",
+  "fifty-two",
+  "fifty-three",
+  "fifty-four",
+  "fifty-five",
+  "fifty-six",
+  "fifty-seven",
+  "fifty-eight",
+  "fifty-nine",
+  "sixty",
+  "sixty-one",
+  "sixty-two",
+  "sixty-three",
+  "sixty-four",
+  "sixty-five",
+  "sixty-six",
+  "sixty-seven",
+  "sixty-eight",
+  "sixty-nine",
+  "seventy",
+  "seventy-one",
+  "seventy-two",
+  "seventy-three",
+  "seventy-four",
+  "seventy-five",
+  "seventy-six",
+  "seventy-seven",
+  "seventy-eight",
+  "seventy-nine",
+  "eighty",
+  "eighty-one",
+  "eighty-two",
+  "eighty-three",
+  "eighty-four",
+  "eighty-five",
+  "eighty-six",
+  "eighty-seven",
+  "eighty-eight",
+  "eighty-nine",
+  "ninety",
+  "ninety-one",
+  "ninety-two",
+  "ninety-three",
+  "ninety-four",
+  "ninety-five",
+  "ninety-six",
+  "ninety-seven",
+  "ninety-eight",
+  "ninety-nine",
+  "one hundred",
+  "one hundred and one",
+  "one hundred and two",
+  "one hundred and three",
+  "one hundred and four",
+  "one hundred and five",
+  "one hundred and six",
+  "one hundred and seven",
+  "one hundred and eight",
+  "one hundred and nine",
+  "one hundred and ten",
+  "one hundred and eleven",
+  "one hundred and twelve",
+  "one hundred and thirteen",
+  "one hundred and fourteen",
+  "one hundred and fifteen",
+  "one hundred and sixteen",
+  "one hundred and seventeen",
+  "one hundred and eighteen",
+  "one hundred and nineteen",
+  "one hundred and twenty"
+ ],
+ "nouns": {
+  "cookie": [
+   "cookie",
+   "cookies"
+  ],
+  "apple": [
+   "apple",
+   "apples"
+  ],
+  "strawberry": [
+   "strawberry",
+   "strawberries"
+  ],
+  "lolly": [
+   "lolly",
+   "lollies"
+  ],
+  "muffin": [
+   "muffin",
+   "muffins"
+  ],
+  "carrot": [
+   "carrot",
+   "carrots"
+  ],
+  "timtam": [
+   "Tim Tam",
+   "Tim Tams"
+  ],
+  "cracker": [
+   "cracker",
+   "crackers"
+  ],
+  "grape": [
+   "grape",
+   "grapes"
+  ],
+  "banana": [
+   "banana",
+   "bananas"
+  ],
+  "block": [
+   "block",
+   "blocks"
+  ],
+  "star": [
+   "star",
+   "stars"
+  ],
+  "car": [
+   "car",
+   "cars"
+  ],
+  "teddy": [
+   "teddy",
+   "teddies"
+  ],
+  "dinosaur": [
+   "dinosaur",
+   "dinosaurs"
+  ],
+  "flower": [
+   "flower",
+   "flowers"
+  ],
+  "fish": [
+   "fish",
+   "fish"
+  ],
+  "button": [
+   "button",
+   "buttons"
+  ],
+  "coin": [
+   "coin",
+   "coins"
+  ],
+  "egg": [
+   "egg",
+   "eggs"
+  ],
+  "shell": [
+   "shell",
+   "shells"
+  ],
+  "sock": [
+   "sock",
+   "socks"
+  ],
+  "bead": [
+   "bead",
+   "beads"
+  ],
+  "marble": [
+   "marble",
+   "marbles"
+  ],
+  "sticker": [
+   "sticker",
+   "stickers"
+  ],
+  "ball": [
+   "ball",
+   "balls"
+  ],
+  "spot": [
+   "spot",
+   "spots"
+  ],
+  "pair": [
+   "pair",
+   "pairs"
+  ],
+  "group": [
+   "group",
+   "groups"
+  ],
+  "bag": [
+   "bag",
+   "bags"
+  ],
+  "hoop": [
+   "hoop",
+   null
+  ],
+  "hand": [
+   "hand",
+   null
+  ],
+  "frame": [
+   "frame",
+   null
+  ]
+ },
+ "names": {
+  "arisha": "arisha"
+ },
+ "slots": {
+  "verb": {
+   "are eaten": "are-eaten",
+   "is eaten": "is-eaten",
+   "swim away": "swim-away",
+   "swims away": "swims-away",
+   "roll away": "roll-away",
+   "rolls away": "rolls-away",
+   "are picked": "are-picked",
+   "is picked": "is-picked",
+   "fall down": "fall-down",
+   "falls down": "falls-down"
+  },
+  "sticker": {
+   "a koala": "a-koala",
+   "a kookaburra": "a-kookaburra",
+   "a wombat": "a-wombat",
+   "a platypus": "a-platypus",
+   "a echidna": "an-echidna",
+   "an echidna": "an-echidna",
+   "a cockatoo": "a-cockatoo",
+   "a bilby": "a-bilby",
+   "a kangaroo": "a-kangaroo",
+   "a tree frog": "a-tree-frog",
+   "a quokka": "a-quokka",
+   "a emu": "an-emu",
+   "an emu": "an-emu",
+   "a sea turtle": "a-sea-turtle"
+  },
+  "skill": {
+   "Sharing between 2": "sharing-between-two",
+   "Sharing between 3, 4 or 5": "sharing-between-three-four-or-five",
+   "All into one group": "all-into-one-group",
+   "Groups of 2": "groups-of-two",
+   "Groups of 5": "groups-of-five",
+   "Groups of 10": "groups-of-ten",
+   "How many groups?": "how-many-groups-q",
+   "Adding": "adding",
+   "Number friends": "number-friends",
+   "Make ten": "make-ten",
+   "Taking away": "taking-away",
+   "Find the number": "find-the-number",
+   "Tens and ones": "tens-and-ones",
+   "Read the blocks": "read-the-blocks",
+   "Before and after": "before-and-after",
+   "Order the numbers": "order-the-numbers"
+  },
+  "tens": {
+   "ten": "n10",
+   "tens": "tens"
+  },
+  "ones": {
+   "one": "n1",
+   "ones": "ones"
+  }
+ },
+ "segments": {
+  "yes-x": "Yes!",
+  "spot-on-x": "Spot on!",
+  "you-got-it-x": "You got it!",
+  "beauty-x": "Beauty!",
+  "nice-one-x": "Nice one!",
+  "too-easy-x": "Too easy!",
+  "thats-it-x": "That's it!",
+  "not-quite-have-another-go-x": "Not quite. Have another go!",
+  "nearly-lets-look-again-p": "Nearly! Let's look again.",
+  "hmm-lets-try-that-again-p": "Hmm, let's try that again.",
+  "good-try-lets-check-it-together-p": "Good try. Let's check it together.",
+  "gday": "G'day",
+  "im-pip-p": "I'm Pip.",
+  "lets-do-some-maths-together-p": "Let's do some maths together.",
+  "youve-done-your-maths-for-today": "You've done your maths for today,",
+  "play-more-if-you-like-p": "Play more if you like.",
+  "pick-an-island-to-start": "Pick an island to start,",
+  "ready-for-some-maths": "Ready for some maths,",
+  "lets-share-some-cookies": "Let's share some cookies,",
+  "which-island-today": "Which island today,",
+  "quick-look-back-p": "Quick look back.",
+  "level-up-x": "Level up!",
+  "is-getting-easier-for-you": "is getting easier for you",
+  "done-for-today-x": "Done for today!",
+  "perfect-x": "Perfect!",
+  "great-work-x": "Great work!",
+  "thats-your-maths-done-for-today": "That's your maths done for today,",
+  "you-earned": "You earned",
+  "every-one-first-go-x": "Every one first go!",
+  "and-you-moved-up-a-level-x": "And you moved up a level!",
+  "keep-it-up-x": "Keep it up!",
+  "you-found-a-new-sticker": "You found a new sticker:",
+  "you-have": "You have",
+  "finish-your-maths-each-day-to-find-more-p": "Finish your maths each day to find more.",
+  "finish-your-maths-for-the-day-to-find-your-first-sticker-p": "Finish your maths for the day to find your first sticker.",
+  "put-all": "Put all",
+  "into-one-basket": "into one basket",
+  "share": "Share",
+  "between": "between",
+  "friends": "friends",
+  "give-each-friend-the-same-p": "Give each friend the same.",
+  "if-any-are-left-over-put-them-in-pips-bowl-p": "If any are left over, put them in Pip's bowl.",
+  "all-shared-out-p": "All shared out.",
+  "now-tap-check-p": "Now tap Check.",
+  "all": "All",
+  "in-one-basket": "in one basket",
+  "every-friend-has": "Every friend has",
+  "and": "and",
+  "left-over-for-pip": "left over for Pip",
+  "thats-fair-x": "That's fair!",
+  "hmm-p": "Hmm.",
+  "this-friend-has": "This friend has",
+  "and-this-friend-has": "and this friend has",
+  "thats-not-the-same-p": "That's not the same.",
+  "move-some-so-each-friend-has-the-same-p": "Move some so each friend has the same.",
+  "pips-bowl-has-too-many-p": "Pip's bowl has too many.",
+  "share-some-more-out-to-the-friends-p": "Share some more out to the friends.",
+  "each-friend-has-the-same-but-pips-bowl-should-have": "Each friend has the same, but Pip's bowl should have",
+  "pop-the-extra-one-in-the-bowl-p": "Pop the extra one in the bowl.",
+  "pop-the-extra-ones-in-the-bowl-p": "Pop the extra ones in the bowl.",
+  "lets-do-it-together-p": "Let's do it together.",
+  "one-for-you-one-for-you-p": "One for you, one for you.",
+  "now-every-friend-has": "Now every friend has",
+  "left-over": "left over",
+  "thats-the-same-for-everyone-p": "That's the same for everyone.",
+  "how-many": "How many",
+  "are-in-the-basket-q": "are in the basket?",
+  "did-each-friend-get-q": "did each friend get?",
+  "in-one-group-is": "in one group is",
+  "great-counting-x": "Great counting!",
+  "shared-between": "shared between",
+  "friends-is": "friends is",
+  "each": "each",
+  "each-with": "each, with",
+  "great-sharing-x": "Great sharing!",
+  "put-the-socks-in-pairs-p": "Put the socks in pairs.",
+  "needs": "needs",
+  "every": "Every",
+  "has": "has",
+  "lovely-pairs-x": "Lovely pairs!",
+  "well-done-x": "Well done!",
+  "every-frame-is-full-p": "Every frame is full.",
+  "that-is": "That is",
+  "have-another-look-p": "Have another look.",
+  "every-group-needs-the-same-p": "Every group needs the same.",
+  "this": "This",
+  "lets-make-pairs-together-p": "Let's make pairs together.",
+  "lets-make-groups-of": "Let's make groups of",
+  "together": "together",
+  "that": "That",
+  "is-full": "is full",
+  "it-holds": "It holds",
+  "all-done-q": "All done?",
+  "tap-check-p": "Tap Check.",
+  "start-here-p": "Start here.",
+  "tap-each-group-to-count-p": "Tap each group to count.",
+  "so-how-many-altogether-q": "So how many altogether?",
+  "how-many-altogether-q": "How many altogether?",
+  "altogether-q": "altogether?",
+  "how-many-bags-did-you-use-q": "How many bags did you use?",
+  "are-left-over-q": "are left over?",
+  "one-number-is-hiding-p": "One number is hiding.",
+  "which-one-is-missing-q": "Which one is missing?",
+  "we-count-two-four-six-p": "We count two, four, six.",
+  "we-count-in-fives-p": "We count in fives.",
+  "we-count-in-tens-p": "We count in tens.",
+  "it-is": "It is",
+  "count-the": "Count the",
+  "in-fives": "in fives",
+  "tap-each-hand-p": "Tap each hand.",
+  "tap-each-tray-p": "Tap each tray.",
+  "tap-to-count-in-fives-p": "Tap to count in fives.",
+  "tap-to-count-in-tens-p": "Tap to count in tens.",
+  "tap-each-ten-then-the-ones-p": "Tap each ten, then the ones.",
+  "count-in-tens-p": "Count in tens.",
+  "tap-each-ten-frame-p": "Tap each ten frame.",
+  "count-in-fives-p": "Count in fives.",
+  "which-number-is-missing-q": "Which number is missing?",
+  "what-comes-here-q": "What comes here?",
+  "count-the-tens-then-count-on-the-ones-p": "Count the tens, then count on the ones.",
+  "fill-each-ten-frame-with-ten-counters-p": "Fill each ten frame with ten counters.",
+  "put": "Put",
+  "in-each-hand": "in each hand",
+  "put-the": "Put the",
+  "in-bags-of": "in bags of",
+  "how-many-bags-do-you-fill-q": "How many bags do you fill?",
+  "of": "of",
+  "is": "is",
+  "makes": "makes",
+  "tap": "Tap",
+  "thats": "That's",
+  "its-in-this-row-p": "It's in this row.",
+  "look-for-the-wiggly-one-p": "Look for the wiggly one.",
+  "heres": "Here's",
+  "make": "Make",
+  "use-the-blocks-x": "Use the blocks!",
+  "the-long-rods-go-on-the-tens-side-p": "The long rods go on the tens side.",
+  "the-little-cubes-go-on-the-ones-side-p": "The little cubes go on the ones side.",
+  "thats-plenty-x": "That's plenty!",
+  "take-some-away-if-you-like-p": "Take some away if you like.",
+  "drag-some-blocks-onto-the-mat-first-p": "Drag some blocks onto the mat first.",
+  "that-makes": "That makes",
+  "we-need": "We need",
+  "more": "more",
+  "thats-too-many-tens-p": "That's too many tens.",
+  "take": "Take",
+  "away": "away",
+  "thats-too-many-ones-p": "That's too many ones.",
+  "too-but-lets-swap-ten-ones-for-one-ten": "too, but let's swap ten ones for one ten",
+  "try": "Try",
+  "its": "It's",
+  "each-long-rod-is-ten-p": "Each long rod is ten.",
+  "count-the-tens-then-the-ones-p": "Count the tens, then the ones.",
+  "count-with-me-p": "Count with me.",
+  "what-number-is-this-q": "What number is this?",
+  "what-comes-after": "What comes after",
+  "what-comes-before": "What comes before",
+  "what-number-is-between": "What number is between",
+  "comes-after": "comes after",
+  "comes-before": "comes before",
+  "is-between": "is between",
+  "lets-count-along-p": "Let's count along.",
+  "count-along-with-me-p": "Count along with me.",
+  "put-the-numbers-in-order-p": "Put the numbers in order.",
+  "smallest-first-x": "Smallest first!",
+  "smallest-to-biggest-x": "Smallest to biggest!",
+  "which-number-is-the-smallest-q": "Which number is the smallest?",
+  "it-goes-first-p": "It goes first.",
+  "nearly-x": "Nearly!",
+  "look-at-the-glowing-spot-p": "Look at the glowing spot.",
+  "which-number-comes-next-q": "Which number comes next?",
+  "put-the-glowing-number-in-the-glowing-spot-p": "Put the glowing number in the glowing spot.",
+  "here-are": "Here are",
+  "orange": "orange",
+  "empty": "empty",
+  "to-add": "to add",
+  "blue": "blue",
+  "there-are": "There are",
+  "add-blue-ones-to-make": "Add blue ones to make",
+  "how-many-blue": "How many blue",
+  "do-you-add-q": "do you add?",
+  "we-have": "We have",
+  "count-on-p": "Count on.",
+  "count-on-from": "Count on from",
+  "thats-the-whole-x": "That's the whole!",
+  "number-friends-x": "Number friends!",
+  "plus": "plus",
+  "you-counted-on-x": "You counted on!",
+  "great-thinking-x": "Great thinking!",
+  "count-them-all-p": "Count them all.",
+  "count-the-empty-ones-p": "Count the empty ones.",
+  "one-part-is": "One part is",
+  "the-other-part-is": "The other part is",
+  "what-is-the-whole-q": "What is the whole?",
+  "the-whole-is": "The whole is",
+  "what-is-the-other-part-q": "What is the other part?",
+  "double": "Double",
+  "thats-a-double-and-one-more-p": "That's a double and one more.",
+  "start-with-the-bigger-number": "Start with the bigger number,",
+  "drag-counters-to-fill-the-ten-frame-p": "Drag counters to fill the ten frame.",
+  "drag-the-blue-counters-to-fill-up-the-ten-frame-first-p": "Drag the blue counters to fill up the ten frame first.",
+  "fill-the-ten-frame-first-p": "Fill the ten frame first.",
+  "more-to-make-ten": "more to make ten",
+  "pop-it-in-an-empty-spot-in-the-first-frame-p": "Pop it in an empty spot in the first frame.",
+  "the-first-frame-is-full-p": "The first frame is full.",
+  "that-makes-ten-x": "That makes ten!",
+  "now-count-on": "Now count on",
+  "is-the-same-as-ten-plus": "is the same as ten plus",
+  "first": "first",
+  "now-one-more-makes": "Now one more makes",
+  "to-take-it-away": "to take it away",
+  "to-take-them-away": "to take them away",
+  "how-many-are-left-q": "How many are left?",
+  "take-away": "take away",
+  "think": "Think:",
+  "and-how-many-make": "and how many make",
+  "are-left-q": "are left?",
+  "so": "so",
+  "lets-count-what-is-left-p": "Let's count what is left.",
+  "are-eaten": "are eaten",
+  "is-eaten": "is eaten",
+  "swim-away": "swim away",
+  "swims-away": "swims away",
+  "roll-away": "roll away",
+  "rolls-away": "rolls away",
+  "are-picked": "are picked",
+  "is-picked": "is picked",
+  "fall-down": "fall down",
+  "falls-down": "falls down",
+  "tens": "tens",
+  "ones": "ones",
+  "a-koala": "a koala",
+  "a-kookaburra": "a kookaburra",
+  "a-wombat": "a wombat",
+  "a-platypus": "a platypus",
+  "an-echidna": "an echidna",
+  "a-cockatoo": "a cockatoo",
+  "a-bilby": "a bilby",
+  "a-kangaroo": "a kangaroo",
+  "a-tree-frog": "a tree frog",
+  "a-quokka": "a quokka",
+  "an-emu": "an emu",
+  "a-sea-turtle": "a sea turtle",
+  "sharing-between-two": "Sharing between two",
+  "sharing-between-three-four-or-five": "Sharing between three, four or five",
+  "all-into-one-group": "All into one group",
+  "groups-of-two": "Groups of two",
+  "groups-of-five": "Groups of five",
+  "groups-of-ten": "Groups of ten",
+  "how-many-groups-q": "How many groups?",
+  "adding": "Adding",
+  "number-friends": "Number friends",
+  "make-ten": "Make ten",
+  "taking-away": "Taking away",
+  "find-the-number": "Find the number",
+  "tens-and-ones": "Tens and ones",
+  "read-the-blocks": "Read the blocks",
+  "before-and-after": "Before and after",
+  "order-the-numbers": "Order the numbers",
+  "arisha": "Arisha",
+  "no": "no"
+ },
+ "preload": [
+  "n0",
+  "n1",
+  "n2",
+  "n3",
+  "n4",
+  "n5",
+  "n6",
+  "n7",
+  "n8",
+  "n9",
+  "n10",
+  "n11",
+  "n12",
+  "n13",
+  "n14",
+  "n15",
+  "n16",
+  "n17",
+  "n18",
+  "n19",
+  "n20",
+  "yes-x",
+  "spot-on-x",
+  "you-got-it-x",
+  "beauty-x",
+  "nice-one-x",
+  "too-easy-x",
+  "thats-it-x",
+  "well-done-x",
+  "how-many",
+  "tap",
+  "thats",
+  "and",
+  "is",
+  "every-friend-has",
+  "share",
+  "between",
+  "friends"
+ ],
+ "inventory": [
+  {
+   "text": "Yes!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "yes-x"
+   ]
+  },
+  {
+   "text": "Spot on!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "spot-on-x"
+   ]
+  },
+  {
+   "text": "You got it!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "you-got-it-x"
+   ]
+  },
+  {
+   "text": "Beauty!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "beauty-x"
+   ]
+  },
+  {
+   "text": "Nice one!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "nice-one-x"
+   ]
+  },
+  {
+   "text": "Too easy!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "too-easy-x"
+   ]
+  },
+  {
+   "text": "That's it!",
+   "where": "js/app.js:16",
+   "kind": "fixed",
+   "segments": [
+    "thats-it-x"
+   ]
+  },
+  {
+   "text": "Not quite. Have another go!",
+   "where": "js/app.js:17",
+   "kind": "fixed",
+   "segments": [
+    "not-quite-have-another-go-x"
+   ]
+  },
+  {
+   "text": "Nearly! Let's look again.",
+   "where": "js/app.js:17",
+   "kind": "fixed",
+   "segments": [
+    "nearly-lets-look-again-p"
+   ]
+  },
+  {
+   "text": "Hmm, let's try that again.",
+   "where": "js/app.js:17",
+   "kind": "fixed",
+   "segments": [
+    "hmm-lets-try-that-again-p"
+   ]
+  },
+  {
+   "text": "Good try. Let's check it together.",
+   "where": "js/app.js:17",
+   "kind": "fixed",
+   "segments": [
+    "good-try-lets-check-it-together-p"
+   ]
+  },
+  {
+   "text": "G'day {name}",
+   "where": "js/app.js:58",
+   "kind": "template",
+   "segments": [
+    "gday",
+    "{name}"
+   ],
+   "from": "G'day ${name}! I'm Pip. Let's do some maths together."
+  },
+  {
+   "text": "I'm Pip.",
+   "where": "js/app.js:58",
+   "kind": "fixed",
+   "segments": [
+    "im-pip-p"
+   ]
+  },
+  {
+   "text": "Let's do some maths together.",
+   "where": "js/app.js:58",
+   "kind": "fixed",
+   "segments": [
+    "lets-do-some-maths-together-p"
+   ]
+  },
+  {
+   "text": "You've done your maths for today, {name}",
+   "where": "js/app.js:78",
+   "kind": "template",
+   "segments": [
+    "youve-done-your-maths-for-today",
+    "{name}"
+   ]
+  },
+  {
+   "text": "Play more if you like.",
+   "where": "js/app.js:78",
+   "kind": "fixed",
+   "segments": [
+    "play-more-if-you-like-p"
+   ]
+  },
+  {
+   "text": "Pick an island to start, {name}",
+   "where": "js/app.js:79",
+   "kind": "template",
+   "segments": [
+    "pick-an-island-to-start",
+    "{name}"
+   ]
+  },
+  {
+   "text": "Ready for some maths, {name}",
+   "where": "js/app.js:79",
+   "kind": "template",
+   "segments": [
+    "ready-for-some-maths",
+    "{name}"
+   ]
+  },
+  {
+   "text": "Let's share some cookies, {name}",
+   "where": "js/app.js:79",
+   "kind": "template",
+   "segments": [
+    "lets-share-some-cookies",
+    "{name}"
+   ]
+  },
+  {
+   "text": "Which island today, {name}",
+   "where": "js/app.js:79",
+   "kind": "template",
+   "segments": [
+    "which-island-today",
+    "{name}"
+   ]
+  },
+  {
+   "text": "Quick look back.",
+   "where": "js/app.js:279",
+   "kind": "fixed",
+   "segments": [
+    "quick-look-back-p"
+   ]
+  },
+  {
+   "text": "Level up!",
+   "where": "js/app.js:227",
+   "kind": "fixed",
+   "segments": [
+    "level-up-x"
+   ]
+  },
+  {
+   "text": "{skill} is getting easier for you.",
+   "where": "js/app.js:227",
+   "kind": "template",
+   "segments": [
+    "{skill}",
+    "is-getting-easier-for-you"
+   ]
+  },
+  {
+   "text": "Done for today!",
+   "where": "js/app.js:316",
+   "kind": "fixed",
+   "segments": [
+    "done-for-today-x"
+   ]
+  },
+  {
+   "text": "Perfect!",
+   "where": "js/app.js:316",
+   "kind": "fixed",
+   "segments": [
+    "perfect-x"
+   ]
+  },
+  {
+   "text": "Great work!",
+   "where": "js/app.js:316",
+   "kind": "fixed",
+   "segments": [
+    "great-work-x"
+   ]
+  },
+  {
+   "text": "That's your maths done for today, {name}.",
+   "where": "js/app.js:318",
+   "kind": "template",
+   "segments": [
+    "thats-your-maths-done-for-today",
+    "{name}"
+   ]
+  },
+  {
+   "text": "You earned {n} {many}.",
+   "where": "js/app.js:318",
+   "kind": "template",
+   "segments": [
+    "you-earned",
+    "{n}",
+    "{many}"
+   ]
+  },
+  {
+   "text": "Every one first go!",
+   "where": "js/app.js:319",
+   "kind": "fixed",
+   "segments": [
+    "every-one-first-go-x"
+   ]
+  },
+  {
+   "text": "And you moved up a level!",
+   "where": "js/app.js:319",
+   "kind": "fixed",
+   "segments": [
+    "and-you-moved-up-a-level-x"
+   ]
+  },
+  {
+   "text": "Keep it up!",
+   "where": "js/app.js:319",
+   "kind": "fixed",
+   "segments": [
+    "keep-it-up-x"
+   ]
+  },
+  {
+   "text": "You found a new sticker: {sticker}!",
+   "where": "js/app.js:336",
+   "kind": "template",
+   "segments": [
+    "you-found-a-new-sticker",
+    "{sticker}"
+   ]
+  },
+  {
+   "text": "You have {n} {many}.",
+   "where": "js/app.js:356",
+   "kind": "template",
+   "segments": [
+    "you-have",
+    "{n}",
+    "{many}"
+   ]
+  },
+  {
+   "text": "Finish your maths each day to find more.",
+   "where": "js/app.js:356",
+   "kind": "fixed",
+   "segments": [
+    "finish-your-maths-each-day-to-find-more-p"
+   ]
+  },
+  {
+   "text": "Finish your maths for the day to find your first sticker.",
+   "where": "js/app.js:356",
+   "kind": "fixed",
+   "segments": [
+    "finish-your-maths-for-the-day-to-find-your-first-sticker-p"
+   ]
+  },
+  {
+   "text": "{n}  (sayOption default: the tapped number)",
+   "where": "js/app.js:257",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "String(v) for every answer button",
+   "where": "js/app.js:248",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "Put all {n} {many} into one basket.",
+   "where": "js/modules/sharing.js:35",
+   "kind": "template",
+   "segments": [
+    "put-all",
+    "{n}",
+    "{many}",
+    "into-one-basket"
+   ]
+  },
+  {
+   "text": "Share {n} {many} between {k} friends.",
+   "where": "js/modules/sharing.js:36",
+   "kind": "template",
+   "segments": [
+    "share",
+    "{n}",
+    "{many}",
+    "between",
+    "{k}",
+    "friends"
+   ],
+   "from": "Share {n} {many} between {k} friends. Give each friend the same. [If any are left over, put them in Pip's bowl.]"
+  },
+  {
+   "text": "Give each friend the same.",
+   "where": "js/modules/sharing.js:36",
+   "kind": "fixed",
+   "segments": [
+    "give-each-friend-the-same-p"
+   ]
+  },
+  {
+   "text": "If any are left over, put them in Pip's bowl.",
+   "where": "js/modules/sharing.js:36",
+   "kind": "fixed",
+   "segments": [
+    "if-any-are-left-over-put-them-in-pips-bowl-p"
+   ]
+  },
+  {
+   "text": "All shared out.",
+   "where": "js/modules/sharing.js:102",
+   "kind": "fixed",
+   "segments": [
+    "all-shared-out-p"
+   ]
+  },
+  {
+   "text": "Now tap Check.",
+   "where": "js/modules/sharing.js:102",
+   "kind": "fixed",
+   "segments": [
+    "now-tap-check-p"
+   ]
+  },
+  {
+   "text": "All {n} in one basket.",
+   "where": "js/modules/sharing.js:128",
+   "kind": "template",
+   "segments": [
+    "all",
+    "{n}",
+    "in-one-basket"
+   ]
+  },
+  {
+   "text": "Every friend has {n}, and {k} left over for Pip.",
+   "where": "js/modules/sharing.js:129",
+   "kind": "template",
+   "segments": [
+    "every-friend-has",
+    "{n}",
+    "and",
+    "{k}",
+    "left-over-for-pip"
+   ]
+  },
+  {
+   "text": "Every friend has {n}.",
+   "where": "js/modules/sharing.js:129",
+   "kind": "template",
+   "segments": [
+    "every-friend-has",
+    "{n}"
+   ]
+  },
+  {
+   "text": "That's fair!",
+   "where": "js/modules/sharing.js:129",
+   "kind": "fixed",
+   "segments": [
+    "thats-fair-x"
+   ]
+  },
+  {
+   "text": "Hmm.",
+   "where": "js/modules/sharing.js:138",
+   "kind": "fixed",
+   "segments": [
+    "hmm-p"
+   ]
+  },
+  {
+   "text": "This friend has {n} and this friend has {k}.",
+   "where": "js/modules/sharing.js:138",
+   "kind": "template",
+   "segments": [
+    "this-friend-has",
+    "{n}",
+    "and-this-friend-has",
+    "{k}"
+   ]
+  },
+  {
+   "text": "That's not the same.",
+   "where": "js/modules/sharing.js:138",
+   "kind": "fixed",
+   "segments": [
+    "thats-not-the-same-p"
+   ]
+  },
+  {
+   "text": "Move some so each friend has the same.",
+   "where": "js/modules/sharing.js:138",
+   "kind": "fixed",
+   "segments": [
+    "move-some-so-each-friend-has-the-same-p"
+   ]
+  },
+  {
+   "text": "Pip's bowl has too many.",
+   "where": "js/modules/sharing.js:141",
+   "kind": "fixed",
+   "segments": [
+    "pips-bowl-has-too-many-p"
+   ]
+  },
+  {
+   "text": "Share some more out to the friends.",
+   "where": "js/modules/sharing.js:141",
+   "kind": "fixed",
+   "segments": [
+    "share-some-more-out-to-the-friends-p"
+   ]
+  },
+  {
+   "text": "Each friend has the same, but Pip's bowl should have {n}.",
+   "where": "js/modules/sharing.js:141",
+   "kind": "template",
+   "segments": [
+    "each-friend-has-the-same-but-pips-bowl-should-have",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Pop the extra one in the bowl.",
+   "where": "js/modules/sharing.js:141",
+   "kind": "fixed",
+   "segments": [
+    "pop-the-extra-one-in-the-bowl-p"
+   ]
+  },
+  {
+   "text": "Pop the extra ones in the bowl.",
+   "where": "js/modules/sharing.js:141",
+   "kind": "fixed",
+   "segments": [
+    "pop-the-extra-ones-in-the-bowl-p"
+   ]
+  },
+  {
+   "text": "Let's do it together.",
+   "where": "js/modules/sharing.js:152",
+   "kind": "fixed",
+   "segments": [
+    "lets-do-it-together-p"
+   ]
+  },
+  {
+   "text": "One for you, one for you...",
+   "where": "js/modules/sharing.js:152",
+   "kind": "fixed",
+   "segments": [
+    "one-for-you-one-for-you-p"
+   ]
+  },
+  {
+   "text": "Now every friend has {n}.",
+   "where": "js/modules/sharing.js:165",
+   "kind": "template",
+   "segments": [
+    "now-every-friend-has",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Now every friend has {n}, and {k} left over.",
+   "where": "js/modules/sharing.js:165",
+   "kind": "template",
+   "segments": [
+    "now-every-friend-has",
+    "{n}",
+    "and",
+    "{k}",
+    "left-over"
+   ]
+  },
+  {
+   "text": "That's the same for everyone.",
+   "where": "js/modules/sharing.js:165",
+   "kind": "fixed",
+   "segments": [
+    "thats-the-same-for-everyone-p"
+   ]
+  },
+  {
+   "text": "How many {many} are in the basket?",
+   "where": "js/modules/sharing.js:176",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}",
+    "are-in-the-basket-q"
+   ]
+  },
+  {
+   "text": "How many {many} did each friend get?",
+   "where": "js/modules/sharing.js:176",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}",
+    "did-each-friend-get-q"
+   ]
+  },
+  {
+   "text": "{n} {many} in 1 group is {k}.",
+   "where": "js/modules/sharing.js:173",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "in-one-group-is",
+    "{k}"
+   ]
+  },
+  {
+   "text": "Great counting!",
+   "where": "js/modules/sharing.js:173",
+   "kind": "fixed",
+   "segments": [
+    "great-counting-x"
+   ]
+  },
+  {
+   "text": "{n} {many} shared between {k} friends is {a} each.",
+   "where": "js/modules/sharing.js:180",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "shared-between",
+    "{k}",
+    "friends-is",
+    "{a}",
+    "each"
+   ]
+  },
+  {
+   "text": "{n} {many} shared between {k} friends is {a} each, with {b} left over.",
+   "where": "js/modules/sharing.js:180",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "shared-between",
+    "{k}",
+    "friends-is",
+    "{a}",
+    "each-with",
+    "{b}",
+    "left-over"
+   ]
+  },
+  {
+   "text": "Great sharing!",
+   "where": "js/modules/sharing.js:180",
+   "kind": "fixed",
+   "segments": [
+    "great-sharing-x"
+   ]
+  },
+  {
+   "text": "Put the socks in pairs.",
+   "where": "js/modules/groups.js:378",
+   "kind": "fixed",
+   "segments": [
+    "put-the-socks-in-pairs-p"
+   ]
+  },
+  {
+   "text": "Each hoop needs 2 socks.",
+   "where": "js/modules/groups.js:378",
+   "kind": "fixed",
+   "segments": [
+    "each",
+    "{many}",
+    "needs",
+    "{n}",
+    "{many2}"
+   ]
+  },
+  {
+   "text": "Every {many} has {n}.",
+   "where": "js/modules/groups.js:381",
+   "kind": "template",
+   "segments": [
+    "every",
+    "{many}",
+    "has",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Lovely pairs!",
+   "where": "js/modules/groups.js:381",
+   "kind": "fixed",
+   "segments": [
+    "lovely-pairs-x"
+   ]
+  },
+  {
+   "text": "Well done!",
+   "where": "js/modules/groups.js:469, js/modules/addsub.js:162",
+   "kind": "fixed",
+   "segments": [
+    "well-done-x"
+   ]
+  },
+  {
+   "text": "Every frame is full.",
+   "where": "js/modules/groups.js:530",
+   "kind": "fixed",
+   "segments": [
+    "every-frame-is-full-p"
+   ]
+  },
+  {
+   "text": "That is 10!",
+   "where": "js/modules/groups.js:530",
+   "kind": "fixed",
+   "segments": [
+    "that-is",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Have another look.",
+   "where": "js/modules/groups.js:243",
+   "kind": "fixed",
+   "segments": [
+    "have-another-look-p"
+   ]
+  },
+  {
+   "text": "Every group needs the same.",
+   "where": "js/modules/groups.js:243",
+   "kind": "fixed",
+   "segments": [
+    "every-group-needs-the-same-p"
+   ]
+  },
+  {
+   "text": "This {many} has {n}.",
+   "where": "js/modules/groups.js:246",
+   "kind": "template",
+   "segments": [
+    "this",
+    "{many}",
+    "has",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Every {many} needs {n}.",
+   "where": "js/modules/groups.js:246",
+   "kind": "template",
+   "segments": [
+    "every",
+    "{many}",
+    "needs",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Let's make pairs together.",
+   "where": "js/modules/groups.js:257",
+   "kind": "fixed",
+   "segments": [
+    "lets-make-pairs-together-p"
+   ]
+  },
+  {
+   "text": "Let's make groups of {n} together.",
+   "where": "js/modules/groups.js:257",
+   "kind": "template",
+   "segments": [
+    "lets-make-groups-of",
+    "{n}",
+    "together"
+   ]
+  },
+  {
+   "text": "That {many} is full.",
+   "where": "js/modules/groups.js:218",
+   "kind": "template",
+   "segments": [
+    "that",
+    "{many}",
+    "is-full"
+   ]
+  },
+  {
+   "text": "It holds {n}.",
+   "where": "js/modules/groups.js:218",
+   "kind": "template",
+   "segments": [
+    "it-holds",
+    "{n}"
+   ]
+  },
+  {
+   "text": "All done?",
+   "where": "js/modules/groups.js:206",
+   "kind": "fixed",
+   "segments": [
+    "all-done-q"
+   ]
+  },
+  {
+   "text": "Tap Check.",
+   "where": "js/modules/groups.js:206",
+   "kind": "fixed",
+   "segments": [
+    "tap-check-p"
+   ]
+  },
+  {
+   "text": "Start here.",
+   "where": "js/modules/groups.js:318",
+   "kind": "fixed",
+   "segments": [
+    "start-here-p"
+   ]
+  },
+  {
+   "text": "Tap each group to count.",
+   "where": "js/modules/groups.js:327",
+   "kind": "fixed",
+   "segments": [
+    "tap-each-group-to-count-p"
+   ]
+  },
+  {
+   "text": "So how many altogether?",
+   "where": "js/modules/groups.js:311",
+   "kind": "fixed",
+   "segments": [
+    "so-how-many-altogether-q"
+   ]
+  },
+  {
+   "text": "How many altogether?",
+   "where": "js/modules/groups.js:477, js/modules/addsub.js:323",
+   "kind": "fixed",
+   "segments": [
+    "how-many-altogether-q"
+   ]
+  },
+  {
+   "text": "How many {many}?",
+   "where": "js/modules/groups.js:399",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}"
+   ]
+  },
+  {
+   "text": "How many {many} altogether?",
+   "where": "js/modules/groups.js:419, js/modules/addsub.js:129",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}",
+    "altogether-q"
+   ]
+  },
+  {
+   "text": "How many bags did you use?",
+   "where": "js/modules/groups.js:610",
+   "kind": "fixed",
+   "segments": [
+    "how-many-bags-did-you-use-q"
+   ]
+  },
+  {
+   "text": "How many {many} are left over?",
+   "where": "js/modules/groups.js:626",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}",
+    "are-left-over-q"
+   ]
+  },
+  {
+   "text": "One number is hiding.",
+   "where": "js/modules/groups.js:390",
+   "kind": "fixed",
+   "segments": [
+    "one-number-is-hiding-p"
+   ]
+  },
+  {
+   "text": "Which one is missing?",
+   "where": "js/modules/groups.js:390",
+   "kind": "fixed",
+   "segments": [
+    "which-one-is-missing-q"
+   ]
+  },
+  {
+   "text": "We count 2, 4, 6.",
+   "where": "js/modules/groups.js:393",
+   "kind": "fixed",
+   "segments": [
+    "we-count-two-four-six-p"
+   ]
+  },
+  {
+   "text": "We count in 5s.",
+   "where": "js/modules/groups.js:350",
+   "kind": "fixed",
+   "segments": [
+    "we-count-in-fives-p"
+   ]
+  },
+  {
+   "text": "We count in 10s.",
+   "where": "js/modules/groups.js:350",
+   "kind": "fixed",
+   "segments": [
+    "we-count-in-tens-p"
+   ]
+  },
+  {
+   "text": "It is {n}.",
+   "where": "js/modules/groups.js:350",
+   "kind": "template",
+   "segments": [
+    "it-is",
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n} left over.",
+   "where": "js/modules/groups.js:625",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "left-over"
+   ]
+  },
+  {
+   "text": "{n} {many}.",
+   "where": "js/modules/groups.js:619",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}"
+   ]
+  },
+  {
+   "text": "Count the {many} in fives.",
+   "where": "js/modules/groups.js:439",
+   "kind": "template",
+   "segments": [
+    "count-the",
+    "{many}",
+    "in-fives"
+   ]
+  },
+  {
+   "text": "Tap each hand.",
+   "where": "js/modules/groups.js:439",
+   "kind": "fixed",
+   "segments": [
+    "tap-each-hand-p"
+   ]
+  },
+  {
+   "text": "Tap each tray.",
+   "where": "js/modules/groups.js:439",
+   "kind": "fixed",
+   "segments": [
+    "tap-each-tray-p"
+   ]
+  },
+  {
+   "text": "Tap to count in fives.",
+   "where": "js/modules/groups.js:440",
+   "kind": "fixed",
+   "segments": [
+    "tap-to-count-in-fives-p"
+   ]
+  },
+  {
+   "text": "Tap to count in tens.",
+   "where": "js/modules/groups.js:511",
+   "kind": "fixed",
+   "segments": [
+    "tap-to-count-in-tens-p"
+   ]
+  },
+  {
+   "text": "Tap each ten, then the ones.",
+   "where": "js/modules/groups.js:558",
+   "kind": "fixed",
+   "segments": [
+    "tap-each-ten-then-the-ones-p"
+   ]
+  },
+  {
+   "text": "Count in tens.",
+   "where": "js/modules/groups.js:510, js/modules/numbers.js:456",
+   "kind": "fixed",
+   "segments": [
+    "count-in-tens-p"
+   ]
+  },
+  {
+   "text": "Tap each ten frame.",
+   "where": "js/modules/groups.js:510",
+   "kind": "fixed",
+   "segments": [
+    "tap-each-ten-frame-p"
+   ]
+  },
+  {
+   "text": "Count in fives.",
+   "where": "js/modules/groups.js:486",
+   "kind": "fixed",
+   "segments": [
+    "count-in-fives-p"
+   ]
+  },
+  {
+   "text": "Which number is missing?",
+   "where": "js/modules/groups.js:486",
+   "kind": "fixed",
+   "segments": [
+    "which-number-is-missing-q"
+   ]
+  },
+  {
+   "text": "What comes here?",
+   "where": "js/modules/groups.js:355",
+   "kind": "fixed",
+   "segments": [
+    "what-comes-here-q"
+   ]
+  },
+  {
+   "text": "Count the tens, then count on the ones.",
+   "where": "js/modules/groups.js:557",
+   "kind": "fixed",
+   "segments": [
+    "count-the-tens-then-count-on-the-ones-p"
+   ]
+  },
+  {
+   "text": "Fill each ten frame with 10 counters.",
+   "where": "js/modules/groups.js:527",
+   "kind": "fixed",
+   "segments": [
+    "fill-each-ten-frame-with-ten-counters-p"
+   ]
+  },
+  {
+   "text": "Put {n} {many} in each hand.",
+   "where": "js/modules/groups.js:466",
+   "kind": "template",
+   "segments": [
+    "put",
+    "{n}",
+    "{many}",
+    "in-each-hand"
+   ]
+  },
+  {
+   "text": "Put the {n} {many} in bags of {k}.",
+   "where": "js/modules/groups.js:598",
+   "kind": "template",
+   "segments": [
+    "put-the",
+    "{n}",
+    "{many}",
+    "in-bags-of",
+    "{k}"
+   ]
+  },
+  {
+   "text": "How many bags do you fill?",
+   "where": "js/modules/groups.js:598",
+   "kind": "fixed",
+   "segments": [
+    "how-many-bags-do-you-fill-q"
+   ]
+  },
+  {
+   "text": "{n} {many} of {k}.",
+   "where": "js/modules/groups.js:443",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "of",
+    "{k}"
+   ]
+  },
+  {
+   "text": "{n} {many} of {k} is {a}.",
+   "where": "js/modules/groups.js:443",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "of",
+    "{k}",
+    "is",
+    "{a}"
+   ]
+  },
+  {
+   "text": "{n} {tens} and {k} {ones}.",
+   "where": "js/modules/groups.js:559",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{tens}",
+    "and",
+    "{k}",
+    "{ones}"
+   ]
+  },
+  {
+   "text": "{n} {tens} and {k} {ones} is {a}.",
+   "where": "js/modules/groups.js:559",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{tens}",
+    "and",
+    "{k}",
+    "{ones}",
+    "is",
+    "{a}"
+   ]
+  },
+  {
+   "text": "{n} {many} in bags of {k} makes {a} {many2}.",
+   "where": "js/modules/groups.js:606",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "in-bags-of",
+    "{k}",
+    "makes",
+    "{a}",
+    "{many2}"
+   ]
+  },
+  {
+   "text": "{n} {many} of {k}, and {a} left over.",
+   "where": "js/modules/groups.js:629",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{many}",
+    "of",
+    "{k}",
+    "and",
+    "{a}",
+    "left-over"
+   ]
+  },
+  {
+   "text": "{list}",
+   "where": "js/modules/groups.js:361",
+   "kind": "template",
+   "segments": [
+    "{list}"
+   ]
+  },
+  {
+   "text": "{n}  (badge counts while pulsing)",
+   "where": "js/modules/groups.js:73",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n}  (missing-number track replay)",
+   "where": "js/modules/groups.js:355",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "Tap {n}.",
+   "where": "js/modules/numbers.js:180",
+   "kind": "template",
+   "segments": [
+    "tap",
+    "{n}"
+   ]
+  },
+  {
+   "text": "That's {n}!",
+   "where": "js/modules/numbers.js:192",
+   "kind": "template",
+   "segments": [
+    "thats",
+    "{n}"
+   ]
+  },
+  {
+   "text": "It's in this row.",
+   "where": "js/modules/numbers.js:210",
+   "kind": "fixed",
+   "segments": [
+    "its-in-this-row-p"
+   ]
+  },
+  {
+   "text": "Look for the wiggly one.",
+   "where": "js/modules/numbers.js:213",
+   "kind": "fixed",
+   "segments": [
+    "look-for-the-wiggly-one-p"
+   ]
+  },
+  {
+   "text": "Here's {n}.",
+   "where": "js/modules/numbers.js:225",
+   "kind": "template",
+   "segments": [
+    "heres",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Make {n}.",
+   "where": "js/modules/numbers.js:237",
+   "kind": "template",
+   "segments": [
+    "make",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Use the blocks!",
+   "where": "js/modules/numbers.js:237",
+   "kind": "fixed",
+   "segments": [
+    "use-the-blocks-x"
+   ]
+  },
+  {
+   "text": "The long rods go on the tens side.",
+   "where": "js/modules/numbers.js:307",
+   "kind": "fixed",
+   "segments": [
+    "the-long-rods-go-on-the-tens-side-p"
+   ]
+  },
+  {
+   "text": "The little cubes go on the ones side.",
+   "where": "js/modules/numbers.js:307",
+   "kind": "fixed",
+   "segments": [
+    "the-little-cubes-go-on-the-ones-side-p"
+   ]
+  },
+  {
+   "text": "That's plenty!",
+   "where": "js/modules/numbers.js:312",
+   "kind": "fixed",
+   "segments": [
+    "thats-plenty-x"
+   ]
+  },
+  {
+   "text": "Take some away if you like.",
+   "where": "js/modules/numbers.js:312",
+   "kind": "fixed",
+   "segments": [
+    "take-some-away-if-you-like-p"
+   ]
+  },
+  {
+   "text": "Drag some blocks onto the mat first.",
+   "where": "js/modules/numbers.js:330",
+   "kind": "fixed",
+   "segments": [
+    "drag-some-blocks-onto-the-mat-first-p"
+   ]
+  },
+  {
+   "text": "{n} is {a} {tens} and {b} {ones}.",
+   "where": "js/modules/numbers.js:333",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "is",
+    "{a}",
+    "{tens}",
+    "and",
+    "{b}",
+    "{ones}"
+   ]
+  },
+  {
+   "text": "That's {a} {tens} and {b} {ones}.",
+   "where": "js/modules/numbers.js:347",
+   "kind": "template",
+   "segments": [
+    "thats",
+    "{a}",
+    "{tens}",
+    "and",
+    "{b}",
+    "{ones}"
+   ]
+  },
+  {
+   "text": "That makes {n}.",
+   "where": "js/modules/numbers.js:347",
+   "kind": "template",
+   "segments": [
+    "that-makes",
+    "{n}"
+   ]
+  },
+  {
+   "text": "We need {a} more {tens}.",
+   "where": "js/modules/numbers.js:340",
+   "kind": "template",
+   "segments": [
+    "we-need",
+    "{a}",
+    "+more",
+    "+{tens}"
+   ]
+  },
+  {
+   "text": "That's too many tens.",
+   "where": "js/modules/numbers.js:340",
+   "kind": "fixed",
+   "segments": [
+    "thats-too-many-tens-p"
+   ]
+  },
+  {
+   "text": "Take {a} away.",
+   "where": "js/modules/numbers.js:340",
+   "kind": "template",
+   "segments": [
+    "take",
+    "{a}",
+    "away"
+   ]
+  },
+  {
+   "text": "We need {a} more {ones}.",
+   "where": "js/modules/numbers.js:340",
+   "kind": "template",
+   "segments": [
+    "we-need",
+    "{a}",
+    "+more",
+    "+{ones}"
+   ]
+  },
+  {
+   "text": "That's too many ones.",
+   "where": "js/modules/numbers.js:344",
+   "kind": "fixed",
+   "segments": [
+    "thats-too-many-ones-p"
+   ]
+  },
+  {
+   "text": "That makes {n} too, but let's swap 10 ones for 1 ten.",
+   "where": "js/modules/numbers.js:348",
+   "kind": "template",
+   "segments": [
+    "that-makes",
+    "{n}",
+    "too-but-lets-swap-ten-ones-for-one-ten"
+   ]
+  },
+  {
+   "text": "Try {a} {tens} and {b} {ones}.",
+   "where": "js/modules/numbers.js:374",
+   "kind": "template",
+   "segments": [
+    "try",
+    "{a}",
+    "{tens}",
+    "and",
+    "{b}",
+    "{ones}"
+   ]
+  },
+  {
+   "text": "It's {n}.",
+   "where": "js/modules/numbers.js:468",
+   "kind": "template",
+   "segments": [
+    "its",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Each long rod is ten.",
+   "where": "js/modules/numbers.js:456",
+   "kind": "fixed",
+   "segments": [
+    "each-long-rod-is-ten-p"
+   ]
+  },
+  {
+   "text": "Count the tens, then the ones.",
+   "where": "js/modules/numbers.js:459",
+   "kind": "fixed",
+   "segments": [
+    "count-the-tens-then-the-ones-p"
+   ]
+  },
+  {
+   "text": "Count with me.",
+   "where": "js/modules/numbers.js:464",
+   "kind": "fixed",
+   "segments": [
+    "count-with-me-p"
+   ]
+  },
+  {
+   "text": "What number is this?",
+   "where": "js/modules/numbers.js:422",
+   "kind": "fixed",
+   "segments": [
+    "what-number-is-this-q"
+   ]
+  },
+  {
+   "text": "What comes after {n}?",
+   "where": "js/modules/numbers.js:515",
+   "kind": "template",
+   "segments": [
+    "what-comes-after",
+    "{n}"
+   ]
+  },
+  {
+   "text": "What comes before {n}?",
+   "where": "js/modules/numbers.js:515",
+   "kind": "template",
+   "segments": [
+    "what-comes-before",
+    "{n}"
+   ]
+  },
+  {
+   "text": "What number is between {n} and {k}?",
+   "where": "js/modules/numbers.js:515",
+   "kind": "template",
+   "segments": [
+    "what-number-is-between",
+    "{n}",
+    "and",
+    "{k}"
+   ]
+  },
+  {
+   "text": "{n} comes after {k}.",
+   "where": "js/modules/numbers.js:516",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "comes-after",
+    "{k}"
+   ]
+  },
+  {
+   "text": "{n} comes before {k}.",
+   "where": "js/modules/numbers.js:516",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "comes-before",
+    "{k}"
+   ]
+  },
+  {
+   "text": "{n} is between {k} and {a}.",
+   "where": "js/modules/numbers.js:516",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "is-between",
+    "{k}",
+    "and",
+    "{a}"
+   ]
+  },
+  {
+   "text": "Let's count along.",
+   "where": "js/modules/numbers.js:559",
+   "kind": "fixed",
+   "segments": [
+    "lets-count-along-p"
+   ]
+  },
+  {
+   "text": "Count along with me.",
+   "where": "js/modules/numbers.js:559",
+   "kind": "fixed",
+   "segments": [
+    "count-along-with-me-p"
+   ]
+  },
+  {
+   "text": "Put the numbers in order.",
+   "where": "js/modules/numbers.js:612",
+   "kind": "fixed",
+   "segments": [
+    "put-the-numbers-in-order-p"
+   ]
+  },
+  {
+   "text": "Smallest first!",
+   "where": "js/modules/numbers.js:612",
+   "kind": "fixed",
+   "segments": [
+    "smallest-first-x"
+   ]
+  },
+  {
+   "text": "Smallest to biggest!",
+   "where": "js/modules/numbers.js:609",
+   "kind": "fixed",
+   "segments": [
+    "smallest-to-biggest-x"
+   ]
+  },
+  {
+   "text": "Which number is the smallest?",
+   "where": "js/modules/numbers.js:683",
+   "kind": "fixed",
+   "segments": [
+    "which-number-is-the-smallest-q"
+   ]
+  },
+  {
+   "text": "It goes first.",
+   "where": "js/modules/numbers.js:683",
+   "kind": "fixed",
+   "segments": [
+    "it-goes-first-p"
+   ]
+  },
+  {
+   "text": "Nearly!",
+   "where": "js/modules/numbers.js:683",
+   "kind": "fixed",
+   "segments": [
+    "nearly-x"
+   ]
+  },
+  {
+   "text": "Look at the glowing spot.",
+   "where": "js/modules/numbers.js:683",
+   "kind": "fixed",
+   "segments": [
+    "look-at-the-glowing-spot-p"
+   ]
+  },
+  {
+   "text": "Which number comes next?",
+   "where": "js/modules/numbers.js:683",
+   "kind": "fixed",
+   "segments": [
+    "which-number-comes-next-q"
+   ]
+  },
+  {
+   "text": "Put the glowing number in the glowing spot.",
+   "where": "js/modules/numbers.js:705",
+   "kind": "fixed",
+   "segments": [
+    "put-the-glowing-number-in-the-glowing-spot-p"
+   ]
+  },
+  {
+   "text": "{n}  (chart cell tapped)",
+   "where": "js/modules/numbers.js:188",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "ten / one  (rod or cube picked up -> number clip 10 / 1)",
+   "where": "js/modules/numbers.js:282",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n}  (order card picked up)",
+   "where": "js/modules/numbers.js:663",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "Here are {n} orange {many}.",
+   "where": "js/modules/addsub.js:128",
+   "kind": "template",
+   "segments": [
+    "here-are",
+    "{n}",
+    "+orange",
+    "+{many}"
+   ]
+  },
+  {
+   "text": "Tap {n} empty {many} to add {k} blue.",
+   "where": "js/modules/addsub.js:128",
+   "kind": "template",
+   "segments": [
+    "tap",
+    "{n}",
+    "+empty",
+    "+{many}",
+    "to-add",
+    "{k}",
+    "+blue"
+   ]
+  },
+  {
+   "text": "There are {n} orange {many} and {k} blue {many2}.",
+   "where": "js/modules/addsub.js:129",
+   "kind": "template",
+   "segments": [
+    "there-are",
+    "{n}",
+    "+orange",
+    "+{many}",
+    "and",
+    "{k}",
+    "+blue",
+    "+{many2}"
+   ]
+  },
+  {
+   "text": "There are {n} orange {many}.",
+   "where": "js/modules/addsub.js:130",
+   "kind": "template",
+   "segments": [
+    "there-are",
+    "{n}",
+    "+orange",
+    "+{many}"
+   ]
+  },
+  {
+   "text": "Add blue ones to make {n}.",
+   "where": "js/modules/addsub.js:130",
+   "kind": "template",
+   "segments": [
+    "add-blue-ones-to-make",
+    "{n}"
+   ]
+  },
+  {
+   "text": "How many blue {many} do you add?",
+   "where": "js/modules/addsub.js:130",
+   "kind": "template",
+   "segments": [
+    "how-many-blue",
+    "{many}",
+    "do-you-add-q"
+   ]
+  },
+  {
+   "text": "{n} and {k} more.",
+   "where": "js/modules/addsub.js:193, js/modules/addsub.js:404",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "and",
+    "{k}",
+    "more"
+   ]
+  },
+  {
+   "text": "We have {n}, we need {k}.",
+   "where": "js/modules/addsub.js:201",
+   "kind": "template",
+   "segments": [
+    "we-have",
+    "{n}",
+    "we-need",
+    "{k}"
+   ]
+  },
+  {
+   "text": "Count on.",
+   "where": "js/modules/addsub.js:201",
+   "kind": "fixed",
+   "segments": [
+    "count-on-p"
+   ]
+  },
+  {
+   "text": "Count on from {n}.",
+   "where": "js/modules/addsub.js:210",
+   "kind": "template",
+   "segments": [
+    "count-on-from",
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n} and {k} makes {a}.",
+   "where": "js/modules/addsub.js:224",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "and",
+    "{k}",
+    "makes",
+    "{a}"
+   ]
+  },
+  {
+   "text": "{n} and {k} make {a}.",
+   "where": "js/modules/addsub.js:289",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "and",
+    "{k}",
+    "make",
+    "{a}"
+   ]
+  },
+  {
+   "text": "That's the whole!",
+   "where": "js/modules/addsub.js:289",
+   "kind": "fixed",
+   "segments": [
+    "thats-the-whole-x"
+   ]
+  },
+  {
+   "text": "Number friends!",
+   "where": "js/modules/addsub.js:289",
+   "kind": "fixed",
+   "segments": [
+    "number-friends-x"
+   ]
+  },
+  {
+   "text": "{n} plus {k} is {a}.",
+   "where": "js/modules/addsub.js:162, js/modules/addsub.js:340",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "plus",
+    "{k}",
+    "is",
+    "{a}"
+   ]
+  },
+  {
+   "text": "You counted on!",
+   "where": "js/modules/addsub.js:170",
+   "kind": "fixed",
+   "segments": [
+    "you-counted-on-x"
+   ]
+  },
+  {
+   "text": "Great thinking!",
+   "where": "js/modules/addsub.js:340",
+   "kind": "fixed",
+   "segments": [
+    "great-thinking-x"
+   ]
+  },
+  {
+   "text": "Count them all.",
+   "where": "js/modules/addsub.js:259",
+   "kind": "fixed",
+   "segments": [
+    "count-them-all-p"
+   ]
+  },
+  {
+   "text": "Count the empty ones.",
+   "where": "js/modules/addsub.js:263",
+   "kind": "fixed",
+   "segments": [
+    "count-the-empty-ones-p"
+   ]
+  },
+  {
+   "text": "One part is {n}.",
+   "where": "js/modules/addsub.js:285",
+   "kind": "template",
+   "segments": [
+    "one-part-is",
+    "{n}"
+   ]
+  },
+  {
+   "text": "The other part is {n}.",
+   "where": "js/modules/addsub.js:285",
+   "kind": "template",
+   "segments": [
+    "the-other-part-is",
+    "{n}"
+   ]
+  },
+  {
+   "text": "What is the whole?",
+   "where": "js/modules/addsub.js:285",
+   "kind": "fixed",
+   "segments": [
+    "what-is-the-whole-q"
+   ]
+  },
+  {
+   "text": "The whole is {n}.",
+   "where": "js/modules/addsub.js:286",
+   "kind": "template",
+   "segments": [
+    "the-whole-is",
+    "{n}"
+   ]
+  },
+  {
+   "text": "What is the other part?",
+   "where": "js/modules/addsub.js:286",
+   "kind": "fixed",
+   "segments": [
+    "what-is-the-other-part-q"
+   ]
+  },
+  {
+   "text": "Double {n}.",
+   "where": "js/modules/addsub.js:323",
+   "kind": "template",
+   "segments": [
+    "double",
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n} plus {k}.",
+   "where": "js/modules/addsub.js:323",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "plus",
+    "{k}"
+   ]
+  },
+  {
+   "text": "That's a double and one more.",
+   "where": "js/modules/addsub.js:323",
+   "kind": "fixed",
+   "segments": [
+    "thats-a-double-and-one-more-p"
+   ]
+  },
+  {
+   "text": "Start with the bigger number, {n}.",
+   "where": "js/modules/addsub.js:324",
+   "kind": "template",
+   "segments": [
+    "start-with-the-bigger-number",
+    "{n}"
+   ]
+  },
+  {
+   "text": "Drag counters to fill the ten frame.",
+   "where": "js/modules/addsub.js:324",
+   "kind": "fixed",
+   "segments": [
+    "drag-counters-to-fill-the-ten-frame-p"
+   ]
+  },
+  {
+   "text": "Drag the blue counters to fill up the ten frame first.",
+   "where": "js/modules/addsub.js:325",
+   "kind": "fixed",
+   "segments": [
+    "drag-the-blue-counters-to-fill-up-the-ten-frame-first-p"
+   ]
+  },
+  {
+   "text": "Fill the ten frame first.",
+   "where": "js/modules/addsub.js:370",
+   "kind": "fixed",
+   "segments": [
+    "fill-the-ten-frame-first-p"
+   ]
+  },
+  {
+   "text": "{n} needs {k} more to make 10.",
+   "where": "js/modules/addsub.js:370",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "needs",
+    "{k}",
+    "more-to-make-ten"
+   ]
+  },
+  {
+   "text": "Pop it in an empty spot in the first frame.",
+   "where": "js/modules/addsub.js:380",
+   "kind": "fixed",
+   "segments": [
+    "pop-it-in-an-empty-spot-in-the-first-frame-p"
+   ]
+  },
+  {
+   "text": "The first frame is full.",
+   "where": "js/modules/addsub.js:391",
+   "kind": "fixed",
+   "segments": [
+    "the-first-frame-is-full-p"
+   ]
+  },
+  {
+   "text": "That makes 10!",
+   "where": "js/modules/addsub.js:391",
+   "kind": "fixed",
+   "segments": [
+    "that-makes-ten-x"
+   ]
+  },
+  {
+   "text": "Now count on {n}.",
+   "where": "js/modules/addsub.js:422",
+   "kind": "template",
+   "segments": [
+    "now-count-on",
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n} plus {k} is the same as 10 plus {a}.",
+   "where": "js/modules/addsub.js:394",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "plus",
+    "{k}",
+    "is-the-same-as-ten-plus",
+    "{a}"
+   ]
+  },
+  {
+   "text": "Double {n} first.",
+   "where": "js/modules/addsub.js:408",
+   "kind": "template",
+   "segments": [
+    "double",
+    "{n}",
+    "first"
+   ]
+  },
+  {
+   "text": "{n} and {k} is {a}.",
+   "where": "js/modules/addsub.js:408",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "and",
+    "{k}",
+    "is",
+    "{a}"
+   ]
+  },
+  {
+   "text": "Now one more makes {n}.",
+   "where": "js/modules/addsub.js:414",
+   "kind": "template",
+   "segments": [
+    "now-one-more-makes",
+    "{n}"
+   ]
+  },
+  {
+   "text": "There are {n} {many}.",
+   "where": "js/modules/addsub.js:460",
+   "kind": "template",
+   "segments": [
+    "there-are",
+    "{n}",
+    "{many}"
+   ]
+  },
+  {
+   "text": "{n} {verb}.",
+   "where": "js/modules/addsub.js:460",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "{verb}"
+   ]
+  },
+  {
+   "text": "Tap {n} {many} to take it away.",
+   "where": "js/modules/addsub.js:460",
+   "kind": "template",
+   "segments": [
+    "tap",
+    "{n}",
+    "{many}",
+    "to-take-it-away"
+   ]
+  },
+  {
+   "text": "Tap {n} {many} to take them away.",
+   "where": "js/modules/addsub.js:460",
+   "kind": "template",
+   "segments": [
+    "tap",
+    "{n}",
+    "{many}",
+    "to-take-them-away"
+   ]
+  },
+  {
+   "text": "How many are left?",
+   "where": "js/modules/addsub.js:461",
+   "kind": "fixed",
+   "segments": [
+    "how-many-are-left-q"
+   ]
+  },
+  {
+   "text": "{n} take away {k}.",
+   "where": "js/modules/addsub.js:462",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "take-away",
+    "{k}"
+   ]
+  },
+  {
+   "text": "Think: {n} and how many make {k}?",
+   "where": "js/modules/addsub.js:462",
+   "kind": "template",
+   "segments": [
+    "think",
+    "{n}",
+    "and-how-many-make",
+    "{k}"
+   ]
+  },
+  {
+   "text": "How many {many} are left?",
+   "where": "js/modules/addsub.js:461",
+   "kind": "template",
+   "segments": [
+    "how-many",
+    "{many}",
+    "are-left-q"
+   ]
+  },
+  {
+   "text": "{n} and {k} make {a}, so {b} take away {c} is {d}.",
+   "where": "js/modules/addsub.js:466",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "and",
+    "{k}",
+    "make",
+    "{a}",
+    "so",
+    "{b}",
+    "take-away",
+    "{c}",
+    "is",
+    "{d}"
+   ]
+  },
+  {
+   "text": "{n} take away {k} is {a}.",
+   "where": "js/modules/addsub.js:162",
+   "kind": "template",
+   "segments": [
+    "{n}",
+    "take-away",
+    "{k}",
+    "is",
+    "{a}"
+   ]
+  },
+  {
+   "text": "Let's count what is left.",
+   "where": "js/modules/addsub.js:519",
+   "kind": "fixed",
+   "segments": [
+    "lets-count-what-is-left-p"
+   ]
+  },
+  {
+   "text": "{n}  (hop count while counting on)",
+   "where": "js/modules/addsub.js:112",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n}  (placed counters count on)",
+   "where": "js/modules/addsub.js:143",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  },
+  {
+   "text": "{n}  (counters taken away)",
+   "where": "js/modules/addsub.js:506",
+   "kind": "number-only",
+   "segments": [
+    "{n}"
+   ]
+  }
+ ]
+}

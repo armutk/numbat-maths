@@ -1,27 +1,34 @@
-# Numbat Maths
+# Numbat Maths · Pip
 
-A Year 1 maths practice app for iPad, built as an offline-first PWA. Pip the numbat talks the child through four islands that map to the Victorian Curriculum 2.0 Mathematics Level 1:
+Pip the numbat is Arisha's live maths tutor on the iPad. The screen is Pip's whiteboard: she builds sharing problems from Arisha's own world (Tim Tams for Mum and Dad), watches every move, asks one question at a time, and remembers what was tricky last time. Arisha can also hold real things up to the camera and share them out with Pip. After each session a short note for parents is saved (and sent to Ahmed's phone). Curriculum: Victorian Curriculum 2.0 Mathematics Level 1, this fortnight sharing equally (VC2M1N06), extension to 120.
 
-| Island | What it practises | VC2.0 Level 1 |
-| --- | --- | --- |
-| Sharing Equally | Drag things onto friends' plates, check it is fair, say how many each (with leftovers and groups of ten as extensions) | VC2M1N06 |
-| Equal Groups | Groups of 2, 5 and 10, skip counting, "how many groups?" | VC2M1N03, VC2M1A01 |
-| Numbers to 120 | Find on a track or 120 chart, tens and ones, before/after, ordering | VC2M1N01, VC2M1N02 |
-| Add and Take Away | Ten frames, part-part-whole, make ten, doubles, subtraction within 20 | VC2M1N04, VC2M1N05 |
+Live at https://armutk.github.io/numbat-maths/ (offline-first PWA: Add to Home Screen in Safari).
 
-Design notes: every instruction is spoken (Web Speech, Australian English voice when available), short mastery-based quests with gentle hints, spaced review of shaky skills, stickers instead of shops, and a hold-to-open grown-ups page with per-skill accuracy and what to practise at home. Everything is stored on the device; there are no accounts, analytics or network calls after the first load.
+## How it is built
 
-## Install on an iPad
+| Piece | What it is |
+| --- | --- |
+| `js/tutor.js` | ElevenLabs Conversational AI session (agent config in `tools/pip-agent/`): voice in/out, client tools that drive the board, app events (`[APP] …` messages) for moves, Ask Pip, idle, camera, caps. |
+| `js/board.js`, `css/board.css` | Pip's whiteboard: items, plates/groups with avatars, number line, 120 chart, ten frames, choices, keypad, highlight, demonstrate, celebrate. `tests/board-dev.html` exercises it standalone. |
+| `js/camera.js` | Camera mode. JPEG snapshots (max 640 px) go to the Hermes proxy, which asks Gemini Flash to count objects; frames are never stored. |
+| `js/memory.js`, `js/profile-config.js` | Learner profile (seed + what Pip learns), session history, parent summaries, daily/session caps. All on the device (`localStorage`). |
+| `js/voice.js`, `assets/voice/` | Offline voice: 444 recorded clips of the same ElevenLabs voice, stitched gap-free on the Web Audio clock. No `speechSynthesis` anywhere. |
+| `js/audio.js`, `assets/sfx/` | Web Audio engine (iOS unlock, voice/SFX buses, ducking) and a CC0 SFX set from Kenney.nl. |
+| `js/drag.js` | One hardened touch drag engine for every screen (pointer capture, state machine, watchdog, spring/lift/snap feel). |
+| `js/modules/*` | The original four islands, kept as "Practise on my own" (works offline). |
+| Hermes `/opt/pip-proxy` | `https://hermes.redgumlab.au/pip/{health,see,summary}`. Gemini key stays on the server. Summaries go to Telegram only from the production origin, max one per 30 min. |
 
-1. Open the site in Safari.
-2. Tap Share, then **Add to Home Screen**.
-3. Open it from the Home Screen: it runs full screen, works offline, and in both orientations.
+The agent: `tools/pip-agent/prompt.md` (persona + pedagogy), `tools/pip-agent/tools.json` (19 client tools), `tools/pip-agent/apply.py` (creates/updates the agent; run on Hermes with `ELEVENLABS_API_KEY=$(secrets get ELEVENLABS_API_KEY) python3 apply.py`). The agent is public but origin-locked to `armutk.github.io` (plus localhost for tests); no key ships in the site.
 
 ## Develop
 
-Plain HTML, CSS and ES modules; no build step. Serve the folder with any static server, e.g. `python3 -m http.server 8124`.
+Plain HTML, CSS and ES modules; no build step. `python3 -m http.server 8125` from the repo root, then open `http://127.0.0.1:8125/?dev` (`?dev` exposes `window.__numbat` and logs `[pip]` events; dev builds send parent summaries as dry runs).
 
-- `tests/play.mjs` plays through a quest on iPad emulation (Playwright) and screenshots to `screens/`.
-- `tests/make-icons.mjs` regenerates the PNG icons and splash screens from `assets/icons/icon.svg`.
+Tests (Playwright; Chromium runs natively, WebKit runs through Docker with `tests/run-webkit.sh`):
 
-Fonts: Fredoka and Nunito (SIL Open Font License), bundled. Illustrations are original SVG.
+- `tests/tutor-check.mjs` live agent wiring with a fake board (text-only session): connection, first response, tool calls, move reporting, Ask Pip.
+- `tests/board-check.mjs` whiteboard API + touch drags + screenshots.
+- `tests/drag-fuzz.mjs` adversarial touch fuzzing of every module (gate for deploys).
+- `tests/touch-check.mjs`, `tests/audio-check.mjs`, `tests/voice-check.mjs`, `tests/play.mjs` (scripted practice quest).
+
+Fonts: Fredoka and Nunito (SIL OFL), bundled. Illustrations are original SVG. SFX: Kenney.nl, CC0 (see `assets/sfx/LICENSE.txt`). ElevenLabs browser SDK vendored in `js/vendor/` (MIT).

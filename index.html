@@ -29,6 +29,8 @@
   <link rel="apple-touch-startup-image" href="./assets/splash/splash-2048x1536.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
   <link rel="preload" href="./assets/fonts/Fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/board.css">
+  <link rel="stylesheet" href="./css/pip.css">
 </head>
 <body>
   <div id="app"></div>
@@ -36,7 +38,18 @@
     import { boot } from './js/app.js';
     boot();
     if ('serviceWorker' in navigator) {
-      addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); });
+      addEventListener('load', async () => {
+        try {
+          const reg = await navigator.serviceWorker.register('./sw.js');
+          // pick up a new build on the next open: when a fresh worker is waiting, let it take over
+          reg.addEventListener('updatefound', () => { const w = reg.installing; w && w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) w.postMessage('skipWaiting'); }); });
+          // reload only when an UPDATED worker takes over (not on the very first install, which would interrupt the greeting)
+          const hadController = !!navigator.serviceWorker.controller;
+          let reloaded = false;
+          navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadController && !reloaded && !document.querySelector('.pip-screen')) { reloaded = true; location.reload(); } });
+          setInterval(() => reg.update().catch(() => {}), 30 * 60 * 1000);
+        } catch {}
+      });
     }
   </script>
 </body>

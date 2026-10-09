@@ -1,63 +1,132 @@
-// Gentle synthesised sounds via Web Audio. No audio assets.
+// Audio engine: one shared AudioContext, three buses, sample-based SFX (Kenney CC0, assets/sfx).
+// Voice (Pip / pre-recorded clips) and SFX are separate buses; only SFX is ever ducked or muted.
 let ctx = null;
-let master = null;
-let enabled = true;
+let unlocked = false;
+let sfxOn = true;
+const waiters = [];
+const bufs = {};
+let loading = null;
+
+export const buses = { master: null, voice: null, sfx: null };
+const voiceSources = new Set();
+
+function wire() {
+  if (ctx) return true;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return false;
+  ctx = new AC();
+  buses.master = ctx.createGain(); buses.master.gain.value = 1.0;
+  buses.voice = ctx.createGain(); buses.voice.gain.value = 1.0;
+  buses.sfx = ctx.createGain(); buses.sfx.gain.value = 0.7;
+  buses.voice.connect(buses.master); buses.sfx.connect(buses.master); buses.master.connect(ctx.destination);
+  ctx.addEventListener?.('statechange', () => {
+    if (ctx.state === 'running') flush();
+    else if (unlocked && (ctx.state === 'suspended' || ctx.state === 'interrupted')) resume();
+  });
+  return true;
+}
+
+function flush() {
+  if (!unlocked) { unlocked = true; }
+  while (waiters.length) { try { waiters.shift()(); } catch {} }
+}
+
+function resume() {
+  if (!ctx) return;
+  try { const p = ctx.resume(); p && p.catch && p.catch(() => {}); } catch {}
+}
 
 export function unlockAudio() {
   try {
-    if (!ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      ctx = new AC();
-      master = ctx.createGain();
-      master.gain.value = 0.35;
-      master.connect(ctx.destination);
-    }
-    if (ctx.state === 'suspended') ctx.resume();
-    // iOS needs a silent buffer kick inside the gesture
+    try { if (navigator.audioSession && navigator.audioSession.type !== 'playback') navigator.audioSession.type = 'playback'; } catch {}
+    if (!wire()) return;
+    // resume inside the gesture, then a silent 1-sample kick (iOS)
+    if (ctx.state !== 'running') resume();
     const b = ctx.createBuffer(1, 1, 22050);
     const s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0);
+    unlocked = true;
+    if (ctx.state === 'running') flush();
+    else { const t = setInterval(() => { if (ctx.state === 'running') { clearInterval(t); flush(); } }, 50); setTimeout(() => clearInterval(t), 5000); }
   } catch {}
 }
 
-export function setSound(on) { enabled = on; }
-export function soundOn() { return enabled; }
-
-document.addEventListener('visibilitychange', () => { if (ctx && !document.hidden && ctx.state === 'suspended') ctx.resume().catch(() => {}); });
-
-function tone({ f = 440, f2, type = 'sine', dur = 0.15, vol = 0.6, at = 0, attack = 0.005, release }) {
-  if (!ctx || !enabled) return;
-  const t0 = ctx.currentTime + at;
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
-  o.type = type;
-  o.frequency.setValueAtTime(f, t0);
-  if (f2) o.frequency.exponentialRampToValueAtTime(f2, t0 + dur);
-  g.gain.setValueAtTime(0.0001, t0);
-  g.gain.exponentialRampToValueAtTime(vol, t0 + attack);
-  g.gain.exponentialRampToValueAtTime(0.0001, t0 + (release || dur));
-  o.connect(g); g.connect(master);
-  o.start(t0); o.stop(t0 + (release || dur) + 0.05);
+const wake = () => { if (unlocked && ctx && ctx.state !== 'running') resume(); };
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) wake(); });
+  window.addEventListener('pageshow', wake);
+  window.addEventListener('focus', wake);
 }
 
-const NOTE = { C4: 261.63, D4: 293.66, E4: 329.63, G4: 392.0, A4: 440.0, C5: 523.25, D5: 587.33, E5: 659.25, G5: 783.99, A5: 880.0, C6: 1046.5, E6: 1318.5 };
+export function audioContext() { return ctx; }
+export function isUnlocked() { return unlocked && !!ctx && ctx.state === 'running'; }
+export function onUnlock(fn) { if (isUnlocked()) { try { fn(); } catch {} } else waiters.push(fn); }
+export function setSound(on) { sfxOn = !!on; }
+export function soundOn() { return sfxOn; }
+
+export function decode(arrayBuffer) {
+  return new Promise((resolve, reject) => {
+    if (!wire()) return reject(new Error('no WebAudio'));
+    try {
+      const p = ctx.decodeAudioData(arrayBuffer, resolve, reject); // Safari: callback form
+      if (p && p.then) p.then(resolve, reject);
+    } catch (e) { reject(e); }
+  });
+}
+
+export function playBuffer(buf, { bus = 'sfx', gain = 1, when = 0, rate = 1 } = {}) {
+  if (!ctx || !buf) return { source: null, stop() {} };
+  try {
+    const source = ctx.createBufferSource();
+    source.buffer = buf; source.playbackRate.value = rate;
+    let out = source;
+    if (gain !== 1) { const g = ctx.createGain(); g.gain.value = gain; source.connect(g); out = g; }
+    out.connect(buses[bus] || buses.sfx);
+    const isVoice = bus === 'voice';
+    if (isVoice) { voiceSources.add(source); source.onended = () => voiceSources.delete(source); }
+    source.start(ctx.currentTime + Math.max(0, when));
+    return { source, stop() { try { source.stop(); } catch {} voiceSources.delete(source); } };
+  } catch { return { source: null, stop() {} }; }
+}
+
+export function stopAll() { for (const s of [...voiceSources]) { try { s.stop(); } catch {} } voiceSources.clear(); }
+
+export function duck(on) {
+  if (!ctx) return;
+  const g = buses.sfx.gain, t = ctx.currentTime;
+  try {
+    g.cancelScheduledValues(t); g.setValueAtTime(g.value, t);
+    g.linearRampToValueAtTime(on ? 0.35 : 0.7, t + (on ? 0.06 : 0.25));
+  } catch {}
+}
+
+export function preloadSfx() {
+  if (loading) return loading;
+  loading = (async () => {
+    try {
+      if (!wire()) return;
+      const man = await (await fetch(new URL('../assets/sfx/manifest.json', import.meta.url))).json();
+      await Promise.all(Object.entries(man).map(async ([name, v]) => {
+        try {
+          const file = typeof v === 'string' ? v : v.file;
+          const ab = await (await fetch(new URL('../assets/sfx/' + file, import.meta.url))).arrayBuffer();
+          bufs[name] = await decode(ab);
+        } catch { /* leave missing; sfx stays silent */ }
+      }));
+    } catch {}
+  })();
+  return loading;
+}
+
+function play(name, opts) {
+  if (!sfxOn || !ctx || !unlocked || !bufs[name]) return;
+  playBuffer(bufs[name], opts);
+}
+const mk = (name, opts) => () => { try { play(name, opts); } catch {} };
 
 export const sfx = {
-  /** soft pop when an item is picked up */
-  pick() { tone({ f: 520, f2: 760, type: 'sine', dur: 0.08, vol: 0.35 }); },
-  /** satisfying plop when an item lands */
-  drop() { tone({ f: 420, f2: 230, type: 'triangle', dur: 0.12, vol: 0.5 }); tone({ f: 1200, f2: 600, type: 'sine', dur: 0.05, vol: 0.12 }); },
-  /** counting blip, pitched by index */
-  tick(i = 0) { tone({ f: NOTE.C5 * Math.pow(2, (i % 8) / 12), type: 'triangle', dur: 0.12, vol: 0.4 }); },
-  tap() { tone({ f: 700, f2: 900, type: 'sine', dur: 0.05, vol: 0.2 }); },
-  /** correct answer: two-note ding */
-  correct() { tone({ f: NOTE.E5, type: 'triangle', dur: 0.16, vol: 0.5 }); tone({ f: NOTE.G5, type: 'triangle', dur: 0.26, vol: 0.5, at: 0.11 }); },
-  /** wrong: a soft, low, kind "hmm" — never a buzzer */
-  wrong() { tone({ f: 300, f2: 240, type: 'sine', dur: 0.22, vol: 0.35 }); },
-  /** task complete chime */
-  success() { [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6].forEach((f, i) => tone({ f, type: 'triangle', dur: 0.35, vol: 0.45, at: i * 0.09 })); },
-  /** quest done fanfare (still gentle) */
-  fanfare() { [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6, NOTE.E6, NOTE.C6].forEach((f, i) => tone({ f, type: 'triangle', dur: 0.4, vol: 0.4, at: i * 0.11 })); tone({ f: NOTE.C4, type: 'sine', dur: 0.9, vol: 0.25, at: 0.5 }); },
-  sticker() { [NOTE.G4, NOTE.C5, NOTE.E5, NOTE.G5].forEach((f, i) => tone({ f, type: 'sine', dur: 0.5, vol: 0.4, at: i * 0.07 })); },
-  whoosh() { tone({ f: 200, f2: 900, type: 'sine', dur: 0.18, vol: 0.12 }); },
+  tap: mk('tap'), pickup: mk('pickup'), drag: mk('drag'), drop: mk('drop'), snap: mk('snap'), reject: mk('reject'),
+  tick(i = 0) { try { play('tick', { rate: 2 ** ((Math.max(0, Math.floor(i)) % 8) / 12) }); } catch {} },
+  correct: mk('correct'), wrong: mk('wrong'), hint: mk('hint'), complete: mk('complete'), sticker: mk('sticker'),
+  celebrate: mk('celebrate'), whoosh: mk('whoosh'), pop: mk('pop'), ding: mk('ding'),
 };
+sfx.pick = sfx.pickup; sfx.success = sfx.complete; sfx.fanfare = sfx.celebrate;

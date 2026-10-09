@@ -2,8 +2,9 @@
 import { h, svg, randInt, shuffle, toast } from './ui.js';
 import { icons } from './art.js';
 import { sfx, setSound } from './audio.js';
-import { voiceInfo } from './speech.js';
+import { voiceInfo } from './voice.js';
 import * as store from './store.js';
+import * as mem from './memory.js';
 
 let MODULES = null;
 async function modules() {
@@ -90,6 +91,7 @@ async function parentView({ show, home }) {
         ),
         h('p', { class: 'muted', style: { marginTop: '12px' } }, `${st.quests} quests finished all up · ${st.stars} stars · ${st.stickers.length} stickers. Daily goal is ${store.DAILY_QUESTS} short quests (about 5–10 minutes).`),
       ),
+      pipNotesCard(),
       h('div', { class: 'card' },
         h('h2', {}, 'What to practise at home'),
         h('p', {}, h('b', {}, 'School topic this fortnight: sharing equally.'), ' The class is sharing collections (like 10 cookies) equally into 2, 5 or 1 group with counters and everyday objects, and explaining how they shared. Confident students extend to bigger numbers, up to 120.'),
@@ -119,4 +121,27 @@ async function parentView({ show, home }) {
     ),
   );
   return s;
+}
+
+/* ---------- Pip's notes: one short summary per live session ---------- */
+function pipNotesCard() {
+  const hist = mem.getHistory().filter((s) => s.summary && s.mode !== 'practice').slice(-6).reverse();
+  const fmtWhen = (s) => { const d = new Date(s.endedAt || s.startedAt || Date.now()); return d.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' }); };
+  const notes = hist.map((s) => h('div', { class: 'note' },
+    h('div', { class: 'when' }, `${fmtWhen(s)} · ${Math.max(1, Math.round((s.seconds || 0) / 60))} min · ${s.mode === 'camera' ? 'camera' : 'whiteboard'}${s.helpTaps ? ` · asked Pip for help ${s.helpTaps} time${s.helpTaps === 1 ? '' : 's'}` : ''}${s.summary.auto ? ' · auto note' : ''}`),
+    h('p', {}, h('b', {}, 'Did: '), s.summary.what_she_did),
+    s.summary.what_clicked ? h('p', {}, h('b', {}, 'Clicked: '), s.summary.what_clicked) : null,
+    s.summary.what_was_tricky ? h('p', {}, h('b', {}, 'Tricky: '), s.summary.what_was_tricky) : null,
+    s.summary.home_activity ? h('p', {}, h('b', {}, 'Try at home (2 min): '), s.summary.home_activity) : null,
+    s.summary.misconceptions?.length ? h('div', {}, ...s.summary.misconceptions.map((t) => h('span', { class: 'tag' }, t))) : null,
+    h('p', { class: 'muted' }, s.sent === 'sent' ? 'Sent to your phone.' : s.sent === 'skipped' ? 'Saved (phone notifications not set up).' : s.sent ? 'Saved on this iPad only (could not send).' : ''),
+  ));
+  const profile = mem.getProfile();
+  const learned = profile.learned.slice(-8).map((f) => `${f.kind}: ${f.text}`).join(' · ');
+  return h('div', { class: 'card' },
+    h('h2', {}, 'Pip\'s notes'),
+    notes.length ? h('div', {}, ...notes) : h('p', { class: 'muted' }, 'After each chat with Pip a short note appears here: what she did, what clicked, what was tricky, and a two-minute thing to try at home.'),
+    h('p', { class: 'muted', style: { marginTop: '10px' } }, learned ? `What Pip remembers about her: ${learned}` : 'Pip remembers her favourite things and family names as she learns them. A parent can also pre-fill js/profile-config.js.'),
+    h('p', { class: 'muted' }, `Pip today: ${Math.round(mem.usageToday().seconds / 60)} min of ${mem.capState().minutesLeft + Math.round(mem.usageToday().seconds / 60) | 0} allowed, ${mem.usageToday().sessions} session${mem.usageToday().sessions === 1 ? '' : 's'}.`),
+  );
 }

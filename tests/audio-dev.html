@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>audio dev</title>
+<button id="go" style="width:100%;height:120px;font-size:28px">Unlock + play all</button>
+<pre id="log">idle</pre>
+<script type="module">
+import * as A from '../js/audio.js';
+const names = ['tap','pickup','drag','drop','snap','reject','tick','correct','wrong','hint','complete','sticker','celebrate','whoosh','pop','ding','pick','success','fanfare'];
+go.addEventListener('click', async () => {
+  const out = { errors: [] };
+  try {
+    A.unlockAudio();
+    await A.preloadSfx();
+    await new Promise(r => setTimeout(r, 300));
+    const ctx = A.audioContext();
+    out.unlocked = A.isUnlocked(); out.state = ctx && ctx.state; out.sampleRate = ctx && ctx.sampleRate;
+    const man = await (await fetch('../assets/sfx/manifest.json')).json();
+    out.buffers = {};
+    for (const [n, v] of Object.entries(man)) {
+      try { const b = await A.decode(await (await fetch('../assets/sfx/' + (v.file || v))).arrayBuffer()); out.buffers[n] = +b.duration.toFixed(3); }
+      catch (e) { out.buffers[n] = 'ERR ' + e; }
+    }
+    for (const n of names) { try { A.sfx[n](); } catch (e) { out.errors.push(n + ': ' + e); } }
+    try { A.sfx.tick(5); A.duck(true); A.duck(false); const h = A.playBuffer(null); h.stop(); A.stopAll(); } catch (e) { out.errors.push('misc ' + e); }
+  } catch (e) { out.errors.push(String(e)); }
+  document.getElementById('log').textContent = JSON.stringify(out);
+});
+</script>

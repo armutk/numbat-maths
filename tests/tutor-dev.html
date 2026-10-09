@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><title>Pip tutor dev</title>
+<style>body{font:14px/1.4 system-ui;margin:16px;background:#fff8ec;color:#2b2740}pre{background:#fff;padding:12px;border-radius:12px;max-height:60vh;overflow:auto;white-space:pre-wrap}button{font:inherit;padding:8px 14px;border-radius:10px;border:0;background:#3fb984;color:#fff;margin:4px}</style></head>
+<body>
+<h1>Pip tutor dev (text-only session, fake board)</h1>
+<div>
+  <button id="start">start lesson (text-only)</button>
+  <button id="say">child says "four"</button>
+  <button id="move">simulate 1 move</button>
+  <button id="finish">deal everything equally</button>
+  <button id="help">Ask Pip</button>
+  <button id="stop">stop</button>
+</div>
+<pre id="log"></pre>
+<script type="module">
+  import * as tutor from '../js/tutor.js';
+  import { unlockAudio } from '../js/audio.js';
+  const logEl = document.getElementById('log');
+  const events = [];
+  window.__events = events;
+  const t0 = performance.now();
+  function log(type, data) { const e = { t: Math.round(performance.now() - t0), type, data }; events.push(e); logEl.textContent += `${e.t}ms ${type} ${typeof data === 'string' ? data : JSON.stringify(data)}\n`; logEl.scrollTop = 1e9; }
+  // fake board: enough state to answer get_board_state and emit moves
+  const handlers = {};
+  const fb = {
+    st: { scene: 'empty', itemKind: 'cookie', total: 0, tray: 0, groups: [], leftovers: null, equal: null, moves: [] },
+    on(ev, fn) { (handlers[ev] = handlers[ev] || []).push(fn); }, off(ev, fn) { handlers[ev] = (handlers[ev] || []).filter((f) => f !== fn); },
+    emit(ev, p) { (handlers[ev] || []).forEach((f) => f(p)); },
+    async setScene({ items, groups, leftovers }) { log('tool:set_scene', { items, groups, leftovers }); this.st = { scene: 'share', itemKind: items.kind, total: items.count, tray: items.count, groups: groups.map((g) => ({ ...g, count: 0 })), leftovers: leftovers ? { count: 0 } : null, equal: null, moves: [] }; },
+    async spawnItems(k, n) { log('tool:spawn_items', { k, n }); this.st.total += n; this.st.tray += n; },
+    async showNumberLine(o) { log('tool:show_number_line', o); }, async showChart120(o) { log('tool:show_chart_120', o); }, async showTenFrame(o) { log('tool:show_ten_frame', o); },
+    async showChoices(o, x) { log('tool:show_choices', { o, x }); }, async showKeypad(o) { log('tool:show_keypad', o); },
+    async highlight(t) { log('tool:highlight', t); }, async demonstrateMove(o) { log('tool:demonstrate_move', o); this.move(o.to === 'all-groups' ? 'all' : o.to.replace('group:', ''), o.count || 1); },
+    async showCounts(on) { log('tool:show_counts', on); }, async celebrate(l) { log('tool:celebrate', l); }, async clear() { log('tool:clear_board', ''); this.st.scene = 'empty'; },
+    move(gid, n = 1) { for (let i = 0; i < n; i++) { if (this.st.tray <= 0) break; const gs = this.st.groups; const g = gid === 'all' ? gs.reduce((a, b) => (a.count <= b.count ? a : b)) : gs.find((x) => x.id === gid) || gs[0]; g.count++; this.st.tray--; this.st.moves.push({ from: 'tray', to: `group:${g.id}` }); this.recalc(); this.emit('move', { item: { kind: this.st.itemKind, index: 0 }, from: 'tray', to: `group:${g.id}`, counts: this.counts() }); } },
+    counts() { return { tray: this.st.tray, groups: Object.fromEntries(this.st.groups.map((g) => [g.id, g.count])) }; },
+    recalc() { const c = this.st.groups.map((g) => g.count); this.st.equal = this.st.tray === 0 ? c.every((v) => v === c[0]) : null; },
+    getState() { return JSON.parse(JSON.stringify(this.st)); },
+    describe() { const s = this.st; if (s.scene !== 'share') return 'empty board'; return `${s.total} ${s.itemKind}s: tray ${s.tray}, ${s.groups.map((g) => `${g.name} ${g.count}`).join(', ')}${s.leftovers ? `, Pip's bowl ${s.leftovers.count}` : ''}. ${s.equal === null ? 'Still sharing.' : s.equal ? 'Equal.' : 'Not equal.'}`; },
+  };
+  window.__fb = fb;
+  tutor.attachBoard(fb);
+  tutor.setUI({
+    onStatus: (s) => log('status', s), onMode: (m) => log('mode', m), onError: (e) => log('error', String(e?.message || e)),
+    onTranscript: ({ role, text }) => log(role === 'pip' ? 'pip' : 'child', text), onEnd: (r) => log('end', r), onCamera: (open) => log('tool:camera', open),
+  });
+  window.__tutor = tutor;
+  document.getElementById('start').onclick = async () => { unlockAudio(); try { await tutor.start({ mode: 'lesson', textOnly: true }); log('started', ''); } catch (e) { log('start-error', String(e?.message || e)); } };
+  document.getElementById('say').onclick = () => { window.__pipConv?.sendUserMessage('four'); log('child', 'four'); };
+  document.getElementById('move').onclick = () => fb.move('all', 1);
+  document.getElementById('finish').onclick = () => { const st = fb.st; const per = Math.floor(st.total / st.groups.length); for (const g of st.groups) while (g.count < per && st.tray > 0) fb.move(g.id, 1); if (st.tray > 0 && st.leftovers) { st.leftovers.count += st.tray; st.tray = 0; fb.recalc(); fb.emit('move', { item: { kind: st.itemKind }, from: 'tray', to: 'group:bowl', counts: fb.counts() }); } };
+  document.getElementById('help').onclick = () => tutor.askForHelp();
+  document.getElementById('stop').onclick = () => tutor.stop('child_asked');
+</script>
+</body></html>

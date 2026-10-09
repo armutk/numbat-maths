@@ -1,7 +1,7 @@
 // Numbers to 120 — VC2M1N01 (recognise, represent, order numbers to 120) and VC2M1N02 (partition into tens and ones).
 import { h, svg, flipMove, wait, randInt, pick, shuffle } from '../ui.js';
 import { moduleArt } from '../art.js';
-import { say as speak } from '../speech.js';
+import { say as speak } from '../voice.js';
 
 /* ---------- styles (self-contained; injected once) ---------- */
 const CSS = `

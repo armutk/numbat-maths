@@ -110,7 +110,7 @@ function wireHelp(task, S) {
 function sizeFor(kind, { slots, total, per, W, H }) {
   const G = 16;
   const dims = (v) => {
-    if (kind === 'hoop') return { w: 2 * v + 30, h: Math.max(150, Math.round(v * 1.9)) };
+    if (kind === 'hoop') return { w: 2 * v + 40, h: Math.max(120, Math.round(v * 2)) };
     if (kind === 'bag') { const c = Math.min(per, 3), r = Math.ceil(per / c); return { w: c * v + (c - 1) * 3 + 32, h: Math.max(120, r * (v + 3) + 36) }; }
     if (kind === 'hand') return { w: 160, h: 160 };
     return { w: 5 * v + 40, h: 2 * v + 44 };

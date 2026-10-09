@@ -282,6 +282,7 @@ input { font: inherit; }
 /* Choice buttons (answers) */
 .choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
 .choice {
+  position: relative;
   min-width: 110px; min-height: 92px; padding: 10px 24px; border-radius: 26px;
   background: var(--white); color: var(--ink);
   font-size: 2.4rem; font-weight: 700;
@@ -291,6 +292,15 @@ input { font: inherit; }
 }
 .choice:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--sand-deep); }
 .choice.is-right { background: var(--green); color: #fff; box-shadow: 0 7px 0 var(--green-deep); animation: popin 0.4s var(--ease-pop); }
+.choice.is-right::after {
+  content: ""; position: absolute; inset: -6px; border-radius: inherit; pointer-events: none;
+  border: 4px solid var(--yellow); opacity: 0;
+  box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.5), 0 0 18px rgba(255, 210, 63, 0.6);
+  animation: sparkle-ring 0.7s var(--ease-out) 0.05s;
+}
+@keyframes sparkle-ring { 0% { opacity: 0.95; transform: scale(0.92); } 100% { opacity: 0; transform: scale(1.28); } }
+.stage.is-win { border-radius: var(--radius-xl); animation: win-glow 1.6s var(--ease-out) both; }
+@keyframes win-glow { 0% { box-shadow: inset 0 0 0 rgba(255, 210, 63, 0); } 30% { box-shadow: inset 0 0 70px rgba(255, 210, 63, 0.32); } 100% { box-shadow: inset 0 0 46px rgba(255, 210, 63, 0.16); } }
 .choice.is-wrong { background: var(--sand); color: var(--ink-faint); box-shadow: 0 7px 0 var(--sand-deep); }
 .choice.is-dim { opacity: 0.35; pointer-events: none; }
 .choice.is-text { font-size: 1.5rem; }
@@ -304,9 +314,17 @@ input { font: inherit; }
   transition: transform 0.25s var(--ease-out);
 }
 .item svg { width: 100%; height: 100%; pointer-events: none; }
-.item.is-dragging { z-index: 50; transition: none; transform: scale(1.15); filter: drop-shadow(0 14px 10px rgba(43, 39, 64, 0.25)); }
-.item.is-picked { animation: wobble 0.8s ease-in-out infinite; filter: drop-shadow(0 0 0 var(--blue)) drop-shadow(0 6px 8px rgba(77, 158, 235, 0.5)); }
-@keyframes wobble { 0%, 100% { transform: rotate(-6deg) scale(1.08); } 50% { transform: rotate(6deg) scale(1.08); } }
+.item.is-dragging, .item.is-lifted { z-index: 50; transition: none; filter: drop-shadow(0 16px 10px rgba(43, 39, 64, 0.26)) drop-shadow(0 2px 2px rgba(43, 39, 64, 0.12)); }
+/* Picked (tap-to-pick): a halo plus a gentle bob on the INNER svg. Never animate `transform` on the
+   draggable itself: it would override the drag transform (items "stuck magnified" / "won't move"). */
+.item.is-picked { filter: drop-shadow(0 0 0 var(--blue)) drop-shadow(0 6px 8px rgba(77, 158, 235, 0.55)) drop-shadow(0 0 5px rgba(77, 158, 235, 0.7)); outline: 3px solid rgba(77, 158, 235, 0.55); outline-offset: 3px; border-radius: 16px; }
+.item.is-picked > svg, .item.is-picked > .block-ten, .item.is-picked > .block-one { animation: pick-bob 0.8s ease-in-out infinite; }
+@keyframes pick-bob { 0%, 100% { transform: rotate(-3deg) scale(1.02); } 50% { transform: rotate(3deg) scale(1.04); } }
+.item, .stage { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+.item { touch-action: none; }
+.stage { touch-action: none; }
+#drag-layer { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: visible; }
+.drag-ghost { position: fixed; margin: 0; pointer-events: none; will-change: transform; }
 .item.is-settling { transition: transform 0.35s var(--ease-pop); }
 
 .tray {
@@ -319,9 +337,14 @@ input { font: inherit; }
 .tray.is-empty { border-style: dashed; opacity: 0.6; }
 
 .drop {
-  position: relative; transition: transform 0.15s var(--ease-pop), box-shadow 0.15s;
+  position: relative; transition: transform 0.3s var(--ease-pop), box-shadow 0.15s;
 }
 .drop.is-over { transform: scale(1.06); }
+.tray.drop.is-over { transform: scale(1.015); background: rgba(255, 255, 255, 0.95); border-color: var(--blue); }
+.drop.did-receive { animation: receive 0.4s var(--ease-pop); }
+.tray.drop.did-receive { animation: receive-soft 0.4s var(--ease-pop); }
+@keyframes receive { 0% { transform: scale(1.06); } 35% { transform: scale(1.09, 0.94); } 65% { transform: scale(0.98, 1.03); } 100% { transform: scale(1); } }
+@keyframes receive-soft { 0% { transform: scale(1.015); } 40% { transform: scale(1.02, 0.985); } 100% { transform: scale(1); } }
 .drop.is-over .plate-dish { box-shadow: 0 0 0 6px var(--blue-soft), 0 10px 20px rgba(77, 158, 235, 0.3); }
 .drop.is-glow .plate-dish { box-shadow: 0 0 0 6px var(--yellow-soft), 0 10px 20px rgba(255, 210, 63, 0.4); }
 .drop.is-glow { animation: nudge 1.2s ease-in-out infinite; }
@@ -349,6 +372,8 @@ input { font: inherit; }
   transition: opacity 0.25s, transform 0.25s var(--ease-pop); z-index: 3;
 }
 .plate .count.on { opacity: 1; transform: scale(1); }
+.plate .count.is-pop { animation: count-pop 0.42s var(--ease-pop); }
+@keyframes count-pop { 0% { transform: scale(1); } 35% { transform: scale(1.4); } 70% { transform: scale(0.93); } 100% { transform: scale(1); } }
 .plate .count.is-odd { background: var(--red); }
 .plate .count.is-even { background: var(--green); }
 .plate .label { font-weight: 600; color: var(--ink-soft); font-size: 1rem; }
@@ -516,8 +541,73 @@ input { font: inherit; }
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
-/* Compact portrait tweaks */
+/* ---------- Press feedback (installPressFeedback in drag.js) ----------
+   Uses the individual `scale` property so it composes with transform-based states
+   (translateY on .btn, tilt on .item, breathe on .ask-pip). */
+.is-pressed { animation: press-in 0.09s ease-out forwards; }
+.is-released { animation: press-out 0.26s var(--ease-pop); }
+@keyframes press-in { from { scale: 1; } to { scale: 0.96; } }
+@keyframes press-out { 0% { scale: 0.96; } 55% { scale: 1.035; } 100% { scale: 1; } }
+.btn[disabled].is-pressed, .btn.is-disabled.is-pressed { animation: none; }
+
+/* ---------- Ask Pip (always-present voice button) ---------- */
+.ask-pip {
+  position: fixed; z-index: 80;
+  bottom: calc(var(--safe-bottom) + 18px); right: calc(var(--safe-right) + 18px);
+  width: 88px; height: 88px; border-radius: 32px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+  background: var(--white); color: var(--ink);
+  box-shadow: 0 6px 0 var(--sand-deep), 0 14px 28px rgba(43, 39, 64, 0.16);
+  animation: pip-breathe 4.2s ease-in-out infinite;
+}
+.ask-pip .face { width: 52px; height: 52px; margin-top: 2px; flex: 0 0 auto; }
+.ask-pip .label { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; line-height: 1; margin-top: 1px; letter-spacing: 0.01em; }
+.ask-pip .hand, .ask-pip .badge {
+  position: absolute; top: -8px; right: -8px; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--yellow); box-shadow: 0 3px 0 var(--yellow-deep), 0 4px 8px rgba(43, 39, 64, 0.15);
+  display: flex; align-items: center; justify-content: center; transform-origin: 70% 90%;
+  animation: pip-wave 5s ease-in-out infinite;
+}
+.ask-pip .hand svg, .ask-pip .badge svg { width: 22px; height: 22px; }
+.ask-pip::before {
+  content: ""; position: absolute; inset: -6px; border-radius: 38px; pointer-events: none; z-index: -1;
+  background: radial-gradient(closest-side, rgba(77, 158, 235, 0.55), rgba(77, 158, 235, 0));
+  opacity: 0;
+}
+.ask-pip.is-live::before { opacity: 1; inset: -14px; border-radius: 46px; animation: pip-halo 2.6s ease-in-out infinite; }
+.ask-pip.is-talking::before { opacity: 1; inset: -18px; border-radius: 50px; animation: pip-halo 0.95s ease-in-out infinite; }
+.ask-pip.is-live { box-shadow: 0 6px 0 var(--blue-deep), 0 14px 28px rgba(77, 158, 235, 0.3); }
+@keyframes pip-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes pip-wave { 0%, 82%, 100% { transform: rotate(0); } 88% { transform: rotate(14deg); } 94% { transform: rotate(-10deg); } }
+@keyframes pip-halo { 0%, 100% { transform: scale(0.94); opacity: 0.55; } 50% { transform: scale(1.08); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-pip, .ask-pip .hand, .ask-pip .badge { animation: none !important; }
+  .is-pressed { animation: none; scale: 0.97; }
+  .item.is-picked { animation: none; }
+}
+
+/* ---------- Home: portrait (iPad 10.2" 810x1080 up to 12.9") ----------
+   .world is one column of full-width rows. Robust to extra buttons stacked above it
+   (all rows minmax(0, 1fr), min-height: 0 so it shrinks instead of overflowing). */
 @media (orientation: portrait) {
+  .home-hero { gap: 16px; padding: 4px 8px 0; }
+  .home-hero .mascot { width: 120px; }
+  .home-hero h1 { font-size: clamp(1.7rem, 4.2vmin, 2.3rem); }
+  .home-hero p { font-size: clamp(1rem, 2.4vmin, 1.2rem); margin-top: 4px; }
+  .world {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr));
+    min-height: 0; gap: clamp(12px, 1.8vmin, 20px);
+    padding: 12px 6px calc(var(--safe-bottom) + 112px);
+  }
+  .island { flex-direction: row; min-height: 0; }
+  .island .island-art { flex: 0 0 38%; padding: 12px; }
+  .island .island-art svg { max-width: none; }
+  .island .island-body { flex: 1 1 auto; justify-content: center; padding: 14px 22px 14px 12px; gap: 10px; }
+  .island h2 { font-size: clamp(1.4rem, 3.4vmin, 2rem); }
+  .island .island-meta { flex-direction: column; align-items: flex-start; gap: 10px; font-size: clamp(1rem, 2.2vmin, 1.2rem); }
+  .island .levels i { width: 14px; height: 14px; }
   .plate { --plate-w: min(42vw, 230px); }
 }
 @media (max-height: 700px) {

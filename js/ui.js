@@ -66,10 +66,31 @@ export function bounce(el) {
   setTimeout(() => el.classList.remove('is-bounce'), 700);
 }
 
-/** Move `el` into `newParent` with a FLIP animation so it glides rather than jumps. */
-export function flipMove(el, newParent, { duration = 380, before } = {}) {
+export const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Set a counter badge's text and re-trigger its pop (.is-pop) only when the text really changed. */
+export function popCount(el, text) {
+  if (!el) return;
+  const t = String(text);
+  if (el.textContent === t) return;
+  el.textContent = t;
+  if (prefersReducedMotion()) return;
+  el.classList.remove('is-pop');
+  void el.offsetWidth;
+  el.classList.add('is-pop');
+  clearTimeout(el._popT);
+  el._popT = setTimeout(() => el.classList.remove('is-pop'), 460);
+}
+
+/**
+ * Move `el` into `newParent` with a FLIP animation (Web Animations API) that glides from where it is
+ * on screen, then squashes and stretches as it lands. Fires a bubbling 'flip:land' event on `el` at the
+ * moment of landing (drag.js uses it for the thump + zone pulse).
+ */
+export function flipMove(el, newParent, { duration = 420, before } = {}) {
   const first = el.getBoundingClientRect();
   if (before) before();
+  el._flip?.cancel();
   newParent.append(el);
   el.style.transition = 'none';
   el.style.transform = 'none';
@@ -77,12 +98,25 @@ export function flipMove(el, newParent, { duration = 380, before } = {}) {
   const dx = first.left - last.left;
   const dy = first.top - last.top;
   const sx = first.width / (last.width || 1);
-  if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return Promise.resolve();
-  el.style.transform = `translate(${dx}px, ${dy}px) scale(${sx})`;
-  void el.offsetWidth;
-  el.style.transition = `transform ${duration}ms cubic-bezier(0.34, 1.4, 0.64, 1)`;
-  el.style.transform = 'none';
-  return new Promise((res) => setTimeout(() => { el.style.transition = ''; res(); }, duration));
+  const land = () => el.dispatchEvent(new CustomEvent('flip:land', { bubbles: true }));
+  if (prefersReducedMotion() || !el.animate || (Math.abs(dx) < 1 && Math.abs(dy) < 1 && Math.abs(sx - 1) < 0.02)) {
+    el.style.transition = '';
+    land();
+    return Promise.resolve();
+  }
+  const anim = el.animate([
+    { transform: `translate(${dx}px, ${dy}px) scale(${sx})`, easing: 'cubic-bezier(0.25, 0.8, 0.35, 1)' },
+    { transform: 'translate(0, 0) scale(1.08, 0.92)', offset: 0.52, easing: 'ease-out' },
+    { transform: 'scale(0.97, 1.03)', offset: 0.78, easing: 'ease-in-out' },
+    { transform: 'none' },
+  ], { duration });
+  el._flip = anim;
+  const landT = setTimeout(land, duration * 0.52);
+  return new Promise((res) => {
+    const end = () => { clearTimeout(landT); if (el._flip === anim) { el._flip = null; el.style.transition = ''; } res(); };
+    anim.addEventListener('finish', end);
+    anim.addEventListener('cancel', () => { clearTimeout(landT); res(); });
+  });
 }
 
 /* ---------- Confetti (restrained: ~40 pieces, 1.2s) ---------- */

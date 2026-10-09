@@ -1,0 +1,82 @@
+{
+ "tap": {
+  "file": "tap.wav",
+  "src": "interface/select_004.ogg",
+  "dur": 0.259
+ },
+ "pickup": {
+  "file": "pickup.wav",
+  "src": "interface/toggle_001.ogg",
+  "dur": 0.136
+ },
+ "drag": {
+  "file": "drag.wav",
+  "src": "ui-audio/rollover5.ogg",
+  "dur": 0.109
+ },
+ "drop": {
+  "file": "drop.wav",
+  "src": "interface/drop_003.ogg + impact-sounds/impactSoft_medium_000.ogg",
+  "dur": 0.188
+ },
+ "snap": {
+  "file": "snap.wav",
+  "src": "interface/glass_002.ogg + interface/drop_003.ogg",
+  "dur": 0.155
+ },
+ "reject": {
+  "file": "reject.wav",
+  "src": "impact-sounds/impactWood_light_001.ogg @x0.9",
+  "dur": 0.292
+ },
+ "tick": {
+  "file": "tick.wav",
+  "src": "interface/glass_003.ogg",
+  "dur": 0.121
+ },
+ "correct": {
+  "file": "correct.wav",
+  "src": "interface/confirmation_002.ogg",
+  "dur": 0.539
+ },
+ "wrong": {
+  "file": "wrong.wav",
+  "src": "interface/bong_001.ogg + interface/bong_001.ogg @x0.84",
+  "dur": 0.283
+ },
+ "hint": {
+  "file": "hint.wav",
+  "src": "interface/question_002.ogg",
+  "dur": 0.332
+ },
+ "complete": {
+  "file": "complete.wav",
+  "src": "interface/confirmation_004.ogg",
+  "dur": 0.489
+ },
+ "sticker": {
+  "file": "sticker.wav",
+  "src": "interface/glass_005.ogg + interface/glass_005.ogg @x1.335 + interface/glass_005.ogg @x1.78",
+  "dur": 0.254
+ },
+ "celebrate": {
+  "file": "celebrate.wav",
+  "src": "interface/glass_001.ogg + interface/glass_001.ogg @x1.26 + interface/glass_001.ogg @x1.5 + interface/confirmation_004.ogg",
+  "dur": 0.75
+ },
+ "whoosh": {
+  "file": "whoosh.wav",
+  "src": "interface/maximize_006.ogg",
+  "dur": 0.38
+ },
+ "pop": {
+  "file": "pop.wav",
+  "src": "interface/select_003.ogg",
+  "dur": 0.261
+ },
+ "ding": {
+  "file": "ding.wav",
+  "src": "interface/glass_004.ogg",
+  "dur": 0.672
+ }
+}

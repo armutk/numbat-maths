@@ -1,0 +1,212 @@
+[
+  {
+    "name": "set_scene",
+    "description": "Build a sharing scene on the whiteboard: a tray of items and plates for each person. Use real names from the child's world. Call this to start every new sharing problem.",
+    "parameters": {
+      "type": "object",
+      "required": ["item_kind", "count", "groups"],
+      "properties": {
+        "item_kind": { "type": "string", "description": "One of: timtam, cracker, strawberry, grape, banana, apple, cookie, lolly, muffin, carrot, block, star, car, teddy, dinosaur, flower, fish, button, coin, egg, shell. Use what the child likes." },
+        "count": { "type": "integer", "description": "How many items to share (1 to 120). For more than 20 use multiples of ten." },
+        "groups": {
+          "type": "array",
+          "description": "The people or places sharing. 1 to 6 entries, in the order they should appear.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Short label, e.g. Arisha, Mum, Dad, Nan, Pip, Teacher" },
+              "role": { "type": "string", "description": "Avatar: child, mum, dad, brother, sister, nan, pop, pip, teacher, friend" }
+            },
+            "required": ["name", "role"]
+          }
+        },
+        "leftovers": { "type": "boolean", "description": "true to show Pip's bowl for leftovers (use when count does not divide evenly)." },
+        "title": { "type": "string", "description": "Optional short on-screen title, e.g. 'Twelve Tim Tams for three'." }
+      }
+    }
+  },
+  {
+    "name": "spawn_items",
+    "description": "Add more items to the tray (or straight onto a plate).",
+    "parameters": {
+      "type": "object",
+      "required": ["kind", "count"],
+      "properties": {
+        "kind": { "type": "string", "description": "Item kind (same list as set_scene)." },
+        "count": { "type": "integer", "description": "How many to add (1 to 60)." },
+        "to_group": { "type": "string", "description": "Optional plate name to put them on directly." }
+      }
+    }
+  },
+  {
+    "name": "show_number_line",
+    "description": "Show a number line on the whiteboard, optionally with a marked number.",
+    "parameters": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "integer", "description": "First number (0 to 110)." },
+        "to": { "type": "integer", "description": "Last number (up to 120, at most 30 numbers long)." },
+        "mark": { "type": "integer", "description": "Optional number to mark." }
+      }
+    }
+  },
+  {
+    "name": "show_chart_120",
+    "description": "Show the 1 to 120 chart, optionally highlighting numbers or hiding numbers after a point so she can count on.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "highlight": { "type": "array", "description": "Numbers to highlight.", "items": { "type": "integer", "description": "A number from 1 to 120" } },
+        "hide_from": { "type": "integer", "description": "Optional: hide every number from this one onwards." }
+      }
+    }
+  },
+  {
+    "name": "show_ten_frame",
+    "description": "Show one or two ten-frames with counters, for counting, making ten, or doubles.",
+    "parameters": {
+      "type": "object",
+      "required": ["filled"],
+      "properties": {
+        "filled": { "type": "integer", "description": "Counters in the first frame (0 to 10)." },
+        "second": { "type": "integer", "description": "Optional counters in a second frame (0 to 10)." }
+      }
+    }
+  },
+  {
+    "name": "show_choices",
+    "description": "Show two to four big number buttons she can tap to answer. The app tells you which one she tapped.",
+    "parameters": {
+      "type": "object",
+      "required": ["options"],
+      "properties": {
+        "options": { "type": "array", "description": "The numbers to offer, including the correct one, in a mixed order.", "items": { "type": "integer", "description": "A number" } },
+        "prompt": { "type": "string", "description": "Optional short on-screen question." }
+      }
+    }
+  },
+  {
+    "name": "show_keypad",
+    "description": "Show a number keypad so she can type a number. The app tells you what she typed.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "max": { "type": "integer", "description": "Largest number allowed (default 120)." }
+      }
+    }
+  },
+  {
+    "name": "highlight",
+    "description": "Point at something on the whiteboard with a glow and a little hand, to guide her without telling the answer.",
+    "parameters": {
+      "type": "object",
+      "required": ["target"],
+      "properties": {
+        "target": { "type": "string", "description": "'group:<name>' (a plate, e.g. group:Mum), 'tray', 'all-groups', 'number:<n>' (on the line or chart), or 'check'." }
+      }
+    }
+  },
+  {
+    "name": "demonstrate_move",
+    "description": "Move items on the whiteboard yourself to show one step of the method. Use count 1 for a single move, or to='all-groups' to deal one round.",
+    "parameters": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "string", "description": "'tray' or 'group:<name>'" },
+        "to": { "type": "string", "description": "'group:<name>', 'all-groups' (deal one to each in turn), 'bowl' (leftovers) or 'tray'" },
+        "count": { "type": "integer", "description": "How many items to move (default 1; for all-groups, how many rounds)." }
+      }
+    }
+  },
+  {
+    "name": "show_counts",
+    "description": "Show or hide the little number badges on each plate.",
+    "parameters": {
+      "type": "object",
+      "required": ["on"],
+      "properties": { "on": { "type": "boolean", "description": "true to show counts, false to hide" } }
+    }
+  },
+  {
+    "name": "celebrate",
+    "description": "A short celebration on screen. 'small' after a good move, 'big' when a whole problem is finished.",
+    "parameters": {
+      "type": "object",
+      "required": ["level"],
+      "properties": { "level": { "type": "string", "description": "'small' or 'big'", "enum": ["small", "big"] } }
+    }
+  },
+  {
+    "name": "clear_board",
+    "description": "Clear the whiteboard.",
+    "parameters": { "type": "object", "properties": {} }
+  },
+  {
+    "name": "get_board_state",
+    "description": "Ask the app exactly what is on the whiteboard right now (items, counts on each plate, leftovers, whether it is equal). Use before giving feedback if you are unsure.",
+    "expects_response": true,
+    "response_timeout_secs": 6,
+    "parameters": { "type": "object", "properties": {} }
+  },
+  {
+    "name": "open_camera",
+    "description": "Switch the screen to camera mode so she can show you real things.",
+    "parameters": { "type": "object", "properties": {} }
+  },
+  {
+    "name": "close_camera",
+    "description": "Leave camera mode and go back to the whiteboard.",
+    "parameters": { "type": "object", "properties": {} }
+  },
+  {
+    "name": "look_through_camera",
+    "description": "Look through the iPad camera at what she is showing you. Returns what objects are visible and how many. Takes a couple of seconds.",
+    "expects_response": true,
+    "response_timeout_secs": 20,
+    "pre_tool_speech": "force",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "hint": { "type": "string", "description": "Optional: what you expect to see, e.g. 'crackers on a plate'." }
+      }
+    }
+  },
+  {
+    "name": "remember",
+    "description": "Save something you learned about the child so you remember it next session.",
+    "parameters": {
+      "type": "object",
+      "required": ["kind", "text"],
+      "properties": {
+        "kind": { "type": "string", "description": "family, pet, favourite, interest, tricky, easy, or note", "enum": ["family", "pet", "favourite", "interest", "tricky", "easy", "note"] },
+        "text": { "type": "string", "description": "Short fact in plain words, e.g. 'has a dog called Biscuit' or 'leftovers were tricky'." }
+      }
+    }
+  },
+  {
+    "name": "save_session_summary",
+    "description": "At the end of the session, save an honest summary for her parents.",
+    "parameters": {
+      "type": "object",
+      "required": ["what_she_did", "what_clicked", "what_was_tricky", "home_activity"],
+      "properties": {
+        "what_she_did": { "type": "string", "description": "One or two sentences." },
+        "what_clicked": { "type": "string", "description": "What she understood or did well." },
+        "what_was_tricky": { "type": "string", "description": "What was hard, in plain words." },
+        "home_activity": { "type": "string", "description": "A two-minute activity a parent can do at home tonight with real things." },
+        "misconceptions": { "type": "array", "description": "Short tags, e.g. 'dealing-not-round-robin', 'leftover-on-plate', 'count-skips'", "items": { "type": "string", "description": "tag" } },
+        "confidence": { "type": "integer", "description": "How confident she seemed, 1 (unsure) to 5 (confident)." }
+      }
+    }
+  },
+  {
+    "name": "end_session",
+    "description": "Finish the session after your wrap-up and save_session_summary.",
+    "parameters": {
+      "type": "object",
+      "properties": { "reason": { "type": "string", "description": "done, child_asked, time_up" } }
+    }
+  }
+]

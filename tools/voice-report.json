@@ -1,0 +1,3577 @@
+{
+ "generated": "2026-10-09T10:50:00.247Z",
+ "voice": {
+  "name": "Sally - Kind Australian Voice",
+  "voice_id": "5GZaeOOG7yqLdoTRsaa6",
+  "model_id": "eleven_multilingual_v2",
+  "language_code": "en",
+  "output_format": "mp3_44100_64",
+  "voice_settings": {
+   "stability": 0.6,
+   "similarity_boost": 0.8,
+   "style": 0.25,
+   "use_speaker_boost": true
+  }
+ },
+ "clips": {
+  "n7": {
+   "file": "n7.mp3",
+   "text": "seven",
+   "chars": 5,
+   "dur": 0.679,
+   "peak": -3,
+   "ok": true
+  },
+  "share": {
+   "file": "share.mp3",
+   "text": "Share",
+   "chars": 5,
+   "dur": 0.601,
+   "peak": -6.7,
+   "ok": true
+  },
+  "and": {
+   "file": "and.mp3",
+   "text": "and",
+   "chars": 3,
+   "dur": 0.392,
+   "peak": -5.1,
+   "ok": true
+  },
+  "n12": {
+   "file": "n12.mp3",
+   "text": "twelve",
+   "chars": 6,
+   "dur": 0.575,
+   "peak": -4.2,
+   "ok": true
+  },
+  "is": {
+   "file": "is.mp3",
+   "text": "is",
+   "chars": 2,
+   "dur": 0.549,
+   "peak": -6.2,
+   "ok": true
+  },
+  "tap": {
+   "file": "tap.mp3",
+   "text": "Tap",
+   "chars": 3,
+   "dur": 0.392,
+   "peak": -5.6,
+   "ok": true
+  },
+  "thats": {
+   "file": "thats.mp3",
+   "text": "That's",
+   "chars": 6,
+   "dur": 0.575,
+   "peak": -4.6,
+   "ok": true
+  },
+  "n1": {
+   "file": "n1.mp3",
+   "text": "one",
+   "chars": 3,
+   "dur": 0.418,
+   "peak": -9,
+   "ok": true
+  },
+  "n0": {
+   "file": "n0.mp3",
+   "text": "zero",
+   "chars": 4,
+   "dur": 0.522,
+   "peak": -4.5,
+   "ok": true
+  },
+  "n3": {
+   "file": "n3.mp3",
+   "text": "three",
+   "chars": 5,
+   "dur": 0.444,
+   "peak": -5.5,
+   "ok": true
+  },
+  "n2": {
+   "file": "n2.mp3",
+   "text": "two",
+   "chars": 3,
+   "dur": 0.549,
+   "peak": -6.2,
+   "ok": true
+  },
+  "n4": {
+   "file": "n4.mp3",
+   "text": "four",
+   "chars": 4,
+   "dur": 0.496,
+   "peak": -6.5,
+   "ok": true
+  },
+  "n5": {
+   "file": "n5.mp3",
+   "text": "five",
+   "chars": 4,
+   "dur": 0.444,
+   "peak": -3.8,
+   "ok": true
+  },
+  "n6": {
+   "file": "n6.mp3",
+   "text": "six",
+   "chars": 3,
+   "dur": 0.34,
+   "peak": -6.9,
+   "ok": true
+  },
+  "n8": {
+   "file": "n8.mp3",
+   "text": "eight",
+   "chars": 5,
+   "dur": 0.313,
+   "peak": -5.6,
+   "ok": true
+  },
+  "n9": {
+   "file": "n9.mp3",
+   "text": "nine",
+   "chars": 4,
+   "dur": 0.444,
+   "peak": -7,
+   "ok": true
+  },
+  "n11": {
+   "file": "n11.mp3",
+   "text": "eleven",
+   "chars": 6,
+   "dur": 0.47,
+   "peak": -2.9,
+   "ok": true
+  },
+  "n10": {
+   "file": "n10.mp3",
+   "text": "ten",
+   "chars": 3,
+   "dur": 0.705,
+   "peak": -2.1,
+   "ok": true
+  },
+  "n13": {
+   "file": "n13.mp3",
+   "text": "thirteen",
+   "chars": 8,
+   "dur": 0.627,
+   "peak": -3.1,
+   "ok": true
+  },
+  "n15": {
+   "file": "n15.mp3",
+   "text": "fifteen",
+   "chars": 7,
+   "dur": 0.679,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n14": {
+   "file": "n14.mp3",
+   "text": "fourteen",
+   "chars": 8,
+   "dur": 0.653,
+   "peak": -3.1,
+   "ok": true
+  },
+  "n16": {
+   "file": "n16.mp3",
+   "text": "sixteen",
+   "chars": 7,
+   "dur": 0.758,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n17": {
+   "file": "n17.mp3",
+   "text": "seventeen",
+   "chars": 9,
+   "dur": 0.731,
+   "peak": -3,
+   "ok": true
+  },
+  "n19": {
+   "file": "n19.mp3",
+   "text": "nineteen",
+   "chars": 8,
+   "dur": 0.549,
+   "peak": -5.8,
+   "ok": true
+  },
+  "n20": {
+   "file": "n20.mp3",
+   "text": "twenty",
+   "chars": 6,
+   "dur": 0.601,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n18": {
+   "file": "n18.mp3",
+   "text": "eighteen",
+   "chars": 8,
+   "dur": 0.653,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n21": {
+   "file": "n21.mp3",
+   "text": "twenty-one",
+   "chars": 10,
+   "dur": 0.575,
+   "peak": -3.9,
+   "ok": true
+  },
+  "n22": {
+   "file": "n22.mp3",
+   "text": "twenty-two",
+   "chars": 10,
+   "dur": 0.575,
+   "peak": -4.8,
+   "ok": true
+  },
+  "n23": {
+   "file": "n23.mp3",
+   "text": "twenty-three",
+   "chars": 12,
+   "dur": 0.758,
+   "peak": -3,
+   "ok": true
+  },
+  "n24": {
+   "file": "n24.mp3",
+   "text": "twenty-four",
+   "chars": 11,
+   "dur": 0.627,
+   "peak": -4.2,
+   "ok": true
+  },
+  "n25": {
+   "file": "n25.mp3",
+   "text": "twenty-five",
+   "chars": 11,
+   "dur": 0.653,
+   "peak": -5,
+   "ok": true
+  },
+  "n27": {
+   "file": "n27.mp3",
+   "text": "twenty-seven",
+   "chars": 12,
+   "dur": 0.784,
+   "peak": -3.9,
+   "ok": true
+  },
+  "n26": {
+   "file": "n26.mp3",
+   "text": "twenty-six",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n28": {
+   "file": "n28.mp3",
+   "text": "twenty-eight",
+   "chars": 12,
+   "dur": 0.653,
+   "peak": -5.1,
+   "ok": true
+  },
+  "n29": {
+   "file": "n29.mp3",
+   "text": "twenty-nine",
+   "chars": 11,
+   "dur": 0.758,
+   "peak": -2.2,
+   "ok": true
+  },
+  "n30": {
+   "file": "n30.mp3",
+   "text": "thirty",
+   "chars": 6,
+   "dur": 0.47,
+   "peak": -5.2,
+   "ok": true
+  },
+  "n31": {
+   "file": "n31.mp3",
+   "text": "thirty-one",
+   "chars": 10,
+   "dur": 0.627,
+   "peak": -6.4,
+   "ok": true
+  },
+  "n32": {
+   "file": "n32.mp3",
+   "text": "thirty-two",
+   "chars": 10,
+   "dur": 0.627,
+   "peak": -4.1,
+   "ok": true
+  },
+  "n33": {
+   "file": "n33.mp3",
+   "text": "thirty-three",
+   "chars": 12,
+   "dur": 0.653,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n34": {
+   "file": "n34.mp3",
+   "text": "thirty-four",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -4.8,
+   "ok": true
+  },
+  "n35": {
+   "file": "n35.mp3",
+   "text": "thirty-five",
+   "chars": 11,
+   "dur": 0.731,
+   "peak": -5.4,
+   "ok": true
+  },
+  "n36": {
+   "file": "n36.mp3",
+   "text": "thirty-six",
+   "chars": 10,
+   "dur": 0.784,
+   "peak": -2.2,
+   "ok": true
+  },
+  "n37": {
+   "file": "n37.mp3",
+   "text": "thirty-seven",
+   "chars": 12,
+   "dur": 0.81,
+   "peak": -5.8,
+   "ok": true
+  },
+  "n38": {
+   "file": "n38.mp3",
+   "text": "thirty-eight",
+   "chars": 12,
+   "dur": 0.575,
+   "peak": -4.8,
+   "ok": true
+  },
+  "n39": {
+   "file": "n39.mp3",
+   "text": "thirty-nine",
+   "chars": 11,
+   "dur": 0.653,
+   "peak": -3.3,
+   "ok": true
+  },
+  "n40": {
+   "file": "n40.mp3",
+   "text": "forty",
+   "chars": 5,
+   "dur": 0.496,
+   "peak": -6.8,
+   "ok": true
+  },
+  "n41": {
+   "file": "n41.mp3",
+   "text": "forty-one",
+   "chars": 9,
+   "dur": 0.679,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n42": {
+   "file": "n42.mp3",
+   "text": "forty-two",
+   "chars": 9,
+   "dur": 0.601,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n43": {
+   "file": "n43.mp3",
+   "text": "forty-three",
+   "chars": 11,
+   "dur": 0.705,
+   "peak": -2.2,
+   "ok": true
+  },
+  "n44": {
+   "file": "n44.mp3",
+   "text": "forty-four",
+   "chars": 10,
+   "dur": 0.653,
+   "peak": -3,
+   "ok": true
+  },
+  "n45": {
+   "file": "n45.mp3",
+   "text": "forty-five",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -6.3,
+   "ok": true
+  },
+  "n46": {
+   "file": "n46.mp3",
+   "text": "forty-six",
+   "chars": 9,
+   "dur": 0.784,
+   "peak": -4.1,
+   "ok": true
+  },
+  "n47": {
+   "file": "n47.mp3",
+   "text": "forty-seven",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -4.3,
+   "ok": true
+  },
+  "n48": {
+   "file": "n48.mp3",
+   "text": "forty-eight",
+   "chars": 11,
+   "dur": 0.653,
+   "peak": -4.4,
+   "ok": true
+  },
+  "n49": {
+   "file": "n49.mp3",
+   "text": "forty-nine",
+   "chars": 10,
+   "dur": 0.784,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n50": {
+   "file": "n50.mp3",
+   "text": "fifty",
+   "chars": 5,
+   "dur": 0.731,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n51": {
+   "file": "n51.mp3",
+   "text": "fifty-one",
+   "chars": 9,
+   "dur": 0.522,
+   "peak": -5.4,
+   "ok": true
+  },
+  "n52": {
+   "file": "n52.mp3",
+   "text": "fifty-two",
+   "chars": 9,
+   "dur": 0.627,
+   "peak": -3.8,
+   "ok": true
+  },
+  "n53": {
+   "file": "n53.mp3",
+   "text": "fifty-three",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n54": {
+   "file": "n54.mp3",
+   "text": "fifty-four",
+   "chars": 10,
+   "dur": 0.653,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n55": {
+   "file": "n55.mp3",
+   "text": "fifty-five",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n56": {
+   "file": "n56.mp3",
+   "text": "fifty-six",
+   "chars": 9,
+   "dur": 0.836,
+   "peak": -3.6,
+   "ok": true
+  },
+  "n57": {
+   "file": "n57.mp3",
+   "text": "fifty-seven",
+   "chars": 11,
+   "dur": 0.758,
+   "peak": -4.4,
+   "ok": true
+  },
+  "n59": {
+   "file": "n59.mp3",
+   "text": "fifty-nine",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n58": {
+   "file": "n58.mp3",
+   "text": "fifty-eight",
+   "chars": 11,
+   "dur": 0.601,
+   "peak": -3.6,
+   "ok": true
+  },
+  "n60": {
+   "file": "n60.mp3",
+   "text": "sixty",
+   "chars": 5,
+   "dur": 0.679,
+   "peak": -3.3,
+   "ok": true
+  },
+  "n61": {
+   "file": "n61.mp3",
+   "text": "sixty-one",
+   "chars": 9,
+   "dur": 0.679,
+   "peak": -2.8,
+   "ok": true
+  },
+  "n62": {
+   "file": "n62.mp3",
+   "text": "sixty-two",
+   "chars": 9,
+   "dur": 0.679,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n63": {
+   "file": "n63.mp3",
+   "text": "sixty-three",
+   "chars": 11,
+   "dur": 0.862,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n64": {
+   "file": "n64.mp3",
+   "text": "sixty-four",
+   "chars": 10,
+   "dur": 0.784,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n65": {
+   "file": "n65.mp3",
+   "text": "sixty-five",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -5.6,
+   "ok": true
+  },
+  "n66": {
+   "file": "n66.mp3",
+   "text": "sixty-six",
+   "chars": 9,
+   "dur": 0.653,
+   "peak": -2.8,
+   "ok": true
+  },
+  "n67": {
+   "file": "n67.mp3",
+   "text": "sixty-seven",
+   "chars": 11,
+   "dur": 0.888,
+   "peak": -4.1,
+   "ok": true
+  },
+  "n68": {
+   "file": "n68.mp3",
+   "text": "sixty-eight",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n69": {
+   "file": "n69.mp3",
+   "text": "sixty-nine",
+   "chars": 10,
+   "dur": 0.679,
+   "peak": -2.8,
+   "ok": true
+  },
+  "n70": {
+   "file": "n70.mp3",
+   "text": "seventy",
+   "chars": 7,
+   "dur": 0.653,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n71": {
+   "file": "n71.mp3",
+   "text": "seventy-one",
+   "chars": 11,
+   "dur": 0.836,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n72": {
+   "file": "n72.mp3",
+   "text": "seventy-two",
+   "chars": 11,
+   "dur": 0.81,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n73": {
+   "file": "n73.mp3",
+   "text": "seventy-three",
+   "chars": 13,
+   "dur": 0.81,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n74": {
+   "file": "n74.mp3",
+   "text": "seventy-four",
+   "chars": 12,
+   "dur": 0.836,
+   "peak": -2.8,
+   "ok": true
+  },
+  "n75": {
+   "file": "n75.mp3",
+   "text": "seventy-five",
+   "chars": 12,
+   "dur": 0.862,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n76": {
+   "file": "n76.mp3",
+   "text": "seventy-six",
+   "chars": 11,
+   "dur": 0.731,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n77": {
+   "file": "n77.mp3",
+   "text": "seventy-seven",
+   "chars": 13,
+   "dur": 0.993,
+   "peak": -2.4,
+   "ok": true
+  },
+  "n79": {
+   "file": "n79.mp3",
+   "text": "seventy-nine",
+   "chars": 12,
+   "dur": 1.019,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n78": {
+   "file": "n78.mp3",
+   "text": "seventy-eight",
+   "chars": 13,
+   "dur": 0.784,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n80": {
+   "file": "n80.mp3",
+   "text": "eighty",
+   "chars": 6,
+   "dur": 0.444,
+   "peak": -4.1,
+   "ok": true
+  },
+  "n81": {
+   "file": "n81.mp3",
+   "text": "eighty-one",
+   "chars": 10,
+   "dur": 0.758,
+   "peak": -2.9,
+   "ok": true
+  },
+  "n82": {
+   "file": "n82.mp3",
+   "text": "eighty-two",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n83": {
+   "file": "n83.mp3",
+   "text": "eighty-three",
+   "chars": 12,
+   "dur": 0.784,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n84": {
+   "file": "n84.mp3",
+   "text": "eighty-four",
+   "chars": 11,
+   "dur": 0.81,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n85": {
+   "file": "n85.mp3",
+   "text": "eighty-five",
+   "chars": 11,
+   "dur": 0.705,
+   "peak": -4.2,
+   "ok": true
+  },
+  "n86": {
+   "file": "n86.mp3",
+   "text": "eighty-six",
+   "chars": 10,
+   "dur": 0.758,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n87": {
+   "file": "n87.mp3",
+   "text": "eighty-seven",
+   "chars": 12,
+   "dur": 0.888,
+   "peak": -2.2,
+   "ok": true
+  },
+  "n89": {
+   "file": "n89.mp3",
+   "text": "eighty-nine",
+   "chars": 11,
+   "dur": 0.758,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n88": {
+   "file": "n88.mp3",
+   "text": "eighty-eight",
+   "chars": 12,
+   "dur": 0.758,
+   "peak": -3.2,
+   "ok": true
+  },
+  "n90": {
+   "file": "n90.mp3",
+   "text": "ninety",
+   "chars": 6,
+   "dur": 0.496,
+   "peak": -6.5,
+   "ok": true
+  },
+  "n91": {
+   "file": "n91.mp3",
+   "text": "ninety-one",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -6.1,
+   "ok": true
+  },
+  "n92": {
+   "file": "n92.mp3",
+   "text": "ninety-two",
+   "chars": 10,
+   "dur": 0.81,
+   "peak": -4.1,
+   "ok": true
+  },
+  "n93": {
+   "file": "n93.mp3",
+   "text": "ninety-three",
+   "chars": 12,
+   "dur": 0.784,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n95": {
+   "file": "n95.mp3",
+   "text": "ninety-five",
+   "chars": 11,
+   "dur": 0.705,
+   "peak": -4.6,
+   "ok": true
+  },
+  "n94": {
+   "file": "n94.mp3",
+   "text": "ninety-four",
+   "chars": 11,
+   "dur": 0.627,
+   "peak": -4.2,
+   "ok": true
+  },
+  "n96": {
+   "file": "n96.mp3",
+   "text": "ninety-six",
+   "chars": 10,
+   "dur": 0.836,
+   "peak": -3.4,
+   "ok": true
+  },
+  "n97": {
+   "file": "n97.mp3",
+   "text": "ninety-seven",
+   "chars": 12,
+   "dur": 0.862,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n99": {
+   "file": "n99.mp3",
+   "text": "ninety-nine",
+   "chars": 11,
+   "dur": 0.862,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n98": {
+   "file": "n98.mp3",
+   "text": "ninety-eight",
+   "chars": 12,
+   "dur": 0.601,
+   "peak": -6.7,
+   "ok": true
+  },
+  "n100": {
+   "file": "n100.mp3",
+   "text": "one hundred",
+   "chars": 11,
+   "dur": 0.627,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n101": {
+   "file": "n101.mp3",
+   "text": "one hundred and one",
+   "chars": 19,
+   "dur": 0.993,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n102": {
+   "file": "n102.mp3",
+   "text": "one hundred and two",
+   "chars": 19,
+   "dur": 1.045,
+   "peak": -3.5,
+   "ok": true
+  },
+  "n103": {
+   "file": "n103.mp3",
+   "text": "one hundred and three",
+   "chars": 21,
+   "dur": 1.097,
+   "peak": -5.3,
+   "ok": true
+  },
+  "n104": {
+   "file": "n104.mp3",
+   "text": "one hundred and four",
+   "chars": 20,
+   "dur": 1.149,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n105": {
+   "file": "n105.mp3",
+   "text": "one hundred and five",
+   "chars": 20,
+   "dur": 1.306,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n106": {
+   "file": "n106.mp3",
+   "text": "one hundred and six",
+   "chars": 19,
+   "dur": 1.071,
+   "peak": -3,
+   "ok": true
+  },
+  "n107": {
+   "file": "n107.mp3",
+   "text": "one hundred and seven",
+   "chars": 21,
+   "dur": 1.228,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n108": {
+   "file": "n108.mp3",
+   "text": "one hundred and eight",
+   "chars": 21,
+   "dur": 0.914,
+   "peak": -2.4,
+   "ok": true
+  },
+  "n109": {
+   "file": "n109.mp3",
+   "text": "one hundred and nine",
+   "chars": 20,
+   "dur": 1.149,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n110": {
+   "file": "n110.mp3",
+   "text": "one hundred and ten",
+   "chars": 19,
+   "dur": 1.123,
+   "peak": -3.1,
+   "ok": true
+  },
+  "n111": {
+   "file": "n111.mp3",
+   "text": "one hundred and eleven",
+   "chars": 22,
+   "dur": 1.045,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n113": {
+   "file": "n113.mp3",
+   "text": "one hundred and thirteen",
+   "chars": 24,
+   "dur": 1.071,
+   "peak": -3.4,
+   "ok": true
+  },
+  "n112": {
+   "file": "n112.mp3",
+   "text": "one hundred and twelve",
+   "chars": 22,
+   "dur": 1.071,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n114": {
+   "file": "n114.mp3",
+   "text": "one hundred and fourteen",
+   "chars": 24,
+   "dur": 1.097,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n115": {
+   "file": "n115.mp3",
+   "text": "one hundred and fifteen",
+   "chars": 23,
+   "dur": 1.228,
+   "peak": -2.3,
+   "ok": true
+  },
+  "n116": {
+   "file": "n116.mp3",
+   "text": "one hundred and sixteen",
+   "chars": 23,
+   "dur": 1.123,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n117": {
+   "file": "n117.mp3",
+   "text": "one hundred and seventeen",
+   "chars": 25,
+   "dur": 1.332,
+   "peak": -2.5,
+   "ok": true
+  },
+  "n118": {
+   "file": "n118.mp3",
+   "text": "one hundred and eighteen",
+   "chars": 24,
+   "dur": 1.019,
+   "peak": -2.6,
+   "ok": true
+  },
+  "n119": {
+   "file": "n119.mp3",
+   "text": "one hundred and nineteen",
+   "chars": 24,
+   "dur": 1.071,
+   "peak": -2.6,
+   "ok": true
+  },
+  "noun-cookie-one": {
+   "file": "noun-cookie-one.mp3",
+   "text": "cookie",
+   "chars": 6,
+   "dur": 0.679,
+   "peak": -2.7,
+   "ok": true
+  },
+  "n120": {
+   "file": "n120.mp3",
+   "text": "one hundred and twenty",
+   "chars": 22,
+   "dur": 1.228,
+   "peak": -2.9,
+   "ok": true
+  },
+  "noun-cookie-many": {
+   "file": "noun-cookie-many.mp3",
+   "text": "cookies",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -2.7,
+   "ok": true
+  },
+  "noun-apple-one": {
+   "file": "noun-apple-one.mp3",
+   "text": "apple",
+   "chars": 5,
+   "dur": 0.601,
+   "peak": -2.6,
+   "ok": true
+  },
+  "noun-apple-many": {
+   "file": "noun-apple-many.mp3",
+   "text": "apples",
+   "chars": 6,
+   "dur": 0.653,
+   "peak": -2.5,
+   "ok": true
+  },
+  "noun-strawberry-one": {
+   "file": "noun-strawberry-one.mp3",
+   "text": "strawberry",
+   "chars": 10,
+   "dur": 0.653,
+   "peak": -4.5,
+   "ok": true
+  },
+  "noun-strawberry-many": {
+   "file": "noun-strawberry-many.mp3",
+   "text": "strawberries",
+   "chars": 12,
+   "dur": 0.758,
+   "peak": -3.5,
+   "ok": true
+  },
+  "noun-lolly-one": {
+   "file": "noun-lolly-one.mp3",
+   "text": "lolly",
+   "chars": 5,
+   "dur": 0.653,
+   "peak": -5.4,
+   "ok": true
+  },
+  "noun-lolly-many": {
+   "file": "noun-lolly-many.mp3",
+   "text": "lollies",
+   "chars": 7,
+   "dur": 0.418,
+   "peak": -9.9,
+   "ok": true
+  },
+  "noun-muffin-one": {
+   "file": "noun-muffin-one.mp3",
+   "text": "muffin",
+   "chars": 6,
+   "dur": 0.627,
+   "peak": -3.9,
+   "ok": true
+  },
+  "noun-carrot-one": {
+   "file": "noun-carrot-one.mp3",
+   "text": "carrot",
+   "chars": 6,
+   "dur": 0.758,
+   "peak": -5.1,
+   "ok": true
+  },
+  "noun-muffin-many": {
+   "file": "noun-muffin-many.mp3",
+   "text": "muffins",
+   "chars": 7,
+   "dur": 0.679,
+   "peak": -2.6,
+   "ok": true
+  },
+  "noun-carrot-many": {
+   "file": "noun-carrot-many.mp3",
+   "text": "carrots",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -4.4,
+   "ok": true
+  },
+  "noun-timtam-one": {
+   "file": "noun-timtam-one.mp3",
+   "text": "Tim Tam",
+   "chars": 7,
+   "dur": 0.705,
+   "peak": -4.1,
+   "ok": true
+  },
+  "noun-cracker-one": {
+   "file": "noun-cracker-one.mp3",
+   "text": "cracker",
+   "chars": 7,
+   "dur": 0.575,
+   "peak": -2.7,
+   "ok": true
+  },
+  "noun-timtam-many": {
+   "file": "noun-timtam-many.mp3",
+   "text": "Tim Tams",
+   "chars": 8,
+   "dur": 0.522,
+   "peak": -5.6,
+   "ok": true
+  },
+  "noun-cracker-many": {
+   "file": "noun-cracker-many.mp3",
+   "text": "crackers",
+   "chars": 8,
+   "dur": 0.627,
+   "peak": -2.8,
+   "ok": true
+  },
+  "noun-grape-one": {
+   "file": "noun-grape-one.mp3",
+   "text": "grape",
+   "chars": 5,
+   "dur": 0.34,
+   "peak": -7,
+   "ok": true
+  },
+  "noun-grape-many": {
+   "file": "noun-grape-many.mp3",
+   "text": "grapes",
+   "chars": 6,
+   "dur": 0.601,
+   "peak": -2.9,
+   "ok": true
+  },
+  "noun-banana-one": {
+   "file": "noun-banana-one.mp3",
+   "text": "banana",
+   "chars": 6,
+   "dur": 0.784,
+   "peak": -5,
+   "ok": true
+  },
+  "noun-banana-many": {
+   "file": "noun-banana-many.mp3",
+   "text": "bananas",
+   "chars": 7,
+   "dur": 0.993,
+   "peak": -6.3,
+   "ok": true
+  },
+  "noun-block-one": {
+   "file": "noun-block-one.mp3",
+   "text": "block",
+   "chars": 5,
+   "dur": 0.679,
+   "peak": -7.2,
+   "ok": true
+  },
+  "noun-block-many": {
+   "file": "noun-block-many.mp3",
+   "text": "blocks",
+   "chars": 6,
+   "dur": 0.653,
+   "peak": -2.5,
+   "ok": true
+  },
+  "noun-star-one": {
+   "file": "noun-star-one.mp3",
+   "text": "star",
+   "chars": 4,
+   "dur": 0.549,
+   "peak": -5,
+   "ok": true
+  },
+  "noun-star-many": {
+   "file": "noun-star-many.mp3",
+   "text": "stars",
+   "chars": 5,
+   "dur": 0.575,
+   "peak": -3.7,
+   "ok": true
+  },
+  "noun-car-one": {
+   "file": "noun-car-one.mp3",
+   "text": "car",
+   "chars": 3,
+   "dur": 0.444,
+   "peak": -6.9,
+   "ok": true
+  },
+  "noun-car-many": {
+   "file": "noun-car-many.mp3",
+   "text": "cars",
+   "chars": 4,
+   "dur": 0.81,
+   "peak": -7.3,
+   "ok": true
+  },
+  "noun-teddy-one": {
+   "file": "noun-teddy-one.mp3",
+   "text": "teddy",
+   "chars": 5,
+   "dur": 0.758,
+   "peak": -4.7,
+   "ok": true
+  },
+  "noun-teddy-many": {
+   "file": "noun-teddy-many.mp3",
+   "text": "teddies",
+   "chars": 7,
+   "dur": 0.888,
+   "peak": -3.4,
+   "ok": true
+  },
+  "noun-dinosaur-one": {
+   "file": "noun-dinosaur-one.mp3",
+   "text": "dinosaur",
+   "chars": 8,
+   "dur": 0.862,
+   "peak": -2.5,
+   "ok": true
+  },
+  "noun-dinosaur-many": {
+   "file": "noun-dinosaur-many.mp3",
+   "text": "dinosaurs",
+   "chars": 9,
+   "dur": 0.601,
+   "peak": -4.6,
+   "ok": true
+  },
+  "noun-flower-one": {
+   "file": "noun-flower-one.mp3",
+   "text": "flower",
+   "chars": 6,
+   "dur": 0.575,
+   "peak": -9.2,
+   "ok": true
+  },
+  "noun-flower-many": {
+   "file": "noun-flower-many.mp3",
+   "text": "flowers",
+   "chars": 7,
+   "dur": 0.522,
+   "peak": -5.9,
+   "ok": true
+  },
+  "noun-fish-one": {
+   "file": "noun-fish-one.mp3",
+   "text": "fish",
+   "chars": 4,
+   "dur": 0.575,
+   "peak": -3.4,
+   "ok": true
+  },
+  "noun-button-one": {
+   "file": "noun-button-one.mp3",
+   "text": "button",
+   "chars": 6,
+   "dur": 0.549,
+   "peak": -3.4,
+   "ok": true
+  },
+  "noun-button-many": {
+   "file": "noun-button-many.mp3",
+   "text": "buttons",
+   "chars": 7,
+   "dur": 0.679,
+   "peak": -2.6,
+   "ok": true
+  },
+  "noun-coin-one": {
+   "file": "noun-coin-one.mp3",
+   "text": "coin",
+   "chars": 4,
+   "dur": 0.705,
+   "peak": -5.8,
+   "ok": true
+  },
+  "noun-egg-one": {
+   "file": "noun-egg-one.mp3",
+   "text": "egg",
+   "chars": 3,
+   "dur": 0.47,
+   "peak": -5.5,
+   "ok": true
+  },
+  "noun-coin-many": {
+   "file": "noun-coin-many.mp3",
+   "text": "coins",
+   "chars": 5,
+   "dur": 0.705,
+   "peak": -3.2,
+   "ok": true
+  },
+  "noun-egg-many": {
+   "file": "noun-egg-many.mp3",
+   "text": "eggs",
+   "chars": 4,
+   "dur": 0.601,
+   "peak": -2.2,
+   "ok": true
+  },
+  "noun-shell-one": {
+   "file": "noun-shell-one.mp3",
+   "text": "shell",
+   "chars": 5,
+   "dur": 0.705,
+   "peak": -6,
+   "ok": true
+  },
+  "noun-shell-many": {
+   "file": "noun-shell-many.mp3",
+   "text": "shells",
+   "chars": 6,
+   "dur": 0.679,
+   "peak": -5.4,
+   "ok": true
+  },
+  "noun-sock-one": {
+   "file": "noun-sock-one.mp3",
+   "text": "sock",
+   "chars": 4,
+   "dur": 0.601,
+   "peak": -5,
+   "ok": true
+  },
+  "noun-sock-many": {
+   "file": "noun-sock-many.mp3",
+   "text": "socks",
+   "chars": 5,
+   "dur": 0.601,
+   "peak": -2.8,
+   "ok": true
+  },
+  "noun-bead-one": {
+   "file": "noun-bead-one.mp3",
+   "text": "bead",
+   "chars": 4,
+   "dur": 0.679,
+   "peak": -2.5,
+   "ok": true
+  },
+  "noun-marble-one": {
+   "file": "noun-marble-one.mp3",
+   "text": "marble",
+   "chars": 6,
+   "dur": 0.522,
+   "peak": -2.9,
+   "ok": true
+  },
+  "noun-marble-many": {
+   "file": "noun-marble-many.mp3",
+   "text": "marbles",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -5.5,
+   "ok": true
+  },
+  "noun-bead-many": {
+   "file": "noun-bead-many.mp3",
+   "text": "beads",
+   "chars": 5,
+   "dur": 0.653,
+   "peak": -2.6,
+   "ok": true
+  },
+  "noun-sticker-one": {
+   "file": "noun-sticker-one.mp3",
+   "text": "sticker",
+   "chars": 7,
+   "dur": 0.679,
+   "peak": -3.8,
+   "ok": true
+  },
+  "noun-ball-one": {
+   "file": "noun-ball-one.mp3",
+   "text": "ball",
+   "chars": 4,
+   "dur": 0.601,
+   "peak": -9.6,
+   "ok": true
+  },
+  "noun-sticker-many": {
+   "file": "noun-sticker-many.mp3",
+   "text": "stickers",
+   "chars": 8,
+   "dur": 0.549,
+   "peak": -2.8,
+   "ok": true
+  },
+  "noun-ball-many": {
+   "file": "noun-ball-many.mp3",
+   "text": "balls",
+   "chars": 5,
+   "dur": 0.731,
+   "peak": -5.2,
+   "ok": true
+  },
+  "noun-spot-one": {
+   "file": "noun-spot-one.mp3",
+   "text": "spot",
+   "chars": 4,
+   "dur": 0.679,
+   "peak": -4.6,
+   "ok": true
+  },
+  "noun-pair-one": {
+   "file": "noun-pair-one.mp3",
+   "text": "pair",
+   "chars": 4,
+   "dur": 0.731,
+   "peak": -6.6,
+   "ok": true
+  },
+  "noun-spot-many": {
+   "file": "noun-spot-many.mp3",
+   "text": "spots",
+   "chars": 5,
+   "dur": 0.601,
+   "peak": -3.8,
+   "ok": true
+  },
+  "noun-pair-many": {
+   "file": "noun-pair-many.mp3",
+   "text": "pairs",
+   "chars": 5,
+   "dur": 0.81,
+   "peak": -5.1,
+   "ok": true
+  },
+  "noun-group-one": {
+   "file": "noun-group-one.mp3",
+   "text": "group",
+   "chars": 5,
+   "dur": 0.444,
+   "peak": -7.3,
+   "ok": true
+  },
+  "noun-group-many": {
+   "file": "noun-group-many.mp3",
+   "text": "groups",
+   "chars": 6,
+   "dur": 0.679,
+   "peak": -5.6,
+   "ok": true
+  },
+  "noun-bag-many": {
+   "file": "noun-bag-many.mp3",
+   "text": "bags",
+   "chars": 4,
+   "dur": 0.627,
+   "peak": -3.8,
+   "ok": true
+  },
+  "noun-bag-one": {
+   "file": "noun-bag-one.mp3",
+   "text": "bag",
+   "chars": 3,
+   "dur": 0.496,
+   "peak": -6.7,
+   "ok": true
+  },
+  "noun-hoop-one": {
+   "file": "noun-hoop-one.mp3",
+   "text": "hoop",
+   "chars": 4,
+   "dur": 0.34,
+   "peak": -6.9,
+   "ok": true
+  },
+  "noun-hand-one": {
+   "file": "noun-hand-one.mp3",
+   "text": "hand",
+   "chars": 4,
+   "dur": 0.522,
+   "peak": -3.5,
+   "ok": true
+  },
+  "noun-frame-one": {
+   "file": "noun-frame-one.mp3",
+   "text": "frame",
+   "chars": 5,
+   "dur": 0.444,
+   "peak": -6.2,
+   "ok": true
+  },
+  "yes-x": {
+   "file": "yes-x.mp3",
+   "text": "Yes!",
+   "chars": 4,
+   "dur": 0.653,
+   "peak": -4.7,
+   "ok": true
+  },
+  "spot-on-x": {
+   "file": "spot-on-x.mp3",
+   "text": "Spot on!",
+   "chars": 8,
+   "dur": 0.784,
+   "peak": -7.1,
+   "ok": true
+  },
+  "you-got-it-x": {
+   "file": "you-got-it-x.mp3",
+   "text": "You got it!",
+   "chars": 11,
+   "dur": 0.575,
+   "peak": -5.8,
+   "ok": true
+  },
+  "beauty-x": {
+   "file": "beauty-x.mp3",
+   "text": "Beauty!",
+   "chars": 7,
+   "dur": 0.575,
+   "peak": -7.3,
+   "ok": true
+  },
+  "nice-one-x": {
+   "file": "nice-one-x.mp3",
+   "text": "Nice one!",
+   "chars": 9,
+   "dur": 0.784,
+   "peak": -2,
+   "ok": true
+  },
+  "too-easy-x": {
+   "file": "too-easy-x.mp3",
+   "text": "Too easy!",
+   "chars": 9,
+   "dur": 0.705,
+   "peak": -7.1,
+   "ok": true
+  },
+  "thats-it-x": {
+   "file": "thats-it-x.mp3",
+   "text": "That's it!",
+   "chars": 10,
+   "dur": 0.601,
+   "peak": -2.5,
+   "ok": true
+  },
+  "not-quite-have-another-go-x": {
+   "file": "not-quite-have-another-go-x.mp3",
+   "text": "Not quite. Have another go!",
+   "chars": 27,
+   "dur": 1.437,
+   "peak": -3.9,
+   "ok": true
+  },
+  "nearly-lets-look-again-p": {
+   "file": "nearly-lets-look-again-p.mp3",
+   "text": "Nearly! Let's look again.",
+   "chars": 25,
+   "dur": 1.228,
+   "peak": -2.1,
+   "ok": true
+  },
+  "hmm-lets-try-that-again-p": {
+   "file": "hmm-lets-try-that-again-p.mp3",
+   "text": "Hmm, let's try that again.",
+   "chars": 26,
+   "dur": 1.437,
+   "peak": -3.2,
+   "ok": true
+  },
+  "gday": {
+   "file": "gday.mp3",
+   "text": "G'day",
+   "chars": 5,
+   "dur": 0.575,
+   "peak": -3.9,
+   "ok": true
+  },
+  "good-try-lets-check-it-together-p": {
+   "file": "good-try-lets-check-it-together-p.mp3",
+   "text": "Good try. Let's check it together.",
+   "chars": 34,
+   "dur": 1.959,
+   "peak": -2.7,
+   "ok": true
+  },
+  "im-pip-p": {
+   "file": "im-pip-p.mp3",
+   "text": "I'm Pip.",
+   "chars": 8,
+   "dur": 0.522,
+   "peak": -5.5,
+   "ok": true
+  },
+  "lets-do-some-maths-together-p": {
+   "file": "lets-do-some-maths-together-p.mp3",
+   "text": "Let's do some maths together.",
+   "chars": 29,
+   "dur": 1.306,
+   "peak": -4.5,
+   "ok": true
+  },
+  "youve-done-your-maths-for-today": {
+   "file": "youve-done-your-maths-for-today.mp3",
+   "text": "You've done your maths for today,",
+   "chars": 33,
+   "dur": 1.541,
+   "peak": -3.6,
+   "ok": true
+  },
+  "play-more-if-you-like-p": {
+   "file": "play-more-if-you-like-p.mp3",
+   "text": "Play more if you like.",
+   "chars": 22,
+   "dur": 0.888,
+   "peak": -5.2,
+   "ok": true
+  },
+  "pick-an-island-to-start": {
+   "file": "pick-an-island-to-start.mp3",
+   "text": "Pick an island to start,",
+   "chars": 24,
+   "dur": 1.097,
+   "peak": -6.9,
+   "ok": true
+  },
+  "ready-for-some-maths": {
+   "file": "ready-for-some-maths.mp3",
+   "text": "Ready for some maths,",
+   "chars": 21,
+   "dur": 1.071,
+   "peak": -4.3,
+   "ok": true
+  },
+  "lets-share-some-cookies": {
+   "file": "lets-share-some-cookies.mp3",
+   "text": "Let's share some cookies,",
+   "chars": 25,
+   "dur": 1.149,
+   "peak": -4.6,
+   "ok": true
+  },
+  "which-island-today": {
+   "file": "which-island-today.mp3",
+   "text": "Which island today,",
+   "chars": 19,
+   "dur": 0.94,
+   "peak": -3.9,
+   "ok": true
+  },
+  "quick-look-back-p": {
+   "file": "quick-look-back-p.mp3",
+   "text": "Quick look back.",
+   "chars": 16,
+   "dur": 0.653,
+   "peak": -2.5,
+   "ok": true
+  },
+  "level-up-x": {
+   "file": "level-up-x.mp3",
+   "text": "Level up!",
+   "chars": 9,
+   "dur": 0.731,
+   "peak": -4.1,
+   "ok": true
+  },
+  "done-for-today-x": {
+   "file": "done-for-today-x.mp3",
+   "text": "Done for today!",
+   "chars": 15,
+   "dur": 0.914,
+   "peak": -2.5,
+   "ok": true
+  },
+  "is-getting-easier-for-you": {
+   "file": "is-getting-easier-for-you.mp3",
+   "text": "is getting easier for you",
+   "chars": 25,
+   "dur": 1.071,
+   "peak": -2.6,
+   "ok": true
+  },
+  "perfect-x": {
+   "file": "perfect-x.mp3",
+   "text": "Perfect!",
+   "chars": 8,
+   "dur": 0.705,
+   "peak": -2.6,
+   "ok": true
+  },
+  "great-work-x": {
+   "file": "great-work-x.mp3",
+   "text": "Great work!",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -3.2,
+   "ok": true
+  },
+  "you-earned": {
+   "file": "you-earned.mp3",
+   "text": "You earned",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -5.9,
+   "ok": true
+  },
+  "thats-your-maths-done-for-today": {
+   "file": "thats-your-maths-done-for-today.mp3",
+   "text": "That's your maths done for today,",
+   "chars": 33,
+   "dur": 1.411,
+   "peak": -2.2,
+   "ok": true
+  },
+  "every-one-first-go-x": {
+   "file": "every-one-first-go-x.mp3",
+   "text": "Every one first go!",
+   "chars": 19,
+   "dur": 1.097,
+   "peak": -4,
+   "ok": true
+  },
+  "and-you-moved-up-a-level-x": {
+   "file": "and-you-moved-up-a-level-x.mp3",
+   "text": "And you moved up a level!",
+   "chars": 25,
+   "dur": 1.123,
+   "peak": -2.5,
+   "ok": true
+  },
+  "keep-it-up-x": {
+   "file": "keep-it-up-x.mp3",
+   "text": "Keep it up!",
+   "chars": 11,
+   "dur": 0.627,
+   "peak": -6.6,
+   "ok": true
+  },
+  "you-found-a-new-sticker": {
+   "file": "you-found-a-new-sticker.mp3",
+   "text": "You found a new sticker:",
+   "chars": 24,
+   "dur": 1.019,
+   "peak": -3.2,
+   "ok": true
+  },
+  "you-have": {
+   "file": "you-have.mp3",
+   "text": "You have",
+   "chars": 8,
+   "dur": 0.575,
+   "peak": -6.4,
+   "ok": true
+  },
+  "put-all": {
+   "file": "put-all.mp3",
+   "text": "Put all",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -7.7,
+   "ok": true
+  },
+  "finish-your-maths-each-day-to-find-more-p": {
+   "file": "finish-your-maths-each-day-to-find-more-p.mp3",
+   "text": "Finish your maths each day to find more.",
+   "chars": 40,
+   "dur": 1.593,
+   "peak": -4.8,
+   "ok": true
+  },
+  "finish-your-maths-for-the-day-to-find-your-first-sticker-p": {
+   "file": "finish-your-maths-for-the-day-to-find-your-first-sticker-p.mp3",
+   "text": "Finish your maths for the day to find your first sticker.",
+   "chars": 57,
+   "dur": 2.508,
+   "peak": -2.6,
+   "ok": true
+  },
+  "into-one-basket": {
+   "file": "into-one-basket.mp3",
+   "text": "into one basket",
+   "chars": 15,
+   "dur": 1.045,
+   "peak": -4.6,
+   "ok": true
+  },
+  "friends": {
+   "file": "friends.mp3",
+   "text": "friends",
+   "chars": 7,
+   "dur": 0.601,
+   "peak": -3.6,
+   "ok": true
+  },
+  "give-each-friend-the-same-p": {
+   "file": "give-each-friend-the-same-p.mp3",
+   "text": "Give each friend the same.",
+   "chars": 26,
+   "dur": 1.123,
+   "peak": -4.2,
+   "ok": true
+  },
+  "between": {
+   "file": "between.mp3",
+   "text": "between",
+   "chars": 7,
+   "dur": 0.601,
+   "peak": -5.8,
+   "ok": true
+  },
+  "if-any-are-left-over-put-them-in-pips-bowl-p": {
+   "file": "if-any-are-left-over-put-them-in-pips-bowl-p.mp3",
+   "text": "If any are left over, put them in Pip's bowl.",
+   "chars": 45,
+   "dur": 2.038,
+   "peak": -3.1,
+   "ok": true
+  },
+  "all-shared-out-p": {
+   "file": "all-shared-out-p.mp3",
+   "text": "All shared out.",
+   "chars": 15,
+   "dur": 0.888,
+   "peak": -5.8,
+   "ok": true
+  },
+  "now-tap-check-p": {
+   "file": "now-tap-check-p.mp3",
+   "text": "Now tap Check.",
+   "chars": 14,
+   "dur": 1.045,
+   "peak": -2.7,
+   "ok": true
+  },
+  "all": {
+   "file": "all.mp3",
+   "text": "All",
+   "chars": 3,
+   "dur": 0.496,
+   "peak": -8.5,
+   "ok": true
+  },
+  "in-one-basket": {
+   "file": "in-one-basket.mp3",
+   "text": "in one basket",
+   "chars": 13,
+   "dur": 1.149,
+   "peak": -2.9,
+   "ok": true
+  },
+  "every-friend-has": {
+   "file": "every-friend-has.mp3",
+   "text": "Every friend has",
+   "chars": 16,
+   "dur": 0.993,
+   "peak": -2.8,
+   "ok": true
+  },
+  "left-over-for-pip": {
+   "file": "left-over-for-pip.mp3",
+   "text": "left over for Pip",
+   "chars": 17,
+   "dur": 0.993,
+   "peak": -2.4,
+   "ok": true
+  },
+  "thats-fair-x": {
+   "file": "thats-fair-x.mp3",
+   "text": "That's fair!",
+   "chars": 12,
+   "dur": 0.784,
+   "peak": -2.9,
+   "ok": true
+  },
+  "hmm-p": {
+   "file": "hmm-p.mp3",
+   "text": "Hmm.",
+   "chars": 4,
+   "dur": 0.392,
+   "peak": -9.2,
+   "ok": true
+  },
+  "this-friend-has": {
+   "file": "this-friend-has.mp3",
+   "text": "This friend has",
+   "chars": 15,
+   "dur": 1.071,
+   "peak": -4,
+   "ok": true
+  },
+  "and-this-friend-has": {
+   "file": "and-this-friend-has.mp3",
+   "text": "and this friend has",
+   "chars": 19,
+   "dur": 1.123,
+   "peak": -2.9,
+   "ok": true
+  },
+  "thats-not-the-same-p": {
+   "file": "thats-not-the-same-p.mp3",
+   "text": "That's not the same.",
+   "chars": 20,
+   "dur": 0.993,
+   "peak": -4.4,
+   "ok": true
+  },
+  "move-some-so-each-friend-has-the-same-p": {
+   "file": "move-some-so-each-friend-has-the-same-p.mp3",
+   "text": "Move some so each friend has the same.",
+   "chars": 38,
+   "dur": 1.881,
+   "peak": -2.9,
+   "ok": true
+  },
+  "pips-bowl-has-too-many-p": {
+   "file": "pips-bowl-has-too-many-p.mp3",
+   "text": "Pip's bowl has too many.",
+   "chars": 24,
+   "dur": 1.123,
+   "peak": -3.7,
+   "ok": true
+  },
+  "share-some-more-out-to-the-friends-p": {
+   "file": "share-some-more-out-to-the-friends-p.mp3",
+   "text": "Share some more out to the friends.",
+   "chars": 35,
+   "dur": 1.437,
+   "peak": -3.5,
+   "ok": true
+  },
+  "each-friend-has-the-same-but-pips-bowl-should-have": {
+   "file": "each-friend-has-the-same-but-pips-bowl-should-have.mp3",
+   "text": "Each friend has the same, but Pip's bowl should have",
+   "chars": 52,
+   "dur": 2.873,
+   "peak": -2.5,
+   "ok": true
+  },
+  "pop-the-extra-one-in-the-bowl-p": {
+   "file": "pop-the-extra-one-in-the-bowl-p.mp3",
+   "text": "Pop the extra one in the bowl.",
+   "chars": 30,
+   "dur": 1.254,
+   "peak": -2.6,
+   "ok": true
+  },
+  "pop-the-extra-ones-in-the-bowl-p": {
+   "file": "pop-the-extra-ones-in-the-bowl-p.mp3",
+   "text": "Pop the extra ones in the bowl.",
+   "chars": 31,
+   "dur": 1.62,
+   "peak": -2.5,
+   "ok": true
+  },
+  "lets-do-it-together-p": {
+   "file": "lets-do-it-together-p.mp3",
+   "text": "Let's do it together.",
+   "chars": 21,
+   "dur": 0.914,
+   "peak": -6.3,
+   "ok": true
+  },
+  "one-for-you-one-for-you-p": {
+   "file": "one-for-you-one-for-you-p.mp3",
+   "text": "One for you, one for you.",
+   "chars": 25,
+   "dur": 1.071,
+   "peak": -2.9,
+   "ok": true
+  },
+  "now-every-friend-has": {
+   "file": "now-every-friend-has.mp3",
+   "text": "Now every friend has",
+   "chars": 20,
+   "dur": 1.176,
+   "peak": -3.4,
+   "ok": true
+  },
+  "left-over": {
+   "file": "left-over.mp3",
+   "text": "left over",
+   "chars": 9,
+   "dur": 0.862,
+   "peak": -3.1,
+   "ok": true
+  },
+  "thats-the-same-for-everyone-p": {
+   "file": "thats-the-same-for-everyone-p.mp3",
+   "text": "That's the same for everyone.",
+   "chars": 29,
+   "dur": 1.176,
+   "peak": -2,
+   "ok": true
+  },
+  "how-many": {
+   "file": "how-many.mp3",
+   "text": "How many",
+   "chars": 8,
+   "dur": 0.522,
+   "peak": -6.1,
+   "ok": true
+  },
+  "are-in-the-basket-q": {
+   "file": "are-in-the-basket-q.mp3",
+   "text": "are in the basket?",
+   "chars": 18,
+   "dur": 1.019,
+   "peak": -5.2,
+   "ok": true
+  },
+  "did-each-friend-get-q": {
+   "file": "did-each-friend-get-q.mp3",
+   "text": "did each friend get?",
+   "chars": 20,
+   "dur": 1.019,
+   "peak": -4.7,
+   "ok": true
+  },
+  "in-one-group-is": {
+   "file": "in-one-group-is.mp3",
+   "text": "in one group is",
+   "chars": 15,
+   "dur": 0.94,
+   "peak": -5.7,
+   "ok": true
+  },
+  "great-counting-x": {
+   "file": "great-counting-x.mp3",
+   "text": "Great counting!",
+   "chars": 15,
+   "dur": 0.731,
+   "peak": -2.6,
+   "ok": true
+  },
+  "shared-between": {
+   "file": "shared-between.mp3",
+   "text": "shared between",
+   "chars": 14,
+   "dur": 0.81,
+   "peak": -2.4,
+   "ok": true
+  },
+  "friends-is": {
+   "file": "friends-is.mp3",
+   "text": "friends is",
+   "chars": 10,
+   "dur": 0.627,
+   "peak": -3.9,
+   "ok": true
+  },
+  "each": {
+   "file": "each.mp3",
+   "text": "each",
+   "chars": 4,
+   "dur": 0.601,
+   "peak": -7.4,
+   "ok": true
+  },
+  "each-with": {
+   "file": "each-with.mp3",
+   "text": "each, with",
+   "chars": 10,
+   "dur": 0.653,
+   "peak": -4.6,
+   "ok": true
+  },
+  "great-sharing-x": {
+   "file": "great-sharing-x.mp3",
+   "text": "Great sharing!",
+   "chars": 14,
+   "dur": 0.836,
+   "peak": -2.5,
+   "ok": true
+  },
+  "put-the-socks-in-pairs-p": {
+   "file": "put-the-socks-in-pairs-p.mp3",
+   "text": "Put the socks in pairs.",
+   "chars": 23,
+   "dur": 1.176,
+   "peak": -2.6,
+   "ok": true
+  },
+  "needs": {
+   "file": "needs.mp3",
+   "text": "needs",
+   "chars": 5,
+   "dur": 0.705,
+   "peak": -4.8,
+   "ok": true
+  },
+  "every": {
+   "file": "every.mp3",
+   "text": "Every",
+   "chars": 5,
+   "dur": 0.575,
+   "peak": -2.3,
+   "ok": true
+  },
+  "has": {
+   "file": "has.mp3",
+   "text": "has",
+   "chars": 3,
+   "dur": 0.522,
+   "peak": -5.4,
+   "ok": true
+  },
+  "lovely-pairs-x": {
+   "file": "lovely-pairs-x.mp3",
+   "text": "Lovely pairs!",
+   "chars": 13,
+   "dur": 0.967,
+   "peak": -2.7,
+   "ok": true
+  },
+  "well-done-x": {
+   "file": "well-done-x.mp3",
+   "text": "Well done!",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -6,
+   "ok": true
+  },
+  "every-frame-is-full-p": {
+   "file": "every-frame-is-full-p.mp3",
+   "text": "Every frame is full.",
+   "chars": 20,
+   "dur": 1.071,
+   "peak": -2.4,
+   "ok": true
+  },
+  "that-is": {
+   "file": "that-is.mp3",
+   "text": "That is",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -3.7,
+   "ok": true
+  },
+  "have-another-look-p": {
+   "file": "have-another-look-p.mp3",
+   "text": "Have another look.",
+   "chars": 18,
+   "dur": 0.653,
+   "peak": -2.7,
+   "ok": true
+  },
+  "every-group-needs-the-same-p": {
+   "file": "every-group-needs-the-same-p.mp3",
+   "text": "Every group needs the same.",
+   "chars": 27,
+   "dur": 1.123,
+   "peak": -2.6,
+   "ok": true
+  },
+  "this": {
+   "file": "this.mp3",
+   "text": "This",
+   "chars": 4,
+   "dur": 0.653,
+   "peak": -5.8,
+   "ok": true
+  },
+  "lets-make-pairs-together-p": {
+   "file": "lets-make-pairs-together-p.mp3",
+   "text": "Let's make pairs together.",
+   "chars": 26,
+   "dur": 1.019,
+   "peak": -2.2,
+   "ok": true
+  },
+  "lets-make-groups-of": {
+   "file": "lets-make-groups-of.mp3",
+   "text": "Let's make groups of",
+   "chars": 20,
+   "dur": 1.019,
+   "peak": -3.9,
+   "ok": true
+  },
+  "together": {
+   "file": "together.mp3",
+   "text": "together",
+   "chars": 8,
+   "dur": 0.601,
+   "peak": -4.7,
+   "ok": true
+  },
+  "that": {
+   "file": "that.mp3",
+   "text": "That",
+   "chars": 4,
+   "dur": 0.575,
+   "peak": -4,
+   "ok": true
+  },
+  "is-full": {
+   "file": "is-full.mp3",
+   "text": "is full",
+   "chars": 7,
+   "dur": 0.679,
+   "peak": -4.4,
+   "ok": true
+  },
+  "it-holds": {
+   "file": "it-holds.mp3",
+   "text": "It holds",
+   "chars": 8,
+   "dur": 0.705,
+   "peak": -6.2,
+   "ok": true
+  },
+  "all-done-q": {
+   "file": "all-done-q.mp3",
+   "text": "All done?",
+   "chars": 9,
+   "dur": 0.601,
+   "peak": -6.3,
+   "ok": true
+  },
+  "tap-check-p": {
+   "file": "tap-check-p.mp3",
+   "text": "Tap Check.",
+   "chars": 10,
+   "dur": 0.601,
+   "peak": -3.4,
+   "ok": true
+  },
+  "start-here-p": {
+   "file": "start-here-p.mp3",
+   "text": "Start here.",
+   "chars": 11,
+   "dur": 0.601,
+   "peak": -6,
+   "ok": true
+  },
+  "so-how-many-altogether-q": {
+   "file": "so-how-many-altogether-q.mp3",
+   "text": "So how many altogether?",
+   "chars": 23,
+   "dur": 1.149,
+   "peak": -4.7,
+   "ok": true
+  },
+  "tap-each-group-to-count-p": {
+   "file": "tap-each-group-to-count-p.mp3",
+   "text": "Tap each group to count.",
+   "chars": 24,
+   "dur": 1.019,
+   "peak": -2.4,
+   "ok": true
+  },
+  "altogether-q": {
+   "file": "altogether-q.mp3",
+   "text": "altogether?",
+   "chars": 11,
+   "dur": 0.627,
+   "peak": -2.9,
+   "ok": true
+  },
+  "how-many-altogether-q": {
+   "file": "how-many-altogether-q.mp3",
+   "text": "How many altogether?",
+   "chars": 20,
+   "dur": 0.94,
+   "peak": -2.5,
+   "ok": true
+  },
+  "are-left-over-q": {
+   "file": "are-left-over-q.mp3",
+   "text": "are left over?",
+   "chars": 14,
+   "dur": 0.836,
+   "peak": -3.4,
+   "ok": true
+  },
+  "how-many-bags-did-you-use-q": {
+   "file": "how-many-bags-did-you-use-q.mp3",
+   "text": "How many bags did you use?",
+   "chars": 26,
+   "dur": 1.202,
+   "peak": -2.7,
+   "ok": true
+  },
+  "which-one-is-missing-q": {
+   "file": "which-one-is-missing-q.mp3",
+   "text": "Which one is missing?",
+   "chars": 21,
+   "dur": 0.81,
+   "peak": -3.6,
+   "ok": true
+  },
+  "one-number-is-hiding-p": {
+   "file": "one-number-is-hiding-p.mp3",
+   "text": "One number is hiding.",
+   "chars": 21,
+   "dur": 0.914,
+   "peak": -2.8,
+   "ok": true
+  },
+  "we-count-two-four-six-p": {
+   "file": "we-count-two-four-six-p.mp3",
+   "text": "We count two, four, six.",
+   "chars": 24,
+   "dur": 1.306,
+   "peak": -2.7,
+   "ok": true
+  },
+  "we-count-in-fives-p": {
+   "file": "we-count-in-fives-p.mp3",
+   "text": "We count in fives.",
+   "chars": 18,
+   "dur": 0.836,
+   "peak": -3.3,
+   "ok": true
+  },
+  "we-count-in-tens-p": {
+   "file": "we-count-in-tens-p.mp3",
+   "text": "We count in tens.",
+   "chars": 17,
+   "dur": 1.045,
+   "peak": -4.1,
+   "ok": true
+  },
+  "it-is": {
+   "file": "it-is.mp3",
+   "text": "It is",
+   "chars": 5,
+   "dur": 0.653,
+   "peak": -6,
+   "ok": true
+  },
+  "count-the": {
+   "file": "count-the.mp3",
+   "text": "Count the",
+   "chars": 9,
+   "dur": 0.914,
+   "peak": -2.5,
+   "ok": true
+  },
+  "in-fives": {
+   "file": "in-fives.mp3",
+   "text": "in fives",
+   "chars": 8,
+   "dur": 0.575,
+   "peak": -6,
+   "ok": true
+  },
+  "tap-each-tray-p": {
+   "file": "tap-each-tray-p.mp3",
+   "text": "Tap each tray.",
+   "chars": 14,
+   "dur": 0.914,
+   "peak": -2.4,
+   "ok": true
+  },
+  "tap-each-hand-p": {
+   "file": "tap-each-hand-p.mp3",
+   "text": "Tap each hand.",
+   "chars": 14,
+   "dur": 0.888,
+   "peak": -3.3,
+   "ok": true
+  },
+  "tap-to-count-in-fives-p": {
+   "file": "tap-to-count-in-fives-p.mp3",
+   "text": "Tap to count in fives.",
+   "chars": 22,
+   "dur": 1.097,
+   "peak": -1.9,
+   "ok": true
+  },
+  "tap-to-count-in-tens-p": {
+   "file": "tap-to-count-in-tens-p.mp3",
+   "text": "Tap to count in tens.",
+   "chars": 21,
+   "dur": 1.28,
+   "peak": -2.7,
+   "ok": true
+  },
+  "tap-each-ten-then-the-ones-p": {
+   "file": "tap-each-ten-then-the-ones-p.mp3",
+   "text": "Tap each ten, then the ones.",
+   "chars": 28,
+   "dur": 1.541,
+   "peak": -2.3,
+   "ok": true
+  },
+  "count-in-tens-p": {
+   "file": "count-in-tens-p.mp3",
+   "text": "Count in tens.",
+   "chars": 14,
+   "dur": 0.575,
+   "peak": -2.6,
+   "ok": true
+  },
+  "tap-each-ten-frame-p": {
+   "file": "tap-each-ten-frame-p.mp3",
+   "text": "Tap each ten frame.",
+   "chars": 19,
+   "dur": 1.149,
+   "peak": -2.3,
+   "ok": true
+  },
+  "count-in-fives-p": {
+   "file": "count-in-fives-p.mp3",
+   "text": "Count in fives.",
+   "chars": 15,
+   "dur": 0.914,
+   "peak": -3.6,
+   "ok": true
+  },
+  "which-number-is-missing-q": {
+   "file": "which-number-is-missing-q.mp3",
+   "text": "Which number is missing?",
+   "chars": 24,
+   "dur": 0.993,
+   "peak": -5.8,
+   "ok": true
+  },
+  "what-comes-here-q": {
+   "file": "what-comes-here-q.mp3",
+   "text": "What comes here?",
+   "chars": 16,
+   "dur": 0.679,
+   "peak": -3.9,
+   "ok": true
+  },
+  "count-the-tens-then-count-on-the-ones-p": {
+   "file": "count-the-tens-then-count-on-the-ones-p.mp3",
+   "text": "Count the tens, then count on the ones.",
+   "chars": 39,
+   "dur": 1.75,
+   "peak": -2.6,
+   "ok": true
+  },
+  "put": {
+   "file": "put.mp3",
+   "text": "Put",
+   "chars": 3,
+   "dur": 0.313,
+   "peak": -7.9,
+   "ok": true
+  },
+  "in-each-hand": {
+   "file": "in-each-hand.mp3",
+   "text": "in each hand",
+   "chars": 12,
+   "dur": 0.705,
+   "peak": -5.3,
+   "ok": true
+  },
+  "fill-each-ten-frame-with-ten-counters-p": {
+   "file": "fill-each-ten-frame-with-ten-counters-p.mp3",
+   "text": "Fill each ten frame with ten counters.",
+   "chars": 38,
+   "dur": 1.855,
+   "peak": -2.5,
+   "ok": true
+  },
+  "put-the": {
+   "file": "put-the.mp3",
+   "text": "Put the",
+   "chars": 7,
+   "dur": 0.836,
+   "peak": -6.7,
+   "ok": true
+  },
+  "how-many-bags-do-you-fill-q": {
+   "file": "how-many-bags-do-you-fill-q.mp3",
+   "text": "How many bags do you fill?",
+   "chars": 26,
+   "dur": 0.81,
+   "peak": -4.9,
+   "ok": true
+  },
+  "in-bags-of": {
+   "file": "in-bags-of.mp3",
+   "text": "in bags of",
+   "chars": 10,
+   "dur": 0.679,
+   "peak": -5.2,
+   "ok": true
+  },
+  "of": {
+   "file": "of.mp3",
+   "text": "of",
+   "chars": 2,
+   "dur": 0.313,
+   "peak": -10.4,
+   "ok": true
+  },
+  "its-in-this-row-p": {
+   "file": "its-in-this-row-p.mp3",
+   "text": "It's in this row.",
+   "chars": 17,
+   "dur": 0.784,
+   "peak": -4.9,
+   "ok": true
+  },
+  "makes": {
+   "file": "makes.mp3",
+   "text": "makes",
+   "chars": 5,
+   "dur": 0.627,
+   "peak": -3.9,
+   "ok": true
+  },
+  "heres": {
+   "file": "heres.mp3",
+   "text": "Here's",
+   "chars": 6,
+   "dur": 0.549,
+   "peak": -6.5,
+   "ok": true
+  },
+  "look-for-the-wiggly-one-p": {
+   "file": "look-for-the-wiggly-one-p.mp3",
+   "text": "Look for the wiggly one.",
+   "chars": 24,
+   "dur": 1.071,
+   "peak": -3,
+   "ok": true
+  },
+  "make": {
+   "file": "make.mp3",
+   "text": "Make",
+   "chars": 4,
+   "dur": 0.366,
+   "peak": -8.8,
+   "ok": true
+  },
+  "the-long-rods-go-on-the-tens-side-p": {
+   "file": "the-long-rods-go-on-the-tens-side-p.mp3",
+   "text": "The long rods go on the tens side.",
+   "chars": 34,
+   "dur": 1.829,
+   "peak": -3,
+   "ok": true
+  },
+  "the-little-cubes-go-on-the-ones-side-p": {
+   "file": "the-little-cubes-go-on-the-ones-side-p.mp3",
+   "text": "The little cubes go on the ones side.",
+   "chars": 37,
+   "dur": 1.672,
+   "peak": -5.3,
+   "ok": true
+  },
+  "use-the-blocks-x": {
+   "file": "use-the-blocks-x.mp3",
+   "text": "Use the blocks!",
+   "chars": 15,
+   "dur": 0.679,
+   "peak": -2.6,
+   "ok": true
+  },
+  "thats-plenty-x": {
+   "file": "thats-plenty-x.mp3",
+   "text": "That's plenty!",
+   "chars": 14,
+   "dur": 0.784,
+   "peak": -3.4,
+   "ok": true
+  },
+  "take-some-away-if-you-like-p": {
+   "file": "take-some-away-if-you-like-p.mp3",
+   "text": "Take some away if you like.",
+   "chars": 27,
+   "dur": 1.071,
+   "peak": -4.3,
+   "ok": true
+  },
+  "that-makes": {
+   "file": "that-makes.mp3",
+   "text": "That makes",
+   "chars": 10,
+   "dur": 0.627,
+   "peak": -2.6,
+   "ok": true
+  },
+  "drag-some-blocks-onto-the-mat-first-p": {
+   "file": "drag-some-blocks-onto-the-mat-first-p.mp3",
+   "text": "Drag some blocks onto the mat first.",
+   "chars": 36,
+   "dur": 1.437,
+   "peak": -2.4,
+   "ok": true
+  },
+  "we-need": {
+   "file": "we-need.mp3",
+   "text": "We need",
+   "chars": 7,
+   "dur": 0.627,
+   "peak": -7.4,
+   "ok": true
+  },
+  "thats-too-many-tens-p": {
+   "file": "thats-too-many-tens-p.mp3",
+   "text": "That's too many tens.",
+   "chars": 21,
+   "dur": 1.045,
+   "peak": -4.6,
+   "ok": true
+  },
+  "more": {
+   "file": "more.mp3",
+   "text": "more",
+   "chars": 4,
+   "dur": 0.575,
+   "peak": -7,
+   "ok": true
+  },
+  "take": {
+   "file": "take.mp3",
+   "text": "Take",
+   "chars": 4,
+   "dur": 0.418,
+   "peak": -5.2,
+   "ok": true
+  },
+  "away": {
+   "file": "away.mp3",
+   "text": "away",
+   "chars": 4,
+   "dur": 0.653,
+   "peak": -7,
+   "ok": true
+  },
+  "thats-too-many-ones-p": {
+   "file": "thats-too-many-ones-p.mp3",
+   "text": "That's too many ones.",
+   "chars": 21,
+   "dur": 0.94,
+   "peak": -2.4,
+   "ok": true
+  },
+  "too-but-lets-swap-ten-ones-for-one-ten": {
+   "file": "too-but-lets-swap-ten-ones-for-one-ten.mp3",
+   "text": "too, but let's swap ten ones for one ten",
+   "chars": 40,
+   "dur": 2.142,
+   "peak": -2.5,
+   "ok": true
+  },
+  "try": {
+   "file": "try.mp3",
+   "text": "Try",
+   "chars": 3,
+   "dur": 0.444,
+   "peak": -6.8,
+   "ok": true
+  },
+  "its": {
+   "file": "its.mp3",
+   "text": "It's",
+   "chars": 4,
+   "dur": 0.47,
+   "peak": -5.9,
+   "ok": true
+  },
+  "each-long-rod-is-ten-p": {
+   "file": "each-long-rod-is-ten-p.mp3",
+   "text": "Each long rod is ten.",
+   "chars": 21,
+   "dur": 1.28,
+   "peak": -5.5,
+   "ok": true
+  },
+  "count-with-me-p": {
+   "file": "count-with-me-p.mp3",
+   "text": "Count with me.",
+   "chars": 14,
+   "dur": 0.653,
+   "peak": -2.9,
+   "ok": true
+  },
+  "count-the-tens-then-the-ones-p": {
+   "file": "count-the-tens-then-the-ones-p.mp3",
+   "text": "Count the tens, then the ones.",
+   "chars": 30,
+   "dur": 1.202,
+   "peak": -3.2,
+   "ok": true
+  },
+  "what-number-is-this-q": {
+   "file": "what-number-is-this-q.mp3",
+   "text": "What number is this?",
+   "chars": 20,
+   "dur": 0.914,
+   "peak": -5.8,
+   "ok": true
+  },
+  "what-comes-after": {
+   "file": "what-comes-after.mp3",
+   "text": "What comes after",
+   "chars": 16,
+   "dur": 0.836,
+   "peak": -3.3,
+   "ok": true
+  },
+  "what-comes-before": {
+   "file": "what-comes-before.mp3",
+   "text": "What comes before",
+   "chars": 17,
+   "dur": 0.94,
+   "peak": -2.6,
+   "ok": true
+  },
+  "what-number-is-between": {
+   "file": "what-number-is-between.mp3",
+   "text": "What number is between",
+   "chars": 22,
+   "dur": 1.123,
+   "peak": -3.9,
+   "ok": true
+  },
+  "comes-after": {
+   "file": "comes-after.mp3",
+   "text": "comes after",
+   "chars": 11,
+   "dur": 0.862,
+   "peak": -3.4,
+   "ok": true
+  },
+  "comes-before": {
+   "file": "comes-before.mp3",
+   "text": "comes before",
+   "chars": 12,
+   "dur": 0.758,
+   "peak": -3.9,
+   "ok": true
+  },
+  "is-between": {
+   "file": "is-between.mp3",
+   "text": "is between",
+   "chars": 10,
+   "dur": 0.758,
+   "peak": -2.6,
+   "ok": true
+  },
+  "lets-count-along-p": {
+   "file": "lets-count-along-p.mp3",
+   "text": "Let's count along.",
+   "chars": 18,
+   "dur": 0.914,
+   "peak": -5.2,
+   "ok": true
+  },
+  "count-along-with-me-p": {
+   "file": "count-along-with-me-p.mp3",
+   "text": "Count along with me.",
+   "chars": 20,
+   "dur": 0.836,
+   "peak": -4.8,
+   "ok": true
+  },
+  "put-the-numbers-in-order-p": {
+   "file": "put-the-numbers-in-order-p.mp3",
+   "text": "Put the numbers in order.",
+   "chars": 25,
+   "dur": 1.019,
+   "peak": -3.8,
+   "ok": true
+  },
+  "smallest-first-x": {
+   "file": "smallest-first-x.mp3",
+   "text": "Smallest first!",
+   "chars": 15,
+   "dur": 0.967,
+   "peak": -4.3,
+   "ok": true
+  },
+  "smallest-to-biggest-x": {
+   "file": "smallest-to-biggest-x.mp3",
+   "text": "Smallest to biggest!",
+   "chars": 20,
+   "dur": 1.019,
+   "peak": -5.1,
+   "ok": true
+  },
+  "it-goes-first-p": {
+   "file": "it-goes-first-p.mp3",
+   "text": "It goes first.",
+   "chars": 14,
+   "dur": 0.888,
+   "peak": -3.3,
+   "ok": true
+  },
+  "which-number-is-the-smallest-q": {
+   "file": "which-number-is-the-smallest-q.mp3",
+   "text": "Which number is the smallest?",
+   "chars": 29,
+   "dur": 1.149,
+   "peak": -4.7,
+   "ok": true
+  },
+  "nearly-x": {
+   "file": "nearly-x.mp3",
+   "text": "Nearly!",
+   "chars": 7,
+   "dur": 0.418,
+   "peak": -4.8,
+   "ok": true
+  },
+  "look-at-the-glowing-spot-p": {
+   "file": "look-at-the-glowing-spot-p.mp3",
+   "text": "Look at the glowing spot.",
+   "chars": 25,
+   "dur": 1.045,
+   "peak": -2.5,
+   "ok": true
+  },
+  "which-number-comes-next-q": {
+   "file": "which-number-comes-next-q.mp3",
+   "text": "Which number comes next?",
+   "chars": 24,
+   "dur": 0.836,
+   "peak": -4.2,
+   "ok": true
+  },
+  "put-the-glowing-number-in-the-glowing-spot-p": {
+   "file": "put-the-glowing-number-in-the-glowing-spot-p.mp3",
+   "text": "Put the glowing number in the glowing spot.",
+   "chars": 43,
+   "dur": 1.881,
+   "peak": -2.2,
+   "ok": true
+  },
+  "here-are": {
+   "file": "here-are.mp3",
+   "text": "Here are",
+   "chars": 8,
+   "dur": 0.496,
+   "peak": -7,
+   "ok": true
+  },
+  "orange": {
+   "file": "orange.mp3",
+   "text": "orange",
+   "chars": 6,
+   "dur": 0.47,
+   "peak": -6.6,
+   "ok": true
+  },
+  "to-add": {
+   "file": "to-add.mp3",
+   "text": "to add",
+   "chars": 6,
+   "dur": 0.601,
+   "peak": -6.8,
+   "ok": true
+  },
+  "empty": {
+   "file": "empty.mp3",
+   "text": "empty",
+   "chars": 5,
+   "dur": 0.575,
+   "peak": -2.3,
+   "ok": true
+  },
+  "blue": {
+   "file": "blue.mp3",
+   "text": "blue",
+   "chars": 4,
+   "dur": 0.392,
+   "peak": -9.7,
+   "ok": true
+  },
+  "there-are": {
+   "file": "there-are.mp3",
+   "text": "There are",
+   "chars": 9,
+   "dur": 0.601,
+   "peak": -7.4,
+   "ok": true
+  },
+  "add-blue-ones-to-make": {
+   "file": "add-blue-ones-to-make.mp3",
+   "text": "Add blue ones to make",
+   "chars": 21,
+   "dur": 0.993,
+   "peak": -2.5,
+   "ok": true
+  },
+  "how-many-blue": {
+   "file": "how-many-blue.mp3",
+   "text": "How many blue",
+   "chars": 13,
+   "dur": 0.81,
+   "peak": -4.7,
+   "ok": true
+  },
+  "do-you-add-q": {
+   "file": "do-you-add-q.mp3",
+   "text": "do you add?",
+   "chars": 11,
+   "dur": 0.679,
+   "peak": -4.6,
+   "ok": true
+  },
+  "we-have": {
+   "file": "we-have.mp3",
+   "text": "We have",
+   "chars": 7,
+   "dur": 0.575,
+   "peak": -5,
+   "ok": true
+  },
+  "count-on-p": {
+   "file": "count-on-p.mp3",
+   "text": "Count on.",
+   "chars": 9,
+   "dur": 0.81,
+   "peak": -2.5,
+   "ok": true
+  },
+  "count-on-from": {
+   "file": "count-on-from.mp3",
+   "text": "Count on from",
+   "chars": 13,
+   "dur": 0.967,
+   "peak": -4,
+   "ok": true
+  },
+  "thats-the-whole-x": {
+   "file": "thats-the-whole-x.mp3",
+   "text": "That's the whole!",
+   "chars": 17,
+   "dur": 0.94,
+   "peak": -3.8,
+   "ok": true
+  },
+  "number-friends-x": {
+   "file": "number-friends-x.mp3",
+   "text": "Number friends!",
+   "chars": 15,
+   "dur": 0.862,
+   "peak": -3.2,
+   "ok": true
+  },
+  "plus": {
+   "file": "plus.mp3",
+   "text": "plus",
+   "chars": 4,
+   "dur": 0.705,
+   "peak": -5.3,
+   "ok": true
+  },
+  "you-counted-on-x": {
+   "file": "you-counted-on-x.mp3",
+   "text": "You counted on!",
+   "chars": 15,
+   "dur": 0.81,
+   "peak": -3.1,
+   "ok": true
+  },
+  "great-thinking-x": {
+   "file": "great-thinking-x.mp3",
+   "text": "Great thinking!",
+   "chars": 15,
+   "dur": 0.784,
+   "peak": -5.5,
+   "ok": true
+  },
+  "count-them-all-p": {
+   "file": "count-them-all-p.mp3",
+   "text": "Count them all.",
+   "chars": 15,
+   "dur": 0.679,
+   "peak": -4.6,
+   "ok": true
+  },
+  "count-the-empty-ones-p": {
+   "file": "count-the-empty-ones-p.mp3",
+   "text": "Count the empty ones.",
+   "chars": 21,
+   "dur": 1.019,
+   "peak": -2.3,
+   "ok": true
+  },
+  "one-part-is": {
+   "file": "one-part-is.mp3",
+   "text": "One part is",
+   "chars": 11,
+   "dur": 0.758,
+   "peak": -4.9,
+   "ok": true
+  },
+  "the-other-part-is": {
+   "file": "the-other-part-is.mp3",
+   "text": "The other part is",
+   "chars": 17,
+   "dur": 0.993,
+   "peak": -6.2,
+   "ok": true
+  },
+  "what-is-the-whole-q": {
+   "file": "what-is-the-whole-q.mp3",
+   "text": "What is the whole?",
+   "chars": 18,
+   "dur": 0.914,
+   "peak": -5.3,
+   "ok": true
+  },
+  "the-whole-is": {
+   "file": "the-whole-is.mp3",
+   "text": "The whole is",
+   "chars": 12,
+   "dur": 0.679,
+   "peak": -5.7,
+   "ok": true
+  },
+  "what-is-the-other-part-q": {
+   "file": "what-is-the-other-part-q.mp3",
+   "text": "What is the other part?",
+   "chars": 23,
+   "dur": 0.967,
+   "peak": -4.3,
+   "ok": true
+  },
+  "double": {
+   "file": "double.mp3",
+   "text": "Double",
+   "chars": 6,
+   "dur": 0.705,
+   "peak": -4.8,
+   "ok": true
+  },
+  "thats-a-double-and-one-more-p": {
+   "file": "thats-a-double-and-one-more-p.mp3",
+   "text": "That's a double and one more.",
+   "chars": 29,
+   "dur": 1.097,
+   "peak": -2.8,
+   "ok": true
+  },
+  "start-with-the-bigger-number": {
+   "file": "start-with-the-bigger-number.mp3",
+   "text": "Start with the bigger number,",
+   "chars": 29,
+   "dur": 1.28,
+   "peak": -2.9,
+   "ok": true
+  },
+  "drag-counters-to-fill-the-ten-frame-p": {
+   "file": "drag-counters-to-fill-the-ten-frame-p.mp3",
+   "text": "Drag counters to fill the ten frame.",
+   "chars": 36,
+   "dur": 1.881,
+   "peak": -2,
+   "ok": true
+  },
+  "drag-the-blue-counters-to-fill-up-the-ten-frame-first-p": {
+   "file": "drag-the-blue-counters-to-fill-up-the-ten-frame-first-p.mp3",
+   "text": "Drag the blue counters to fill up the ten frame first.",
+   "chars": 54,
+   "dur": 2.534,
+   "peak": -2.1,
+   "ok": true
+  },
+  "fill-the-ten-frame-first-p": {
+   "file": "fill-the-ten-frame-first-p.mp3",
+   "text": "Fill the ten frame first.",
+   "chars": 25,
+   "dur": 1.332,
+   "peak": -2.7,
+   "ok": true
+  },
+  "more-to-make-ten": {
+   "file": "more-to-make-ten.mp3",
+   "text": "more to make ten",
+   "chars": 16,
+   "dur": 0.914,
+   "peak": -5.7,
+   "ok": true
+  },
+  "pop-it-in-an-empty-spot-in-the-first-frame-p": {
+   "file": "pop-it-in-an-empty-spot-in-the-first-frame-p.mp3",
+   "text": "Pop it in an empty spot in the first frame.",
+   "chars": 43,
+   "dur": 1.829,
+   "peak": -2.6,
+   "ok": true
+  },
+  "the-first-frame-is-full-p": {
+   "file": "the-first-frame-is-full-p.mp3",
+   "text": "The first frame is full.",
+   "chars": 24,
+   "dur": 1.202,
+   "peak": -4.7,
+   "ok": true
+  },
+  "that-makes-ten-x": {
+   "file": "that-makes-ten-x.mp3",
+   "text": "That makes ten!",
+   "chars": 15,
+   "dur": 0.784,
+   "peak": -2,
+   "ok": true
+  },
+  "now-count-on": {
+   "file": "now-count-on.mp3",
+   "text": "Now count on",
+   "chars": 12,
+   "dur": 0.862,
+   "peak": -5.1,
+   "ok": true
+  },
+  "is-the-same-as-ten-plus": {
+   "file": "is-the-same-as-ten-plus.mp3",
+   "text": "is the same as ten plus",
+   "chars": 23,
+   "dur": 1.358,
+   "peak": -4.2,
+   "ok": true
+  },
+  "first": {
+   "file": "first.mp3",
+   "text": "first",
+   "chars": 5,
+   "dur": 0.653,
+   "peak": -3.5,
+   "ok": true
+  },
+  "now-one-more-makes": {
+   "file": "now-one-more-makes.mp3",
+   "text": "Now one more makes",
+   "chars": 18,
+   "dur": 1.123,
+   "peak": -4.4,
+   "ok": true
+  },
+  "to-take-it-away": {
+   "file": "to-take-it-away.mp3",
+   "text": "to take it away",
+   "chars": 15,
+   "dur": 0.81,
+   "peak": -4.5,
+   "ok": true
+  },
+  "to-take-them-away": {
+   "file": "to-take-them-away.mp3",
+   "text": "to take them away",
+   "chars": 17,
+   "dur": 1.097,
+   "peak": -2.7,
+   "ok": true
+  },
+  "how-many-are-left-q": {
+   "file": "how-many-are-left-q.mp3",
+   "text": "How many are left?",
+   "chars": 18,
+   "dur": 0.653,
+   "peak": -5.7,
+   "ok": true
+  },
+  "take-away": {
+   "file": "take-away.mp3",
+   "text": "take away",
+   "chars": 9,
+   "dur": 0.836,
+   "peak": -4.8,
+   "ok": true
+  },
+  "think": {
+   "file": "think.mp3",
+   "text": "Think:",
+   "chars": 6,
+   "dur": 0.418,
+   "peak": -2.5,
+   "ok": true
+  },
+  "and-how-many-make": {
+   "file": "and-how-many-make.mp3",
+   "text": "and how many make",
+   "chars": 17,
+   "dur": 0.862,
+   "peak": -5.2,
+   "ok": true
+  },
+  "so": {
+   "file": "so.mp3",
+   "text": "so",
+   "chars": 2,
+   "dur": 0.575,
+   "peak": -4.9,
+   "ok": true
+  },
+  "are-left-q": {
+   "file": "are-left-q.mp3",
+   "text": "are left?",
+   "chars": 9,
+   "dur": 0.731,
+   "peak": -5.4,
+   "ok": true
+  },
+  "lets-count-what-is-left-p": {
+   "file": "lets-count-what-is-left-p.mp3",
+   "text": "Let's count what is left.",
+   "chars": 25,
+   "dur": 1.045,
+   "peak": -2.6,
+   "ok": true
+  },
+  "are-eaten": {
+   "file": "are-eaten.mp3",
+   "text": "are eaten",
+   "chars": 9,
+   "dur": 0.81,
+   "peak": -2.6,
+   "ok": true
+  },
+  "is-eaten": {
+   "file": "is-eaten.mp3",
+   "text": "is eaten",
+   "chars": 8,
+   "dur": 0.679,
+   "peak": -4.2,
+   "ok": true
+  },
+  "swim-away": {
+   "file": "swim-away.mp3",
+   "text": "swim away",
+   "chars": 9,
+   "dur": 0.731,
+   "peak": -6.1,
+   "ok": true
+  },
+  "swims-away": {
+   "file": "swims-away.mp3",
+   "text": "swims away",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -5.5,
+   "ok": true
+  },
+  "roll-away": {
+   "file": "roll-away.mp3",
+   "text": "roll away",
+   "chars": 9,
+   "dur": 0.836,
+   "peak": -4.5,
+   "ok": true
+  },
+  "are-picked": {
+   "file": "are-picked.mp3",
+   "text": "are picked",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -3,
+   "ok": true
+  },
+  "rolls-away": {
+   "file": "rolls-away.mp3",
+   "text": "rolls away",
+   "chars": 10,
+   "dur": 0.601,
+   "peak": -6.2,
+   "ok": true
+  },
+  "is-picked": {
+   "file": "is-picked.mp3",
+   "text": "is picked",
+   "chars": 9,
+   "dur": 0.862,
+   "peak": -3.2,
+   "ok": true
+  },
+  "fall-down": {
+   "file": "fall-down.mp3",
+   "text": "fall down",
+   "chars": 9,
+   "dur": 0.888,
+   "peak": -6.8,
+   "ok": true
+  },
+  "falls-down": {
+   "file": "falls-down.mp3",
+   "text": "falls down",
+   "chars": 10,
+   "dur": 0.784,
+   "peak": -5.4,
+   "ok": true
+  },
+  "tens": {
+   "file": "tens.mp3",
+   "text": "tens",
+   "chars": 4,
+   "dur": 0.653,
+   "peak": -2.9,
+   "ok": true
+  },
+  "a-koala": {
+   "file": "a-koala.mp3",
+   "text": "a koala",
+   "chars": 7,
+   "dur": 0.993,
+   "peak": -4,
+   "ok": true
+  },
+  "ones": {
+   "file": "ones.mp3",
+   "text": "ones",
+   "chars": 4,
+   "dur": 0.575,
+   "peak": -2.7,
+   "ok": true
+  },
+  "a-kookaburra": {
+   "file": "a-kookaburra.mp3",
+   "text": "a kookaburra",
+   "chars": 12,
+   "dur": 0.888,
+   "peak": -4,
+   "ok": true
+  },
+  "a-wombat": {
+   "file": "a-wombat.mp3",
+   "text": "a wombat",
+   "chars": 8,
+   "dur": 0.836,
+   "peak": -6.7,
+   "ok": true
+  },
+  "an-echidna": {
+   "file": "an-echidna.mp3",
+   "text": "an echidna",
+   "chars": 10,
+   "dur": 0.731,
+   "peak": -6.2,
+   "ok": true
+  },
+  "a-platypus": {
+   "file": "a-platypus.mp3",
+   "text": "a platypus",
+   "chars": 10,
+   "dur": 0.627,
+   "peak": -4.8,
+   "ok": true
+  },
+  "a-bilby": {
+   "file": "a-bilby.mp3",
+   "text": "a bilby",
+   "chars": 7,
+   "dur": 0.705,
+   "peak": -4.8,
+   "ok": true
+  },
+  "a-cockatoo": {
+   "file": "a-cockatoo.mp3",
+   "text": "a cockatoo",
+   "chars": 10,
+   "dur": 0.705,
+   "peak": -2.6,
+   "ok": true
+  },
+  "a-kangaroo": {
+   "file": "a-kangaroo.mp3",
+   "text": "a kangaroo",
+   "chars": 10,
+   "dur": 0.888,
+   "peak": -6.2,
+   "ok": true
+  },
+  "a-tree-frog": {
+   "file": "a-tree-frog.mp3",
+   "text": "a tree frog",
+   "chars": 11,
+   "dur": 0.81,
+   "peak": -3.3,
+   "ok": true
+  },
+  "an-emu": {
+   "file": "an-emu.mp3",
+   "text": "an emu",
+   "chars": 6,
+   "dur": 0.836,
+   "peak": -2.7,
+   "ok": true
+  },
+  "a-quokka": {
+   "file": "a-quokka.mp3",
+   "text": "a quokka",
+   "chars": 8,
+   "dur": 0.81,
+   "peak": -4.9,
+   "ok": true
+  },
+  "a-sea-turtle": {
+   "file": "a-sea-turtle.mp3",
+   "text": "a sea turtle",
+   "chars": 12,
+   "dur": 0.784,
+   "peak": -3.9,
+   "ok": true
+  },
+  "sharing-between-two": {
+   "file": "sharing-between-two.mp3",
+   "text": "Sharing between two",
+   "chars": 19,
+   "dur": 1.071,
+   "peak": -3.1,
+   "ok": true
+  },
+  "all-into-one-group": {
+   "file": "all-into-one-group.mp3",
+   "text": "All into one group",
+   "chars": 18,
+   "dur": 0.967,
+   "peak": -4.5,
+   "ok": true
+  },
+  "sharing-between-three-four-or-five": {
+   "file": "sharing-between-three-four-or-five.mp3",
+   "text": "Sharing between three, four or five",
+   "chars": 35,
+   "dur": 1.829,
+   "peak": -3.4,
+   "ok": true
+  },
+  "groups-of-two": {
+   "file": "groups-of-two.mp3",
+   "text": "Groups of two",
+   "chars": 13,
+   "dur": 1.045,
+   "peak": -2.3,
+   "ok": true
+  },
+  "groups-of-five": {
+   "file": "groups-of-five.mp3",
+   "text": "Groups of five",
+   "chars": 14,
+   "dur": 0.914,
+   "peak": -2.7,
+   "ok": true
+  },
+  "groups-of-ten": {
+   "file": "groups-of-ten.mp3",
+   "text": "Groups of ten",
+   "chars": 13,
+   "dur": 0.862,
+   "peak": -3.4,
+   "ok": true
+  },
+  "how-many-groups-q": {
+   "file": "how-many-groups-q.mp3",
+   "text": "How many groups?",
+   "chars": 16,
+   "dur": 0.862,
+   "peak": -2.9,
+   "ok": true
+  },
+  "adding": {
+   "file": "adding.mp3",
+   "text": "Adding",
+   "chars": 6,
+   "dur": 0.601,
+   "peak": -2.6,
+   "ok": true
+  },
+  "number-friends": {
+   "file": "number-friends.mp3",
+   "text": "Number friends",
+   "chars": 14,
+   "dur": 0.888,
+   "peak": -2.4,
+   "ok": true
+  },
+  "make-ten": {
+   "file": "make-ten.mp3",
+   "text": "Make ten",
+   "chars": 8,
+   "dur": 0.731,
+   "peak": -2.2,
+   "ok": true
+  },
+  "taking-away": {
+   "file": "taking-away.mp3",
+   "text": "Taking away",
+   "chars": 11,
+   "dur": 0.914,
+   "peak": -3.7,
+   "ok": true
+  },
+  "find-the-number": {
+   "file": "find-the-number.mp3",
+   "text": "Find the number",
+   "chars": 15,
+   "dur": 0.94,
+   "peak": -2.5,
+   "ok": true
+  },
+  "tens-and-ones": {
+   "file": "tens-and-ones.mp3",
+   "text": "Tens and ones",
+   "chars": 13,
+   "dur": 1.071,
+   "peak": -2.6,
+   "ok": true
+  },
+  "before-and-after": {
+   "file": "before-and-after.mp3",
+   "text": "Before and after",
+   "chars": 16,
+   "dur": 0.888,
+   "peak": -5.4,
+   "ok": true
+  },
+  "read-the-blocks": {
+   "file": "read-the-blocks.mp3",
+   "text": "Read the blocks",
+   "chars": 15,
+   "dur": 0.784,
+   "peak": -3.7,
+   "ok": true
+  },
+  "order-the-numbers": {
+   "file": "order-the-numbers.mp3",
+   "text": "Order the numbers",
+   "chars": 17,
+   "dur": 0.731,
+   "peak": -2.8,
+   "ok": true
+  },
+  "arisha": {
+   "file": "arisha.mp3",
+   "text": "Arisha",
+   "chars": 6,
+   "dur": 0.81,
+   "peak": -5.5,
+   "ok": true
+  },
+  "no": {
+   "file": "no.mp3",
+   "text": "no",
+   "chars": 2,
+   "dur": 0.575,
+   "peak": -7.7,
+   "ok": true
+  }
+ },
+ "summary": {
+  "clips": 444,
+  "files": 444,
+  "bytes": 3065863,
+  "chars": 5875,
+  "bad": []
+ }
+}

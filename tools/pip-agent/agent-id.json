@@ -1,0 +1,6 @@
+{
+ "agent_id": "agent_2001m4g45xbaf3gr4g61qrw64xyz",
+ "voice_id": "5GZaeOOG7yqLdoTRsaa6",
+ "llm": "claude-sonnet-5-5",
+ "tts_model": "eleven_v4_turbo"
+}
