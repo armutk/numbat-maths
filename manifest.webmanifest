@@ -1,0 +1,19 @@
+{
+  "name": "Numbat Maths",
+  "short_name": "Numbat Maths",
+  "description": "Year 1 maths practice with Pip the numbat: sharing equally, equal groups, numbers to 120, adding and subtracting within 20.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff8ec",
+  "theme_color": "#fff8ec",
+  "lang": "en-AU",
+  "categories": ["education", "kids"],
+  "icons": [
+    { "src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
