@@ -1,5 +1,5 @@
 // Offline-first service worker: precache the app shell, serve from cache, refresh in the background.
-const VERSION = 'numbat-maths-v1';
+const VERSION = 'numbat-maths-v2';
 const SHELL = [
   './',
   './index.html',

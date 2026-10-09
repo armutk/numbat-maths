@@ -251,15 +251,21 @@ function startQuest(mod, forcedPlan) {
           const b = h('button', { class: `choice ${cls}`, dataset: { value: String(v) } }, text(v));
           b.addEventListener('click', async () => {
             if (locked || b.classList.contains('is-wrong')) return;
+            if (locked) return;
+            locked = true; // one tap at a time while the option is read back
+            sfx.tap();
             say(sayOption(v), { interrupt: true });
             if (v === answer) {
               b.classList.add('is-right');
               group.querySelectorAll('.choice').forEach((o) => { if (o !== b) o.classList.add('is-dim'); });
+              await wait(550);
+              locked = false;
               if (onCorrect) { await api.step(true, { say: onCorrect.say }); onCorrect.then && onCorrect.then(); }
               else api.finish(true, { say: finalSay });
             } else {
               b.classList.add('is-wrong');
-              await wait(350);
+              await wait(650);
+              locked = false;
               api.finish(false);
             }
           });

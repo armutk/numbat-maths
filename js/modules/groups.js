@@ -14,7 +14,7 @@ const CSS = `
 .g-glow .plate-dish,.g-glow.tenframe,.g-glow.g-t5{box-shadow:0 0 0 6px var(--yellow-soft),0 10px 20px rgba(255,210,63,.5)!important}
 .g-pulse{animation:nudge .6s ease-in-out}
 .g-tappable{cursor:pointer;touch-action:manipulation}
-.plate.g-hand .plate-dish{background:url("data:image/svg+xml,${encodeURIComponent(HAND_SVG)}") center/contain no-repeat;border-radius:0;box-shadow:none;width:150px;min-height:150px;padding:60px 26px 12px;gap:2px;align-content:center}
+.plate.g-hand .plate-dish{background:url("data:image/svg+xml,${encodeURIComponent(HAND_SVG)}") center/contain no-repeat;border-radius:0;box-shadow:none;width:var(--hw,160px);min-height:var(--hw,160px);padding:62px 24px 12px;gap:2px;align-content:center}
 .plate.g-hand.is-over .plate-dish,.plate.g-hand.g-glow .plate-dish{box-shadow:none!important;filter:drop-shadow(0 0 8px var(--blue))}
 .plate.g-hand.g-glow .plate-dish{filter:drop-shadow(0 0 9px var(--yellow-deep))}
 .plate.g-hand.is-full .plate-dish{filter:drop-shadow(0 0 5px var(--green))}
@@ -25,7 +25,7 @@ const CSS = `
 .plate.hoop .plate-dish{padding:8px;gap:3px}
 .tenframe.is-full{box-shadow:0 6px 0 var(--green-deep),var(--shadow-card)}
 .g-t5{display:flex;gap:3px;padding:12px 12px 10px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 4px var(--blue-soft),0 6px 0 var(--sand-deep)}
-.g-track{padding-top:34px;gap:16px;align-items:flex-end}
+.g-track{padding-top:34px;gap:16px;align-items:flex-end;justify-content:center}
 .g-tcell{position:relative}
 .g-jump{position:absolute;left:-26px;top:-28px;width:36px;text-align:center;font-weight:700;font-size:.95rem;color:var(--green-deep);background:var(--green-soft);border-radius:999px;padding:1px 0}
 .g-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;flex:1 1 auto;min-height:0}
@@ -107,13 +107,34 @@ function wireHelp(task, S) {
 }
 
 /* ---------------------------------------------------------------- containers */
-function plateWidth(slots) { return slots <= 4 ? 150 : slots <= 6 ? 130 : slots <= 8 ? 120 : 108; }
+function sizeFor(kind, { slots, total, per, W, H }) {
+  const G = 16;
+  const dims = (v) => {
+    if (kind === 'hoop') return { w: 2 * v + 30, h: Math.max(150, Math.round(v * 1.9)) };
+    if (kind === 'bag') { const c = Math.min(per, 3), r = Math.ceil(per / c); return { w: c * v + (c - 1) * 3 + 32, h: Math.max(120, r * (v + 3) + 36) }; }
+    if (kind === 'hand') return { w: 160, h: 160 };
+    return { w: 5 * v + 40, h: 2 * v + 44 };
+  };
+  const cap = { hoop: 76, bag: 60, hand: 34, frame: 52 }[kind];
+  const min = { hoop: 38, bag: 32, hand: 30, frame: 34 }[kind];
+  let pick = null;
+  for (let v = cap; v >= min; v -= 2) {
+    const d = dims(v);
+    const t = kind === 'hand' ? 46 : kind === 'frame' ? Math.min(52, v) : v;
+    const perRow = Math.max(1, Math.floor((W - 16 + G) / (d.w + G)));
+    const zonesH = Math.ceil(slots / perRow) * (d.h + 28);
+    const trayH = Math.ceil(total / Math.max(1, Math.floor((W - 24) / (t + 8)))) * (t + 8) + 28;
+    pick = { itemPx: v, trayPx: t, plateW: d.w, plateH: d.h, cell: v };
+    if (zonesH + trayH + 20 <= H && zonesH + 200 <= H) break;
+  }
+  return pick;
+}
 
 /**
  * Build one container. kind: hoop | hand | bag | frame.
  * Returns { wrap (laid out), el (drop target / glow target), badge, count(), place(item), cap }
  */
-function buildZone(api, kind, { i, itemPx, plateW, droppable = true, cell = 40 }) {
+function buildZone(api, kind, { i, itemPx, plateW, plateH, droppable = true, cell = 40 }) {
   const badge = h('div', { class: 'g-badge' });
   if (kind === 'frame') {
     const cells = Array.from({ length: 10 }, () => h('div', { class: 'cell' }));
@@ -128,7 +149,7 @@ function buildZone(api, kind, { i, itemPx, plateW, droppable = true, cell = 40 }
   }
   const dish = h('div', { class: 'plate-dish', style: { '--item': `${itemPx}px` } });
   const cls = { hoop: 'hoop g-hoop', hand: 'g-hand', bag: 'basket g-bag' }[kind];
-  const el = h('div', { class: `plate ${droppable ? 'drop' : ''} ${cls}`, style: { '--plate-w': `${plateW}px`, '--plate-h': kind === 'hand' ? '150px' : kind === 'bag' ? '96px' : '84px' } },
+  const el = h('div', { class: `plate ${droppable ? 'drop' : ''} ${cls}`, style: { '--plate-w': `${plateW}px`, '--plate-h': `${plateH || (kind === 'bag' ? 120 : 150)}px`, '--hw': `${plateW}px` } },
     h('div', { style: { position: 'relative', width: '100%' } }, dish, badge));
   if (droppable) api.dropTarget(el, `z${i}`);
   return {
@@ -145,7 +166,7 @@ const fillItem = (el, d) => { if (typeof d === 'string') el.innerHTML = d; else 
  * cfg: say, kind, per, total, slots, leftover, itemPx, trayPx, drawItem(i), okSay, word, onSolved(ctx), cell
  */
 function placeTask(cfg) {
-  const { say, kind, per, total, slots, leftover = 0, itemPx, trayPx, drawItem, okSay, word, onSolved, cell } = cfg;
+  const { say, kind, per, total, slots, leftover = 0, drawItem, okSay, word, onSolved } = cfg;
   const S = {};
   const used = Math.floor(total / per);
   const task = {
@@ -154,9 +175,10 @@ function placeTask(cfg) {
       injectStyle();
       let phase = 'place', busy = false, saidCheck = false;
       const row = h('div', { class: 'plates' });
-      const plateW = plateWidth(slots);
+      const W = stage.clientWidth || innerWidth - 48, H = stage.clientHeight || innerHeight - 250;
+      const { itemPx, trayPx, plateW, plateH, cell } = sizeFor(kind, { slots, total, per, W, H });
       const zones = Array.from({ length: slots }, (_, i) => {
-        const z = buildZone(api, kind, { i, itemPx, plateW, cell });
+        const z = buildZone(api, kind, { i, itemPx, plateW, plateH, cell });
         row.append(z.wrap);
         return z;
       });
@@ -320,7 +342,7 @@ function trackTask({ say, step, start, n, blankIdx, tail }) {
     mount(stage, api) {
       injectStyle();
       const cells = values.map((v, i) => h('div', { class: `cellnum ${i === blankIdx ? 'is-blank' : ''}` }, i === blankIdx ? '?' : String(v)));
-      const track = h('div', { class: 'track g-track', style: { '--cell': 'min(10vmin, 74px)' } },
+      const track = h('div', { class: 'track g-track', style: { '--cell': 'min(11vmin, 84px)' } },
         ...cells.map((c, i) => h('div', { class: 'g-tcell' }, i > 0 ? h('div', { class: 'g-jump' }, `+${step}`) : null, c)));
       stage.append(h('div', { class: 'g-center' }, track));
       const fill = () => { const c = cells[blankIdx]; c.textContent = String(answer); c.classList.remove('is-blank'); c.classList.add('is-right'); };
@@ -355,7 +377,6 @@ function pairsTask(level) {
   return placeTask({
     say: 'Put the socks in pairs. Each hoop needs 2 socks.',
     kind: 'hoop', per: 2, total, slots: g, word: 'hoop',
-    itemPx: g > 8 ? 34 : 38, trayPx: total > 14 ? 40 : 46,
     drawItem: (i) => items.sock(cols[i % 2]),
     okSay: 'Every hoop has 2. Lovely pairs!',
     async onSolved({ api, stage, S, zones, row, tray }) {
@@ -415,7 +436,7 @@ function fivesTask(level) {
     const total = g * 5;
     return tapTask({
       per: 5, total,
-      say: level === 1 ? 'Count the stars in fives. Tap each hand.' : `Count in fives. Tap each tray.`,
+      say: level === 1 ? `Count the ${f.thing} in fives. Tap each hand.` : `Count the ${f.thing} in fives. Tap each tray.`,
       tapSay: 'Tap to count in fives.',
       okSay: `${g} groups of 5.`,
       sentence: `${g} groups of 5 is `,
@@ -425,12 +446,12 @@ function fivesTask(level) {
           let badge = h('div', { class: 'g-badge' });
           let wrap;
           if (level === 1) {
-            const z = buildZone(api, 'hand', { i, itemPx: 30, plateW: 150, droppable: false });
+            const z = buildZone(api, 'hand', { i, itemPx: 34, plateW: 160, plateH: 160, droppable: false });
             for (let k = 0; k < 5; k++) z.dish.append(h('div', { class: 'item', html: f.draw() }));
             wrap = z.wrap;
             badge = z.badge;
           } else {
-            const t = h('div', { class: 'g-t5', style: { '--item': '30px' } }, ...Array.from({ length: 5 }, () => h('div', { class: 'item', html: f.draw() })));
+            const t = h('div', { class: 'g-t5', style: { '--item': '40px' } }, ...Array.from({ length: 5 }, () => h('div', { class: 'item', html: f.draw() })));
             wrap = h('div', { class: 'g-wrap' }, t, badge);
           }
           return { wrap, badge, labels: [5 * (i + 1)] };
@@ -444,7 +465,6 @@ function fivesTask(level) {
     return placeTask({
       say: `Put 5 ${f.thing} in each hand.`,
       kind: 'hand', per: 5, total, slots: g, word: 'hand',
-      itemPx: 30, trayPx: total > 12 ? 42 : 48,
       drawItem: () => f.draw(),
       okSay: 'Every hand has 5. Well done!',
       async onSolved({ api, stage, S, zones }) {
@@ -469,6 +489,11 @@ function fivesTask(level) {
 }
 
 /* ---------------------------------------------------------------- 3. groups of 10 */
+function cellFor(count, W) {
+  const c = Math.floor(((W - (count - 1) * 24) / count - 40) / 5);
+  return Math.max(40, Math.min(52, c));
+}
+
 function frameEl(api, { filled, cell, col, i }) {
   const z = buildZone(api, 'frame', { i, cell, droppable: false });
   z.cells.slice(0, filled).forEach((c) => c.append(h('div', { class: `counter ${col}` })));
@@ -489,7 +514,7 @@ function tensTask(level) {
       finalSay: `${g} groups of 10 is ${total}.`,
       makeGroups(api) {
         return Array.from({ length: g }, (_, i) => {
-          const z = frameEl(api, { filled: 10, cell: 40, col, i });
+          const z = frameEl(api, { filled: 10, cell: cellFor(g, innerWidth - 48), col, i });
           return { wrap: z.wrap, badge: z.badge, labels: [10 * (i + 1)] };
         });
       },
@@ -501,7 +526,6 @@ function tensTask(level) {
     return placeTask({
       say: 'Fill each ten frame with 10 counters.',
       kind: 'frame', per: 10, total, slots: g, word: 'frame', cell: 40,
-      itemPx: 32, trayPx: 38,
       drawItem: () => h('div', { class: `counter ${col}`, style: { width: '100%', height: '100%' } }),
       okSay: 'Every frame is full. That is 10!',
       async onSolved({ api, stage, S, zones }) {
@@ -536,7 +560,7 @@ function tensTask(level) {
     sentence: `${tens} tens and ${ones} ${ones === 1 ? 'one' : 'ones'} is `,
     finalSay: `${tens} tens and ${ones} ${ones === 1 ? 'one' : 'ones'} is ${total}.`,
     makeGroups(api) {
-      const cell = 34;
+      const cell = cellFor(tens + 1, innerWidth - 48);
       const gs = Array.from({ length: tens }, (_, i) => {
         const z = frameEl(api, { filled: 10, cell, col: 'is-blue', i });
         return { wrap: z.wrap, badge: z.badge, labels: [10 * (i + 1)] };
@@ -573,7 +597,6 @@ function howManyTask(level) {
   return placeTask({
     say: `Put the ${total} ${word} in bags of ${per}. How many bags do you fill?`,
     kind: 'bag', per, total, slots, leftover, word: 'bag',
-    itemPx: 34, trayPx: total > 14 ? 42 : 46,
     drawItem: () => t.draw(col),
     okSay: `Every bag has ${per}.`,
     async onSolved({ api, stage, S, zones, tray }) {
