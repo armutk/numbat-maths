@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 6, \"friendliness\": 6, \"clarity\": 8, \"consistency\": 7, \"artefacts\": 9, \"arisha_ok\": null, \"numbat_ok\": true, \"notes\": \"Clear and clean, but sounds a bit too much like a standard narrator.\"}",
+ "model": "gemini-3.5-flash-lite"
+}

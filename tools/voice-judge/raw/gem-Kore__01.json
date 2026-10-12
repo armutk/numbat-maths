@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 8, \"friendliness\": 8, \"clarity\": 9, \"consistency\": 9, \"artefacts\": 10, \"arisha_ok\": null, \"numbat_ok\": null, \"notes\": \"Warm and friendly delivery, very clear and well-paced for a child.\"}",
+ "model": "gemini-3.5-flash-lite"
+}

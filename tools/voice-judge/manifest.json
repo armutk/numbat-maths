@@ -1,0 +1,461 @@
+{
+ "style_prompt": "A bright, playful, warm young buddy talking to a 6-year-old girl learning maths. Gentle Australian accent, smiley, encouraging, like a fun older friend. Never over the top, no shouting, natural pace for a young child.",
+ "judge_model": "gemini pool (multi-model rotation, free-tier daily caps)",
+ "candidates": {
+  "edge-Ana": {
+   "note": "edge-tts en-US-AnaNeural (default)",
+   "clips": {
+    "01": {
+     "file": "clips/edge-Ana/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/edge-Ana/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/edge-Ana/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/edge-Ana/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/edge-Ana/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/edge-Ana/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/edge-Ana/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/edge-Ana/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/edge-Ana/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "edge-Ana-pitch5": {
+   "note": "edge-tts en-US-AnaNeural pitch +5Hz",
+   "clips": {
+    "01": {
+     "file": "clips/edge-Ana-pitch5/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/edge-Ana-pitch5/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/edge-Ana-pitch5/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/edge-Ana-pitch5/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/edge-Ana-pitch5/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/edge-Ana-pitch5/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/edge-Ana-pitch5/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/edge-Ana-pitch5/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/edge-Ana-pitch5/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "edge-Natasha-news": {
+   "note": "edge-tts en-AU-NatashaNeural rate -10% pitch +15Hz (newsreader baseline)",
+   "clips": {
+    "01": {
+     "file": "clips/edge-Natasha-news/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/edge-Natasha-news/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/edge-Natasha-news/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/edge-Natasha-news/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/edge-Natasha-news/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/edge-Natasha-news/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/edge-Natasha-news/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/edge-Natasha-news/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/edge-Natasha-news/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "gem-Aoede": {
+   "note": "gemini-3.1-flash-tts-preview",
+   "clips": {
+    "01": {
+     "file": "clips/gem-Aoede/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/gem-Aoede/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/gem-Aoede/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/gem-Aoede/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/gem-Aoede/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/gem-Aoede/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/gem-Aoede/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/gem-Aoede/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/gem-Aoede/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "gem-Kore": {
+   "note": "gemini-2.5-flash-preview-tts; partial (5/9) - free-tier daily quota exhausted",
+   "clips": {
+    "01": {
+     "file": "clips/gem-Kore/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/gem-Kore/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/gem-Kore/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/gem-Kore/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/gem-Kore/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    }
+   }
+  },
+  "gem-Leda": {
+   "note": "gemini-3.8-flash-lite-tts",
+   "clips": {
+    "01": {
+     "file": "clips/gem-Leda/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/gem-Leda/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/gem-Leda/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/gem-Leda/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/gem-Leda/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/gem-Leda/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/gem-Leda/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/gem-Leda/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/gem-Leda/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "gem-Puck": {
+   "note": "gemini-2.5-flash-preview-tts; partial (4/9) - free-tier daily quota exhausted",
+   "clips": {
+    "01": {
+     "file": "clips/gem-Puck/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "03": {
+     "file": "clips/gem-Puck/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/gem-Puck/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "09": {
+     "file": "clips/gem-Puck/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "gem-Zephyr": {
+   "note": "gemini-3.8-flash-tts",
+   "clips": {
+    "01": {
+     "file": "clips/gem-Zephyr/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/gem-Zephyr/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/gem-Zephyr/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/gem-Zephyr/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/gem-Zephyr/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/gem-Zephyr/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/gem-Zephyr/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/gem-Zephyr/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/gem-Zephyr/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "kokoro-af_bella": {
+   "note": "kokoro-onnx v1.0, af_bella, speed 0.95",
+   "clips": {
+    "01": {
+     "file": "clips/kokoro-af_bella/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/kokoro-af_bella/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/kokoro-af_bella/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/kokoro-af_bella/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/kokoro-af_bella/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/kokoro-af_bella/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/kokoro-af_bella/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/kokoro-af_bella/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/kokoro-af_bella/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  },
+  "kokoro-af_heart": {
+   "note": "kokoro-onnx v1.0, af_heart, speed 0.95",
+   "clips": {
+    "01": {
+     "file": "clips/kokoro-af_heart/01.mp3",
+     "text": "Share 10 apples between 2 friends.",
+     "category": "share"
+    },
+    "02": {
+     "file": "clips/kokoro-af_heart/02.mp3",
+     "text": "Start with the bigger number, 6.",
+     "category": "hint"
+    },
+    "03": {
+     "file": "clips/kokoro-af_heart/03.mp3",
+     "text": "Nearly!",
+     "category": "wrong-answer"
+    },
+    "04": {
+     "file": "clips/kokoro-af_heart/04.mp3",
+     "text": "Great sharing!",
+     "category": "praise"
+    },
+    "05": {
+     "file": "clips/kokoro-af_heart/05.mp3",
+     "text": "Count the tens, then count on the ones.",
+     "category": "counting"
+    },
+    "06": {
+     "file": "clips/kokoro-af_heart/06.mp3",
+     "text": "Hi Arisha! It's Pip. Ready to play maths?",
+     "category": "greeting"
+    },
+    "07": {
+     "file": "clips/kokoro-af_heart/07.mp3",
+     "text": "Drag the blue counters to fill up the ten frame first.",
+     "category": "long-instruction"
+    },
+    "08": {
+     "file": "clips/kokoro-af_heart/08.mp3",
+     "text": "11 take away 3.",
+     "category": "number-heavy"
+    },
+    "09": {
+     "file": "clips/kokoro-af_heart/09.mp3",
+     "text": "You and Pip the numbat share 12 biscuits.",
+     "category": "numbat-probe"
+    }
+   }
+  }
+ }
+}

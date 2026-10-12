@@ -1,0 +1,13 @@
+{
+  "lines": [
+    {"id": "01", "cat": "share", "text": "Share 10 apples between 2 friends.", "from": "inventory"},
+    {"id": "02", "cat": "hint", "text": "Start with the bigger number, 6.", "from": "inventory"},
+    {"id": "03", "cat": "wrong-answer", "text": "Nearly!", "from": "inventory"},
+    {"id": "04", "cat": "praise", "text": "Great sharing!", "from": "inventory"},
+    {"id": "05", "cat": "counting", "text": "Count the tens, then count on the ones.", "from": "inventory"},
+    {"id": "06", "cat": "greeting", "text": "Hi Arisha! It's Pip. Ready to play maths?", "from": "probe (no Arisha greeting exists in inventory)"},
+    {"id": "07", "cat": "long-instruction", "text": "Drag the blue counters to fill up the ten frame first.", "from": "inventory"},
+    {"id": "08", "cat": "number-heavy", "text": "11 take away 3.", "from": "inventory"},
+    {"id": "09", "cat": "numbat-probe", "text": "You and Pip the numbat share 12 biscuits.", "from": "probe"}
+  ]
+}

@@ -128,6 +128,12 @@ export function sentenceKey(s) {
   return String(s ?? '').toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/…/g, '...').replace(/\s+/g, ' ').trim();
 }
 
+/** Pure counting-list line ("3, 5, 7.") — mirrors tools/gen-voice2.mjs isCountingList: it is deliberately
+ *  excluded from the sentence recordings and stitches number clips by design, so it must never count as a stitch fallback. */
+export function isCountingList(s) {
+  return /^[\d,\s]+$/.test(String(s ?? '').replace(/[.!?]+$/, ''));
+}
+
 function resolveSentence(man, c, sentence, gaps) {
   const n = norm(sentence);
   if (!n) return { items: [], missing: [] };
@@ -162,7 +168,11 @@ export function resolve(text, manifest) {
   const c = compile(manifest);
   const items = [], missing = [], stitched = [];
   const whole = resolveSentence(manifest, c, String(text ?? ''), gaps);
-  if (whole.items.length) return { ok: true, missing: [], stitched: whole.whole ? [] : [String(text).trim()], items: whole.items };
+  // a multi-sentence line whose every sentence has its own whole recording is played sentence by sentence (one voice),
+  // never from an older combined word-clip 'exact' match
+  const parts = splitSentences(text);
+  const allWhole = parts.length > 1 && parts.every((s) => (manifest.sentences || {})[sentenceKey(s)]);
+  if (whole.items.length && !allWhole) return { ok: true, missing: [], stitched: whole.whole ? [] : [String(text).trim()], items: whole.items };
   for (const s of splitSentences(text)) {
     const r = resolveSentence(manifest, c, s, gaps);
     if (r.items.length && !r.whole) stitched.push(s);
@@ -284,7 +294,14 @@ async function speak(text) {
   if (dev() && plan.missing.length) for (const m of plan.missing) console.info('voice:miss', m);
   if (plan.stitched && plan.stitched.length) {           // last-resort word stitching: log it so the sentence can be recorded
     try { (window.__voiceStitched = window.__voiceStitched || new Set()).add(plan.stitched.join(' | ')); } catch {}
-    if (dev()) for (const m of plan.stitched) console.info('voice:stitched', m);
+    for (const m of plan.stitched) {
+      if (isCountingList(m)) {                           // counting lists ("3, 5, 7.") stitch number clips by design: silent
+        if (dev()) console.info('voice:stitched', m);
+      } else {
+        // every other stitched line means its whole-sentence recording is missing from the manifest: defect, be loud
+        console.error(`[voice] STITCH FALLBACK (missing clip for: ${m})`);
+      }
+    }
   }
   if (!plan.items.length) return;
   const loaded = await Promise.all(plan.items.map((it) => loadBuf(it.file)));

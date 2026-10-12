@@ -1,0 +1,4 @@
+{
+ "raw": "{\n  \"warmth\": 8,\n  \"friendliness\": 8,\n  \"clarity\": 9,\n  \"consistency\": 9,\n  \"artefacts\": 10,\n  \"arisha_ok\": null,\n  \"numbat_ok\": null,\n  \"notes\": \"Warm, friendly, and clear. Good pacing. No artefacts detected.\"\n}",
+ "model": "gemini-2.5-flash-lite"
+}

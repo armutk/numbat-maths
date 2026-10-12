@@ -23,6 +23,7 @@ const files = new Set();
 Object.values(man.clips).forEach((c) => files.add(c.file));
 Object.values(man.numbers).forEach((f) => files.add(f));
 Object.values(man.nouns).forEach((n) => Object.values(n).forEach((f) => files.add(f)));
+Object.values(man.sentences || {}).forEach((f) => files.add(f));
 function probeOne(f) {
   return new Promise((res) => {
     const p = path.join(VOICE, f);
@@ -53,7 +54,9 @@ for (const r of results) {
   if (!(r.peak < -1)) fail(`${r.f}: peak ${r.peak} dBFS`);
 }
 console.log(`files: ${results.length} checked, ${(bytes / 1048576).toFixed(2)} MB, duration ${minD.toFixed(2)}-${maxD.toFixed(2)} s, loudest peak ${maxPeak} dBFS`);
-if (bytes > 3 * 1048576) fail(`total size ${bytes} over 3 MB`);
+// raised from 3 MB (ElevenLabs word-clip set) to 130 MB: the v2 set adds 6,291 whole-sentence
+// recordings (~94 MB total). Hard cap stays as a runaway guard, not a size target.
+if (bytes > 130 * 1048576) fail(`total size ${bytes} over 130 MB`);
 // every key a template/exact/slot refers to must exist
 for (const [t, k] of Object.entries(man.exact)) if (!man.clips[k]) fail(`exact "${t}" -> missing clip ${k}`);
 for (const t of man.templates) for (const s of t.segments) { const m = /^\+?(\{[a-z0-9]+\})$/.exec(s); const k = s.replace(/^\+/, ''); if (!m && !man.clips[k]) fail(`template "${t.pattern}" -> missing clip ${k}`); }

@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 8, \"friendliness\": 8, \"clarity\": 9, \"consistency\": 9, \"artefacts\": 9, \"arisha_ok\": true, \"numbat_ok\": null, \"notes\": \"Warm and friendly, well-paced for a 6-year-old.\"}",
+ "model": "gemini-3.5-flash-lite"
+}

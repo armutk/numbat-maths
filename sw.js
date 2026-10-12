@@ -1,6 +1,6 @@
 // Offline-first service worker: precache the app shell, serve from cache, refresh in the background.
 // Voice clips and SFX are cached best-effort in a second pass so one missing file never blocks install.
-const VERSION = 'numbat-maths-v4';
+const VERSION = 'numbat-maths-v5';
 const SHELL = [
   './',
   './index.html',
@@ -21,10 +21,17 @@ self.addEventListener('install', (e) => {
     const c = await caches.open(VERSION);
     await c.addAll(SHELL);
     // best effort, in small batches so Safari does not choke
-    // whole-sentence recordings are listed in the voice manifest
-    let sent = [];
-    try { const m = await (await fetch('./assets/voice/manifest.json', { cache: 'no-cache' })).json(); sent = [...new Set(Object.values(m.sentences || {}))].map((f) => './assets/voice/' + f); } catch {}
-    const extra = [...SFX, ...VOICE, ...sent];
+    // word/phrase/number/noun clips only. The ~6,300 whole-sentence recordings (assets/voice/sent/, ~89 MB) are NOT precached: they are cached on first play (runtime cache below)
+    let voiceFiles = [];
+    try {
+      const m = await (await fetch('./assets/voice/manifest.json', { cache: 'no-cache' })).json();
+      const files = new Set();
+      for (const c of Object.values(m.clips || {})) if (c && c.file) files.add(c.file);
+      for (const f of Object.values(m.numbers || {})) if (f) files.add(f);
+      for (const n of Object.values(m.nouns || {})) for (const f of Object.values(n || {})) if (f) files.add(f);
+      voiceFiles = [...files];
+    } catch {}
+    const extra = [...SFX, ...VOICE, ...voiceFiles.map((f) => './assets/voice/' + f)];
     for (let i = 0; i < extra.length; i += 20) {
       await Promise.all(extra.slice(i, i + 20).map((u) => fetch(u).then((r) => (r.ok ? c.put(u, r) : null)).catch(() => null)));
     }
@@ -43,6 +50,13 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return; // ElevenLabs, the Pip proxy and fonts are never cached here
+  if (url.pathname.includes('/assets/voice/sent/')) {   // sentence clips never change under the same name: cache-first, fetch + store on first play
+    e.respondWith(caches.match(req, { ignoreSearch: true }).then((cached) => cached || fetch(req).then((res) => {
+      if (res && res.ok) { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
+      return res;
+    })));
+    return;
+  }
   e.respondWith(
     caches.match(req, { ignoreSearch: true }).then((cached) => {
       const fetching = fetch(req).then((res) => {

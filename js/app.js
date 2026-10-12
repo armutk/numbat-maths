@@ -275,7 +275,7 @@ function pipScreen(mode) {
     },
     onTranscript: ({ role, text }) => { const clean = String(text || '').replace(/\[[a-z][a-z ,'-]{1,24}\]/gi, '').replace(/\s{2,}/g, ' ').trim(); if (role === 'pip' && clean && clean !== 'Hmm...') { bubbleText.textContent = clean; bubble.classList.remove('is-hint', 'is-happy'); } },
     onCamera: async (open) => { if (open) { if (currentMode !== 'camera') { currentMode = 'camera'; screen.dataset.mode = 'camera'; camBtn.classList.add('is-on'); await openCamera(); } } else setMode('lesson'); },
-    onEnd: (reason) => { if (!ended) { if (reason === 'daily_cap' || reason === 'time_up') { ended = true; camera.close(); board.destroy?.(); tutor.attachBoard(null); show(restScreen(reason)); } else if (reason === 'error' || reason === 'disconnected') { showFallback('Pip lost the connection.'); } } },
+    onEnd: (reason) => { if (!ended) { if (reason === 'daily_cap' || reason === 'time_up') { ended = true; camera.close(); board.destroy?.(); tutor.attachBoard(null); show(restScreen(reason)); } else if (reason === 'quota') { showFallback('Pip needs a new connection right now.'); } else if (reason === 'error' || reason === 'disconnected') { showFallback('Pip lost the connection.'); } } },
     onError: (e) => { if (DEV) console.warn('tutor error', e); },
   });
 

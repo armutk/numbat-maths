@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 6, \"friendliness\": 6, \"clarity\": 7, \"consistency\": 5, \"artefacts\": 6, \"arisha_ok\": true, \"numbat_ok\": null, \"notes\": \"Childlike tone, but robotic cadence and choppy pauses make it sound synthetic.\"}",
+ "model": "gemini-3.5-flash"
+}

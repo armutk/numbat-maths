@@ -1,0 +1,832 @@
+{
+ "edge-Ana": {
+  "01": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 6,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and upbeat child-like voice, but noticeably synthetic and slightly robotic in rhythm."
+  },
+  "02": {
+   "warmth": 9,
+   "friendliness": 9,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, natural, kid-friendly delivery with great clarity and no noticeable artefacts."
+  },
+  "03": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Upbeat and friendly delivery, slightly high-pitched synthetic tone."
+  },
+  "04": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and upbeat delivery, though slightly synthetic."
+  },
+  "05": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Bright child voice with clear pacing and friendly, engaging tone."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Playful, bright, and clear voice well-suited for a child user."
+  },
+  "08": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Bright, clear child-like voice with a friendly tone and good pacing."
+  },
+  "09": {
+   "warmth": 7,
+   "friendliness": 8,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 7,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Warm and playful child-like voice with clear pronunciation, though slightly synthetic."
+  },
+  "06": {
+   "warmth": 5,
+   "friendliness": 5,
+   "clarity": 7,
+   "consistency": 5,
+   "artefacts": 7,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Sounds very synthetic and choppy with unnatural pauses between phrases."
+  }
+ },
+ "edge-Ana-pitch5": {
+  "01": {
+   "warmth": 7,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, cheerful child-like voice with good pacing and clean audio quality."
+  },
+  "02": {
+   "warmth": 9,
+   "friendliness": 9,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Very natural, warm, and playful kid voice with clear pacing and no artefacts."
+  },
+  "03": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, encouraging, and friendly delivery, though slightly synthetic."
+  },
+  "04": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Bright, enthusiastic, and clear delivery; slightly synthetic cadence but very warm."
+  },
+  "05": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and upbeat child voice, though distinctly synthetic in rhythm and cadence."
+  },
+  "06": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 7,
+   "consistency": 5,
+   "artefacts": 6,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Childlike tone, but robotic cadence and choppy pauses make it sound synthetic."
+  },
+  "08": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 7,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and friendly, but slightly synthetic and stilted in cadence."
+  },
+  "09": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Clear and child-friendly delivery, but sounds distinctly synthetic rather than natural."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 8,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Bright, cheerful, and clear kid-friendly delivery with clean audio quality."
+  }
+ },
+ "edge-Natasha-news": {
+  "01": {
+   "warmth": 5,
+   "friendliness": 5,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and articulate, but sounds somewhat synthetic and instructional rather than warm and friendly."
+  },
+  "02": {
+   "warmth": 5,
+   "friendliness": 5,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and easy to understand, but sounds slightly synthetic and formal."
+  },
+  "03": {
+   "warmth": 9,
+   "friendliness": 9,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, encouraging, and highly natural delivery suitable for a young child."
+  },
+  "04": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 7,
+   "consistency": 7,
+   "artefacts": 7,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, cheerful delivery with a slightly synthetic inflection."
+  },
+  "08": {
+   "warmth": 5,
+   "friendliness": 5,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and clean delivery, but sounds like a standard synthetic assistant, not a buddy."
+  },
+  "05": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly too formal, but warm and clear for a child."
+  },
+  "06": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Warm and friendly, well-paced for a 6-year-old."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, clear, and friendly tone suitable for a child."
+  },
+  "09": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Warm and clear, perfect for a young child."
+  }
+ },
+ "gem-Aoede": {
+  "01": {
+   "warmth": 7,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 7,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and pleasant, but sounds more like a teacher than a playful buddy."
+  },
+  "02": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and warm, slightly theatrical delivery but well suited for a young child."
+  },
+  "03": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 7,
+   "consistency": 7,
+   "artefacts": 7,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Encouraging and cheerful single-word delivery with good clarity."
+  },
+  "04": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 7,
+   "consistency": 6,
+   "artefacts": 7,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Enthusiastic and clear kid-friendly praise with clean audio quality."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, cheerful, clean delivery with great pacing for a child."
+  },
+  "09": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 7,
+   "consistency": 7,
+   "artefacts": 7,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Clear, upbeat reading, though leans slightly theatrical rather than natural peer buddy."
+  },
+  "05": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, clear, and friendly tone suitable for a young child."
+  },
+  "06": {
+   "warmth": 9,
+   "friendliness": 9,
+   "clarity": 10,
+   "consistency": 10,
+   "artefacts": 10,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, and very natural delivery."
+  },
+  "08": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and clear delivery, great for a child."
+  }
+ },
+ "gem-Kore": {
+  "04": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly too formal, but clear and friendly enough for a 6-year-old."
+  },
+  "05": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly too formal, but clear and friendly enough for a 6-year-old."
+  },
+  "01": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly delivery, very clear and well-paced for a child."
+  },
+  "02": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, clear, and friendly tone perfectly suited for a child."
+  },
+  "03": {
+   "warmth": 9,
+   "friendliness": 9,
+   "clarity": 10,
+   "consistency": 10,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, encouraging, and clear delivery perfectly suited for a child."
+  }
+ },
+ "gem-Leda": {
+  "01": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Very natural, friendly, and clear. Slightly less warm than perfect."
+  },
+  "02": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, and clear. Good pacing. No artefacts detected."
+  },
+  "03": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, and clear delivery. Sounds like a peer."
+  },
+  "04": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, clear, and consistent. Sounds like a natural, encouraging friend."
+  },
+  "05": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly, clear and consistent. Sounds like a helpful friend."
+  },
+  "06": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Very natural, warm, and friendly. Clear pronunciation and consistent pacing."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Very natural, friendly, and clear. Good pacing for a child."
+  },
+  "08": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, clear and consistent. Sounds like a natural, encouraging friend."
+  },
+  "09": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": true,
+   "numbat_ok": true,
+   "notes": "Very natural and friendly. Slight Australian lilt is charming."
+  }
+ },
+ "gem-Puck": {
+  "01": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly formal, but warm and clear. Good pacing for a child."
+  },
+  "03": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly too fast, but otherwise good."
+  },
+  "04": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Slightly too formal, but clear and friendly enough for a 6-year-old."
+  },
+  "09": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Slightly too formal, but warm and clear. Good pacing."
+  }
+ },
+ "gem-Zephyr": {
+  "01": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Very natural, friendly, and clear. Good pacing for a child."
+  },
+  "02": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Very natural, friendly, and clear. Slightly less warm than perfect."
+  },
+  "03": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, and clear delivery. Good pacing for a child."
+  },
+  "04": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, clear, and consistent. Sounds like a natural, encouraging friend."
+  },
+  "05": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly tone, clear pacing for a child."
+  },
+  "06": {
+   "warmth": 8,
+   "friendliness": 9,
+   "clarity": 9,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, and natural delivery suitable for a child."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, clear, and friendly delivery suitable for a child."
+  },
+  "08": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, friendly, and warm delivery suitable for a child."
+  },
+  "09": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Clear, friendly, natural pacing suitable for a child."
+  }
+ },
+ "kokoro-af_bella": {
+  "01": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, friendly, and well-paced for a child."
+  },
+  "02": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly delivery, very clear and well-paced for a child."
+  },
+  "03": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and encouraging, perfectly suited for a young child."
+  },
+  "04": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly tone, clear pronunciation, perfectly clean audio."
+  },
+  "05": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 7,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and clean, but slightly robotic and teacher-like."
+  },
+  "06": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Warm, friendly delivery well-suited for a 6-year-old."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and clear, perfect pacing for a six year old."
+  },
+  "08": {
+   "warmth": 7,
+   "friendliness": 7,
+   "clarity": 8,
+   "consistency": 8,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear and warm delivery, suitable for a child."
+  },
+  "09": {
+   "warmth": 6,
+   "friendliness": 6,
+   "clarity": 8,
+   "consistency": 7,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Clear and clean, but sounds a bit too much like a standard narrator."
+  }
+ },
+ "kokoro-af_heart": {
+  "01": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Clear, warm, and friendly delivery suitable for a child."
+  },
+  "02": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and clear, delivered with a friendly, natural tone suited for a child."
+  },
+  "03": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and encouraging, fits the persona well."
+  },
+  "04": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, clear, and friendly delivery suitable for a child."
+  },
+  "05": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm, friendly, clear delivery suitable for a child."
+  },
+  "06": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": true,
+   "numbat_ok": null,
+   "notes": "Warm and friendly, well-paced for a child."
+  },
+  "07": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and friendly tone, clear pronunciation, perfectly clean audio."
+  },
+  "08": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 10,
+   "consistency": 9,
+   "artefacts": 10,
+   "arisha_ok": null,
+   "numbat_ok": null,
+   "notes": "Warm and clear delivery suitable for a child."
+  },
+  "09": {
+   "warmth": 8,
+   "friendliness": 8,
+   "clarity": 9,
+   "consistency": 9,
+   "artefacts": 9,
+   "arisha_ok": null,
+   "numbat_ok": true,
+   "notes": "Warm, friendly, clear delivery with correct numbat pronunciation."
+  }
+ }
+}

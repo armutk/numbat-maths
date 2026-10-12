@@ -230,7 +230,13 @@ export async function start({ mode = 'lesson', textOnly = false } = {}) {
     textOnly: textOnly || undefined,
     onConnect: () => { ui.onStatus?.('live'); log('connected', conv?.getId?.()); },
     onDisconnect: (d) => { log('disconnected', d); const reason = d?.reason || 'disconnected'; cleanup(reason); },
-    onError: (e, ctx) => { log('error', e, ctx); ui.onError?.(e); },
+    onError: (e, ctx) => {
+      log('error', e, ctx);
+      ui.onError?.(e);
+      // a quota / auth / credit error leaves the session alive but with silent voice: treat it like a disconnect
+      const msg = [e?.message || (typeof e === 'string' ? e : ''), e?.status, ctx?.message || (typeof ctx === 'string' ? ctx : '')].filter(Boolean).join(' ');
+      if (/quota|credit|401|402|unauthor|payment|insufficient/i.test(msg)) stop('quota');
+    },
     onModeChange: ({ mode: m }) => { if (m === 'speaking') { lastSpokeAt = Date.now(); duck(true); } else duck(false); ui.onMode?.(m); },
     onStatusChange: ({ status }) => { if (status === 'connected') ui.onStatus?.('live'); },
     onMessage: ({ message, source }) => { if (source === 'ai') { lastSpokeAt = Date.now(); afterGreeting(); } ui.onTranscript?.({ role: source === 'ai' ? 'pip' : 'child', text: message }); session?.log.push({ t: Date.now(), type: source === 'ai' ? 'pip' : 'child', text: String(message).slice(0, 200) }); },

@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 5, \"friendliness\": 5, \"clarity\": 9, \"consistency\": 8, \"artefacts\": 9, \"arisha_ok\": null, \"numbat_ok\": null, \"notes\": \"Clear and clean delivery, but sounds like a standard synthetic assistant, not a buddy.\"}",
+ "model": "gemini-3.7-flash"
+}

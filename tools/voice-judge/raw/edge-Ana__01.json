@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 6, \"friendliness\": 6, \"clarity\": 8, \"consistency\": 8, \"artefacts\": 6, \"arisha_ok\": null, \"numbat_ok\": null, \"notes\": \"Clear and upbeat child-like voice, but noticeably synthetic and slightly robotic in rhythm.\"}",
+ "model": "gemini-3.5-flash"
+}

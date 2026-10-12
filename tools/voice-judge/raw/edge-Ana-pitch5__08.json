@@ -1,0 +1,4 @@
+{
+ "raw": "{\"warmth\": 6, \"friendliness\": 6, \"clarity\": 8, \"consistency\": 7, \"artefacts\": 8, \"arisha_ok\": null, \"numbat_ok\": null, \"notes\": \"Clear and friendly, but slightly synthetic and stilted in cadence.\"}",
+ "model": "gemini-3.5-flash"
+}

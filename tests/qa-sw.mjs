@@ -5,7 +5,8 @@ const require = createRequire(import.meta.url);
 const PW = process.env.PW_PATH || '/home/impmaster/.local/share/mise/installs/npm-playwright/1.63.0/node_modules/playwright';
 const { chromium, webkit, devices } = require(PW);
 const ENGINE = (process.argv.find((a) => a.startsWith('--engine=')) || '--engine=chromium').split('=')[1];
-const LIVE = 'https://armutk.github.io/numbat-maths/';
+const LIVE = process.env.SITE || 'https://armutk.github.io/numbat-maths/';
+const VER = process.env.SW_VER || VER;
 const OLD = process.env.OLD_DIR; // extracted old build
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.webmanifest': 'application/manifest+json' };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -13,11 +14,11 @@ const res = [];
 const rec = (name, ok, info) => { res.push({ name, ok }); console.log(`${ok ? 'PASS' : 'FAIL'} ${name} ${info ?? ''}`); };
 const browser = await (ENGINE === 'webkit' ? webkit : chromium).launch();
 const swInfo = (page) => page.evaluate(async () => { const r = await navigator.serviceWorker.getRegistration(); const keys = await caches.keys(); const counts = {}; for (const k of keys) counts[k] = (await (await caches.open(k)).keys()).length; return { active: r?.active?.scriptURL, state: r?.active?.state, waiting: !!r?.waiting, installing: !!r?.installing, controlled: !!navigator.serviceWorker.controller, counts }; });
-async function waitFull(page, min = 560, ms = 60000) { const t = Date.now(); while (Date.now() - t < ms) { const i = await swInfo(page); if (i.counts['numbat-maths-v4'] >= min && i.controlled) return i; await sleep(500); } return swInfo(page); }
+async function waitFull(page, min = 560, ms = 60000) { const t = Date.now(); while (Date.now() - t < ms) { const i = await swInfo(page); if (i.counts[VER] >= min && i.controlled) return i; await sleep(500); } return swInfo(page); }
 
 // 0. served file
 const sw = await (await fetch(LIVE + 'sw.js', { cache: 'no-store' })).text();
-rec('live sw.js has VERSION numbat-maths-v4', /VERSION = 'numbat-maths-v4'/.test(sw));
+rec(`sw.js has VERSION ${VER}`, sw.includes(`VERSION = '${VER}'`));
 const nShell = (sw.match(/'\.\/[^']+'/g) || []).length;
 
 // 1. fresh install (iPad context)
@@ -30,8 +31,8 @@ const nShell = (sw.match(/'\.\/[^']+'/g) || []).length;
   await page.reload();
   const i = await waitFull(page);
   console.log('fresh', JSON.stringify(i));
-  rec('fresh install: v4 active, controlling, only v4 cache', /sw\.js/.test(i.active || '') && i.controlled && Object.keys(i.counts).join() === 'numbat-maths-v4', JSON.stringify(i.counts));
-  rec(`fresh install: cache holds shell+sfx+voice (>= ${nShell - 5} entries of ${nShell} listed)`, i.counts['numbat-maths-v4'] >= nShell - 5, `${i.counts['numbat-maths-v4']}/${nShell}`);
+  rec('fresh install: v4 active, controlling, only v4 cache', /sw\.js/.test(i.active || '') && i.controlled && Object.keys(i.counts).join() === VER, JSON.stringify(i.counts));
+  rec(`fresh install: cache holds shell+sfx+voice (>= ${nShell - 5} entries of ${nShell} listed)`, i.counts[VER] >= nShell - 5, `${i.counts[VER]}/${nShell}`);
   // offline reload
   await ctx.setOffline(true);
   await page.reload({ waitUntil: 'load' }).catch((e) => console.log('offline reload err', e.message));
@@ -76,9 +77,9 @@ for (const [label, dir] of [['d5e3179 (previous deploy)', process.env.OLD_DIR_A]
   // first open after deploy may still show the old shell (stale-while-revalidate); give the new SW time to install
   let after;
   const t0 = Date.now();
-  while (Date.now() - t0 < 90000) { after = await swInfo(page).catch(() => null); if (after && Object.keys(after.counts).join() === 'numbat-maths-v4' && after.counts['numbat-maths-v4'] >= nShell - 5) break; await sleep(800); }
+  while (Date.now() - t0 < 90000) { after = await swInfo(page).catch(() => null); if (after && Object.keys(after.counts).join() === VER && after.counts[VER] >= nShell - 5) break; await sleep(800); }
   console.log(label, 'after', JSON.stringify(after));
-  rec(`upgrade from ${label}: v4 takes over, old caches removed`, !!after && Object.keys(after.counts).join() === 'numbat-maths-v4', JSON.stringify(after?.counts));
+  rec(`upgrade from ${label}: v4 takes over, old caches removed`, !!after && Object.keys(after.counts).join() === VER, JSON.stringify(after?.counts));
   await page.reload(); await page.waitForTimeout(2500);
   const ver = await page.evaluate(() => ({ pipcss: [...document.styleSheets].some((s) => /pip\.css/.test(s.href || '')), ask: !!document.querySelector('.ask-pip'), screens: document.querySelectorAll('.screen').length }));
   rec(`upgrade from ${label}: next open runs the new app (pip.css + Ask Pip present)`, ver.pipcss && ver.ask, JSON.stringify(ver));
