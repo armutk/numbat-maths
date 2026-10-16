@@ -182,6 +182,7 @@ input { font: inherit; }
   display: flex; align-items: center; gap: 20px;
   padding: 8px 8px 0; flex: 0 0 auto;
 }
+.pip-home { overflow-y: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch; padding-right: calc(var(--safe-right) + 122px); }
 .home-hero .mascot { width: clamp(110px, 16vmin, 170px); height: auto; flex: 0 0 auto; }
 .home-hero h1 { margin: 0; font-size: clamp(1.9rem, 4.5vmin, 2.8rem); font-weight: 700; line-height: 1.1; }
 .home-hero p { margin: 6px 0 0; font-size: clamp(1.05rem, 2.4vmin, 1.35rem); color: var(--ink-soft); font-weight: 500; }
@@ -195,12 +196,28 @@ input { font: inherit; }
 }
 
 .world {
-  flex: 1 1 auto; min-height: 0;
+  flex: 0 0 auto; min-height: 0;
   display: grid; gap: clamp(12px, 2.2vmin, 22px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: clamp(138px, 20vh, 180px);
   padding: 14px 6px 6px;
 }
+.resume-card, .adventure-card {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 14px; width: 100%;
+  border-radius: 22px; padding: 12px 16px; background: var(--white);
+  box-shadow: 0 5px 0 var(--sand-deep), var(--shadow-card); text-align: left;
+}
+.resume-card { justify-content: space-between; background: var(--yellow-soft); }
+.resume-copy, .adventure-copy { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.resume-copy b, .adventure-copy b { font-family: var(--font-display); font-size: 1.2rem; }
+.resume-copy span, .adventure-copy small { color: var(--ink-soft); font-weight: 600; }
+.resume-actions { display: flex; align-items: center; gap: 10px; }
+.resume-actions .btn { min-height: 50px; padding: 0 18px; font-size: 1rem; border-radius: 16px; }
+.adventure-card { background: linear-gradient(135deg, var(--purple-soft), var(--blue-soft)); }
+.adventure-mark { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 17px; background: var(--purple); color: #fff; font-size: 1.5rem; font-weight: 800; box-shadow: 0 4px 0 var(--purple-deep); }
+.adventure-go { width: 34px; height: 34px; color: var(--purple-deep); }
+.adventure-go svg { width: 100%; height: 100%; }
+.adventure-card[disabled], .island[disabled] { opacity: .52; filter: saturate(.55); }
 .island {
   --island: var(--orange); --island-deep: var(--orange-deep); --island-soft: var(--orange-soft);
   position: relative; display: flex; flex-direction: column; align-items: stretch;
@@ -238,6 +255,9 @@ input { font: inherit; }
 
 /* ---------- Quest (task runner) ---------- */
 .quest { gap: 10px; }
+.mission-strip { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px; border-radius: 16px; background: var(--purple-soft); color: var(--purple-deep); font-weight: 700; }
+.mission-strip span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mission-strip b { text-align: right; }
 .progress {
   flex: 1 1 auto; display: flex; gap: 6px; height: 16px; align-items: stretch;
 }
@@ -461,6 +481,16 @@ input { font: inherit; }
 .sentence { text-align: center; font-size: clamp(1.4rem, 3.4vmin, 2.1rem); font-weight: 600; color: var(--ink); padding: 8px 0; }
 .sentence b { color: var(--orange-deep); }
 
+/* Reasoning challenges */
+.challenge-card { width: min(720px, 100%); margin: auto; display: flex; flex-direction: column; align-items: center; gap: 18px; padding: clamp(18px, 3vmin, 30px); border-radius: 28px; background: var(--white); box-shadow: var(--shadow-card); }
+.challenge-label { margin: 0; color: var(--ink-soft); font-weight: 700; font-size: 1.1rem; }
+.challenge-equation { font-family: var(--font-display); font-size: clamp(2.4rem, 7vmin, 4.4rem); font-weight: 800; padding: 12px 24px; border-radius: 20px; background: var(--yellow-soft); }
+.challenge-objects { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 580px; padding: 10px; border-radius: 20px; background: var(--sand); }
+.challenge-object { width: clamp(44px, 7vmin, 68px); height: clamp(44px, 7vmin, 68px); }
+.challenge-object svg { width: 100%; height: 100%; }
+.challenge-hint { outline: 5px solid var(--yellow); animation: pulse 1.1s ease-in-out infinite; }
+.challenge-answer { color: var(--green-deep); font-weight: 800; }
+
 /* ---------- Summary / done ---------- */
 .center-card {
   margin: auto; width: min(680px, 100%); max-height: 100%; overflow-y: auto; background: var(--white); border-radius: var(--radius-xl);
@@ -468,6 +498,11 @@ input { font: inherit; }
   display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.6vmin, 16px); text-align: center;
 }
 .summary .center-card { width: min(760px, 100%); }
+.mission-intro { width: min(820px, 100%) !important; }
+.mission-stages { width: 100%; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; counter-reset: mission; }
+.mission-stages li { counter-increment: mission; position: relative; display: flex; flex-direction: column; gap: 5px; padding: 16px; border-radius: 20px; background: var(--purple-soft); text-align: left; }
+.mission-stages li::before { content: counter(mission); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: var(--purple); color: #fff; font-weight: 800; }
+.mission-stages span { color: var(--ink-soft); font-size: .95rem; line-height: 1.3; }
 .summary .reward-row { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .center-card h1 { margin: 0; font-size: clamp(2rem, 5vmin, 3rem); font-weight: 700; }
 .center-card p { margin: 0; font-size: 1.25rem; color: var(--ink-soft); font-weight: 500; }
@@ -607,7 +642,7 @@ input { font: inherit; }
   .home-hero p { font-size: clamp(1rem, 2.4vmin, 1.2rem); margin-top: 4px; }
   .world {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr));
+    grid-template-rows: none; grid-auto-rows: clamp(128px, 14vh, 165px);
     min-height: 0; gap: clamp(12px, 1.8vmin, 20px);
     padding: 12px 6px calc(var(--safe-bottom) + 112px);
   }
@@ -619,6 +654,10 @@ input { font: inherit; }
   .island .island-meta { flex-direction: column; align-items: flex-start; gap: 10px; font-size: clamp(1rem, 2.2vmin, 1.2rem); }
   .island .levels i { width: 14px; height: 14px; }
   .plate { --plate-w: min(42vw, 230px); }
+  .resume-card { align-items: stretch; flex-direction: column; }
+  .resume-actions { width: 100%; }
+  .resume-actions .btn { flex: 1; }
+  .mission-stages { grid-template-columns: 1fr; }
 }
 @media (max-height: 700px) {
   .home-hero .mascot { width: 96px; }

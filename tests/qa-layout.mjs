@@ -17,6 +17,7 @@ const VPS = [
 const SCREENS = [
   ['firstrun', null], ['home', 'home'],
   ['sharing.two', ['sharing.two', 1]], ['sharing.groups', ['sharing.groups', 3]], ['groups.pairs', ['groups.pairs', 1]], ['groups.pairs4', ['groups.pairs', 4]], ['groups.fives', ['groups.fives', 2]], ['numbers.build', ['numbers.build', 2]], ['numbers.order', ['numbers.order', 1]], ['addsub.maketen', ['addsub.maketen', 2]],
+  ['reasoning.match', ['reasoning.match', 2]], ['explore.patterns', ['explore.patterns', 2]], ['explore.shapes', ['explore.shapes', 2]], ['explore.measure', ['explore.measure', 2]], ['explore.charts', ['explore.charts', 3]],
   ['stickers', 'stickers'], ['pip-fallback', 'pip-offline'],
 ];
 const problems = [];

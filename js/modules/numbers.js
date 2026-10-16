@@ -167,12 +167,12 @@ function buildChart(api, { max, track, onTap }) {
   return { root, cells, fit };
 }
 
-function findTask(level) {
+function findTask(level, repeatOk = false) {
   const max = [0, 20, 50, 100, 120][level] || 20;
   let n;
   for (let i = 0; i < 20; i++) {
     n = level === 4 && Math.random() < 0.55 ? randInt(101, 120) : randInt(2, max);
-    if (n !== lastFind) break;
+    if (repeatOk || n !== lastFind) break;
   }
   lastFind = n;
   const target = n;
@@ -407,14 +407,14 @@ function readOptions(n, max, count) {
 }
 
 let lastRead = 0;
-function readTask(level) {
+function readTask(level, repeatOk = false) {
   const [lo, hi] = [null, [11, 20], [21, 50], [51, 99], [100, 120]][level];
   let n;
   for (let i = 0; i < 20; i++) {
     n = randInt(lo, hi);
     if (level === 3 && Math.random() < 0.25) n = randInt(5, 9) * 10;
     if (level === 4 && Math.random() < 0.2) n = pick([100, 110, 120]);
-    if (n !== lastRead) break;
+    if (repeatOk || n !== lastRead) break;
   }
   lastRead = n;
   const T = Math.floor(n / 10), O = n % 10;
@@ -475,7 +475,7 @@ function readTask(level) {
 const BA_MAX = [0, 20, 50, 100, 120];
 let lastBA = 0;
 
-function beforeAfterTask(level) {
+function beforeAfterTask(level, repeatOk = false) {
   const max = BA_MAX[level];
   let kind = 'after';
   if (level === 2) kind = Math.random() < 0.5 ? 'after' : 'before';
@@ -507,7 +507,7 @@ function beforeAfterTask(level) {
       ans = ref + 1;
       start = clampRange(ref - 2, Math.min(ref, max - 4));
     }
-    if (ref !== lastBA) break;
+    if (repeatOk || ref !== lastBA) break;
   }
   lastBA = ref;
   start = Math.min(Math.max(1, start), max - 4);
@@ -740,25 +740,26 @@ export default {
     { id: 'numbers.beforeafter', name: 'Before and after', maxLevel: 4 },
     { id: 'numbers.order', name: 'Order the numbers', maxLevel: 3 },
   ],
-  makeTask(skillId, level) {
+  makeTask(skillId, level, options = null) {
     const L = Math.max(1, Math.min(4, Math.round(level) || 1));
+    const deterministic = !!(options && (typeof options === 'number' || Number.isFinite(options.seed)));
     try {
       switch (skillId) {
-        case 'numbers.find': return findTask(L);
+        case 'numbers.find': return findTask(L, deterministic);
         case 'numbers.build': {
           let n = buildNumber(L);
-          if (n === lastBuild) n = buildNumber(L);
+          if (!deterministic && n === lastBuild) n = buildNumber(L);
           lastBuild = n;
           return buildTask(n);
         }
-        case 'numbers.read': return readTask(L);
-        case 'numbers.beforeafter': return beforeAfterTask(L);
+        case 'numbers.read': return readTask(L, deterministic);
+        case 'numbers.beforeafter': return beforeAfterTask(L, deterministic);
         case 'numbers.order': return orderTask(Math.min(L, 3));
-        default: return findTask(1);
+        default: return findTask(1, deterministic);
       }
     } catch (e) {
       console.error('numbers makeTask failed', e);
-      return findTask(1);
+      return findTask(1, deterministic);
     }
   },
 };

@@ -11,6 +11,8 @@ const blank = () => ({
   stickers: [], // sticker ids earned
   stars: 0,
   quests: 0,
+  activeQuest: null,
+  completedQuestIds: [],
   log: [],      // last 200 attempts { t, skill, ok, firstTry }
 });
 
@@ -19,9 +21,35 @@ let state = load();
 function load() {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) { const s = JSON.parse(raw); return { ...blank(), ...s, profile: { ...blank().profile, ...s.profile } }; }
+    if (raw) {
+      const s = JSON.parse(raw);
+      const next = { ...blank(), ...s, profile: { ...blank().profile, ...s.profile } };
+      next.activeQuest = normaliseQuest(next.activeQuest);
+      next.completedQuestIds = Array.isArray(next.completedQuestIds) ? next.completedQuestIds.filter((id) => typeof id === 'string').slice(-20) : [];
+      return next;
+    }
   } catch {}
   return blank();
+}
+
+function normaliseQuest(q) {
+  if (!q || q.v !== 1 || typeof q.id !== 'string' || !q.id || !Array.isArray(q.plan) || !q.plan.length) return null;
+  if (!Number.isInteger(q.idx) || q.idx < 0 || q.idx > q.plan.length) return null;
+  if (!q.plan.every((p) => p && typeof p.moduleId === 'string' && typeof p.skillId === 'string' && Number.isFinite(p.seed))) return null;
+  const result = q.result && typeof q.result === 'object' ? q.result : {};
+  return {
+    ...q,
+    mode: ['standard', 'adventure', 'story'].includes(q.mode) ? q.mode : 'standard',
+    wrongs: Math.max(0, Number(q.wrongs) || 0),
+    helpUsed: Math.max(0, Number(q.helpUsed) || 0),
+    helpTaps: Math.max(0, Number(q.helpTaps) || 0),
+    result: {
+      stars: Math.max(0, Number(result.stars) || 0),
+      correct: Math.max(0, Number(result.correct) || 0),
+      firstTry: Math.max(0, Number(result.firstTry) || 0),
+      levelUps: Array.isArray(result.levelUps) ? result.levelUps.filter((x) => x && typeof x.skillId === 'string') : [],
+    },
+  };
 }
 
 export function save() {
@@ -40,7 +68,7 @@ export function skill(id) {
 }
 
 /** Record an attempt. `ok` = eventually right, `firstTry` = right without a wrong step. Returns {levelUp, levelDown}. */
-export function recordAttempt(id, ok, firstTry, maxLevel = 4) {
+function applyAttempt(id, ok, firstTry, maxLevel = 4) {
   const s = skill(id);
   const now = Date.now();
   s.total++;
@@ -66,9 +94,70 @@ export function recordAttempt(id, ok, firstTry, maxLevel = 4) {
   if (state.log.length > 300) state.log.shift();
   const d = day();
   d.tasks++; if (firstTry) d.correct++;
-  save();
   return { levelUp, levelDown, level: s.level };
 }
+
+export function recordAttempt(id, ok, firstTry, maxLevel = 4) {
+  const result = applyAttempt(id, ok, firstTry, maxLevel);
+  save();
+  return result;
+}
+
+/** Persist one active quest. Plans contain IDs/seeds only, never DOM or task functions. */
+export function beginQuest(quest) {
+  const q = normaliseQuest({ ...quest, createdAt: quest.createdAt || Date.now(), updatedAt: Date.now() });
+  if (!q) throw new Error('invalid quest');
+  state.activeQuest = q;
+  save();
+  return q;
+}
+
+export function activeQuest() { return state.activeQuest; }
+
+export function updateActiveQuest(patch = {}) {
+  const q = state.activeQuest;
+  if (!q || (patch.questId && patch.questId !== q.id)) return null;
+  for (const k of ['wrongs', 'helpUsed', 'helpTaps']) if (patch[k] != null) q[k] = Math.max(0, Number(patch[k]) || 0);
+  q.updatedAt = Date.now();
+  save();
+  return q;
+}
+
+/** Apply rewards, attempt counters and the next-task position in one synchronous save. */
+export function completeQuestStep({ questId, index, skillId, maxLevel = 4, ok, firstTry, stars = 0 }) {
+  const q = state.activeQuest;
+  if (!q || q.id !== questId || index < q.idx) return { duplicate: true };
+  if (index !== q.idx || index >= q.plan.length) return { duplicate: false, invalid: true };
+  const rec = applyAttempt(skillId, !!ok, !!firstTry, maxLevel);
+  const earned = ok ? Math.max(0, Number(stars) || 0) : 0;
+  state.stars += earned;
+  q.result.stars += earned;
+  if (ok) q.result.correct++;
+  if (firstTry) q.result.firstTry++;
+  if (rec.levelUp) q.result.levelUps.push({ skillId, level: rec.level });
+  q.idx++;
+  q.wrongs = 0;
+  q.helpUsed = 0;
+  q.updatedAt = Date.now();
+  save();
+  return { duplicate: false, ...rec, quest: q };
+}
+
+export function finishActiveQuest() {
+  const q = state.activeQuest;
+  if (!q || q.idx < q.plan.length) return null;
+  if (!state.completedQuestIds.includes(q.id)) {
+    state.quests++;
+    day().quests++;
+    state.completedQuestIds.push(q.id);
+    if (state.completedQuestIds.length > 20) state.completedQuestIds.shift();
+  }
+  state.activeQuest = null;
+  save();
+  return q;
+}
+
+export function clearActiveQuest() { state.activeQuest = null; save(); }
 
 export function day(key = todayKey()) {
   if (!state.days[key]) state.days[key] = { seconds: 0, tasks: 0, correct: 0, quests: 0, doneShown: false };

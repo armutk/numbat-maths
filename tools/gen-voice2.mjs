@@ -43,6 +43,8 @@ const BITRATE_MAX_BYTES = 90 * 1024 * 1024;
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes('--' + n) || argv.includes('--all');
+const opt = (n, d = '') => (argv.find((a) => a.startsWith(`--${n}=`)) || '').split('=').slice(1).join('=') || d;
+const LIST = opt('list');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------- key/file naming (mirror js/voice.js + gen-sentences.mjs) ---------- */
@@ -56,6 +58,19 @@ function buildTasks() {
   const inv = JSON.parse(fs.readFileSync(INVENTORY, 'utf8'));
   const man = JSON.parse(fs.readFileSync(MAN, 'utf8'));
   const tasks = [];
+  if (LIST) {
+    const source = JSON.parse(fs.readFileSync(path.resolve(ROOT, LIST), 'utf8'));
+    const unique = [...new Set(source.map((s) => String(s).replace(/\s+/g, ' ').trim()).filter(Boolean))];
+    for (const s of unique) {
+      if (isCountingList(s)) continue;
+      const f = fileFor(s);
+      tasks.push({ key: 'sent:' + f.slice(5, 15), text: s, kind: 'sentence', file: f });
+    }
+    fs.mkdirSync(WORK, { recursive: true });
+    fs.writeFileSync(TASKS, JSON.stringify({ excludedCountingLists: unique.length - tasks.length, tasks }));
+    console.log(`tasks: ${tasks.length} release sentences from ${LIST}`);
+    return;
+  }
   // word/phrase/number/noun clips — same derivation as tools/gen-voice.mjs, keys unchanged
   L.numbers.forEach((t, i) => tasks.push({ key: 'n' + i, text: t, kind: 'clip', file: 'n' + i + '.mp3' }));
   for (const [id, [one, many]] of Object.entries(L.nouns)) {
@@ -235,6 +250,18 @@ async function doManifest() {
   console.log(`manifest: version 2, clips ${Object.keys(man.clips).length}, numbers ${Object.keys(man.numbers).length}, sentences ${Object.keys(man.sentences).length}; files ${files.length}, ${(bytes / 1048576).toFixed(1)} MB; counting lists excluded ${excludedCountingLists}`);
 }
 
+async function mergeManifest() {
+  const { tasks } = loadTasks();
+  const man = JSON.parse(fs.readFileSync(MAN, 'utf8'));
+  man.sentences = man.sentences || {};
+  for (const task of tasks) {
+    if (!fs.existsSync(outPath(task))) throw new Error(`missing encoded voice file: ${task.file}`);
+    man.sentences[skey(task.text)] = task.file;
+  }
+  fs.writeFileSync(MAN, JSON.stringify(man));
+  console.log(`manifest: merged ${tasks.length} release sentences; total ${Object.keys(man.sentences).length}`);
+}
+
 /* ---------- audit ---------- */
 async function audit() {
   const { tasks } = loadTasks();
@@ -318,5 +345,6 @@ if (flag('tasks')) buildTasks();
 if (flag('tts')) await doTts();
 if (flag('post')) await doPost();
 if (flag('manifest')) await doManifest();
+if (flag('merge-manifest')) await mergeManifest();
 if (argv.includes('--audit')) await audit();
 if (argv.includes('--retry')) await retryBad();

@@ -88,7 +88,7 @@ n = await names();
 rec('fair Check fires correct/complete', n.some((x) => /correct|complete|celebrate/.test(x)), n.join(','));
 // voice: offline clips in the right order for dynamic sentences
 const man = await page.evaluate(async () => (await fetch(new URL('assets/voice/manifest.json', document.baseURI))).json());
-const sentences = ["Put the socks in pairs. Each hoop needs 2 socks.",'Put the socks in pairs. Each hoop needs 2 socks.', 'Arisha has 7 cookies. How many are left over?', 'Share 12 strawberries between 3 friends.', "Great sharing, Arisha!", '14 plus 6 makes 20.', 'There are 35 stars. Count in fives.', 'Tap check.', 'Every friend has 4 grapes.'];
+const sentences = ["Put the socks in pairs. Each hoop needs 2 socks.",'Put the socks in pairs. Each hoop needs 2 socks.', 'Arisha has 7 cookies. How many are left over?', 'Share 12 strawberries between 3 friends.', "Great sharing, Arisha!", '14 plus 6 makes 20.', '5, 10, 15, 20.', 'Tap check.', 'Every friend has 4 grapes.'];
 const plan = await page.evaluate(async (ss) => { const vo = await import(new URL('./js/voice.js', document.baseURI).href); return ss.map((s) => ({ s, r: vo.resolve(s, window.__man) })); }, sentences).catch(async () => { await page.evaluate((m) => { window.__man = m; }, man); return page.evaluate(async (ss) => { const vo = await import(new URL('./js/voice.js', document.baseURI).href); return ss.map((s) => ({ s, r: vo.resolve(s, window.__man) })); }, sentences); });
 for (const { s, r } of plan) console.log('  plan:', JSON.stringify(s), r.ok ? 'OK' : 'MISSING ' + r.missing.join('|'), '->', r.items.map((i) => i.key).join(' '));
 // actually play them and check order of scheduled starts equals plan order
@@ -113,6 +113,8 @@ const cov = await page.evaluate(async () => {
 });
 rec(`task prompts fully covered by recorded voice (${cov.total - cov.bad}/${cov.total})`, cov.bad === 0, cov.bad ? JSON.stringify(cov.miss).slice(0, 700) : '');
 rec('no page errors', errs.length === 0, errs.slice(0, 3).join('|'));
+const unexpectedStitches = await page.evaluate(() => [...(window.__voiceStitched || [])].filter((line) => !/^\s*\d+(\s*,\s*\d+)+(\s*[.!?])?\s*$/.test(line)));
+rec('only intentional number-counting lines use stitch fallback', unexpectedStitches.length === 0, unexpectedStitches.slice(0, 3).join('|'));
 rec('speechSynthesis.speak still never called', (await page.evaluate(() => window.__spy.speak)) === 0);
 console.log('voice:miss console lines seen:', misses.length, [...new Set(misses)].slice(0, 8).join(' || '));
 await browser.close();

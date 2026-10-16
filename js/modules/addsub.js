@@ -446,14 +446,14 @@ const SUBKINDS = [
   { one: 'star', many: 'stars', draw: items.star, verb: 'fall down', verb1: 'falls down' },
 ];
 
-function subTask(level) {
+function subTask(level, options = {}) {
   let n, s, mode = 'tap';
   if (level === 1) { n = randInt(4, 10); s = randInt(1, Math.min(n - 1, 6)); }
   else if (level === 2) { n = Math.random() < 0.5 ? randInt(11, 12) : randInt(8, 10); s = randInt(2, Math.min(n - 2, 9)); }
   else if (level === 3) { mode = 'pre'; n = randInt(11, 20); s = randInt(2, 9); }
   else { mode = 'think'; n = randInt(11, 20); s = n - randInt(2, 8); }
   const left = n - s;
-  const kind = pick(SUBKINDS);
+  const kind = options.storyKind === 'snacks' ? SUBKINDS.find((item) => item.one === 'cookie') : pick(SUBKINDS);
   const noun = (k) => (k === 1 ? kind.one : kind.many);
   const verb = s === 1 ? kind.verb1 : kind.verb;
   let say;
@@ -541,12 +541,12 @@ export default {
     { id: 'addsub.maketen', name: 'Make ten', maxLevel: 4 },
     { id: 'addsub.sub', name: 'Taking away', maxLevel: 4 },
   ],
-  makeTask(skillId, level) {
+  makeTask(skillId, level, options = {}) {
     const lv = Math.max(1, Math.min(4, Number(level) || 1));
     try {
       if (skillId === 'addsub.ppw') return ppwTask(lv);
       if (skillId === 'addsub.maketen') return makeTenTask(lv);
-      if (skillId === 'addsub.sub') return subTask(lv);
+      if (skillId === 'addsub.sub') return subTask(lv, options);
       return addTask(lv);
     } catch (e) {
       console.error('addsub makeTask failed', e);

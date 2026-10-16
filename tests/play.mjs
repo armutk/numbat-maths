@@ -25,7 +25,7 @@ async function drag(from, to) {
   await page.waitForTimeout(420);
 }
 const shot = (name) => page.screenshot({ path: `${OUT}${name}-${TAG}.png` });
-const bubble = () => page.locator('.prompt .speech-bubble p').innerText();
+const bubble = () => page.locator('#app > .screen:last-child .prompt .speech-bubble p').innerText();
 
 await page.goto(BASE);
 await page.evaluate(() => localStorage.setItem('numbat-maths.v1', JSON.stringify({ profile: { name: 'Mia', created: Date.now(), sound: true } })));
@@ -37,6 +37,11 @@ await page.getByRole('button', { name: /Sharing Equally/ }).tap();
 await page.waitForTimeout(900);
 
 for (let t = 0; t < 6; t++) {
+  await page.waitForFunction(() => {
+    const screen = document.querySelector('#app > .screen:last-child');
+    return screen?.classList.contains('summary') || (screen?.querySelectorAll('.tray .item').length > 0 && /^(Share|Put all)/.test(screen.querySelector('.speech-bubble p')?.textContent || ''));
+  }, null, { timeout: 15000 });
+  if (await page.locator('#app > .screen:last-child.summary').count()) break;
   const text = await bubble();
   const m = text.match(/Share (\d+) \w+ between (\d+) friends|Put all (\d+)/);
   const plates = page.locator('.plate.drop:not(:has(.label))');
@@ -70,22 +75,27 @@ for (let t = 0; t < 6; t++) {
   }
   if (t === 0) await shot(`12-sharing-fair`);
   await page.getByRole('button', { name: 'Check' }).tap();
-  await page.waitForTimeout(2600);
+  await page.locator('#app > .screen:last-child .choices .choice').first().waitFor({ state: 'visible', timeout: 15000 });
   const q = await bubble();
   console.log('  after check:', q);
-  const choices = page.locator('.choices .choice');
+  const choices = page.locator('#app > .screen:last-child .choices .choice');
   if (!(await choices.count())) { errors.push(`no choices after check in task ${t + 1}: ${q}`); break; }
   if (t === 0) await shot(`13-sharing-explain`);
   const answer = g === 1 ? n : each * unit;
   // task 2: tap a wrong option first to exercise the hint path
   if (t === 1) {
     const wrong = choices.filter({ hasNotText: new RegExp(`^${answer}$`) }).first();
-    await wrong.tap(); await page.waitForTimeout(1600); await shot(`14-explain-wrong`);
+    await wrong.tap();
+    await page.waitForFunction((answer) => [...document.querySelectorAll('#app > .screen:last-child .choices .choice')].some((button) => button.textContent.trim() === String(answer) && !button.disabled), answer, { timeout: 15000 });
+    await shot(`14-explain-wrong`);
   }
   await choices.filter({ hasText: new RegExp(`^${answer}$`) }).first().tap();
-  await page.waitForTimeout(600);
+  await page.waitForTimeout(250);
   if (t === 0) await shot(`15-sharing-correct`);
-  await page.waitForTimeout(2600);
+  await page.waitForFunction(() => {
+    const screen = document.querySelector('#app > .screen:last-child');
+    return screen?.classList.contains('summary') || screen?.querySelectorAll('.tray .item').length > 0;
+  }, null, { timeout: 15000 });
 }
 await page.waitForTimeout(800);
 await shot('20-summary');

@@ -15,7 +15,9 @@ Live at https://armutk.github.io/numbat-maths/ (offline-first PWA: Add to Home S
 | `js/voice.js`, `assets/voice/` | Offline voice: whole-sentence recordings (`assets/voice/sent/`, `tools/gen-sentences.mjs`) played as one file each; sentences not yet recorded fall back to 444 word/phrase clips stitched on the Web Audio clock (logged in dev as `voice:stitched`). No `speechSynthesis` anywhere. |
 | `js/audio.js`, `assets/sfx/` | Web Audio engine (iOS unlock, voice/SFX buses, ducking) and a CC0 SFX set from Kenney.nl. |
 | `js/drag.js` | One hardened touch drag engine for every screen (pointer capture, state machine, watchdog, spring/lift/snap feel). |
-| `js/modules/*` | The original four islands, kept as "Practise on my own" (works offline). |
+| `js/modules/*` | Six offline practice worlds: sharing, equal groups, numbers, add/subtract, reasoning challenges, and patterns/shapes/measurement/charts. |
+| `js/adventures.js` | Serializable three-stage story missions. The first picnic mission links grouping, fair sharing, and subtraction with visible stage progress. |
+| `js/store.js` | On-device mastery, spaced review, stars/stickers, and resumable quest transactions. Task seeds preserve the same question across Home/reload; completion is idempotent. |
 | Hermes `/opt/pip-proxy` | `https://hermes.redgumlab.au/pip/{health,see,summary}`. Gemini key stays on the server. Summaries go to Telegram only from the production origin, max one per 30 min. |
 
 The agent: `tools/pip-agent/prompt.md` (persona + pedagogy), `tools/pip-agent/tools.json` (19 client tools), `tools/pip-agent/apply.py` (creates/updates the agent; run on Hermes with `ELEVENLABS_API_KEY=$(secrets get ELEVENLABS_API_KEY) python3 apply.py`). The agent is public but origin-locked to `armutk.github.io` (plus localhost for tests); no key ships in the site.
@@ -31,5 +33,8 @@ Tests (Playwright; Chromium runs natively, WebKit runs through Docker with `test
 - `tests/drag-fuzz.mjs` adversarial touch fuzzing of every module (gate for deploys).
 - `tests/qa-*.mjs`, `tests/qa-fuzz-all-live.sh`: layout (Ask Pip overlap), audio, voice coverage (`qa-voice-cover.mjs`), service worker, live drag fuzz.
 - `tests/touch-check.mjs`, `tests/audio-check.mjs`, `tests/voice-check.mjs`, `tests/play.mjs` (scripted practice quest).
+- `tests/quest-persistence.mjs`, `tests/stale-callback-check.mjs`: exact resume, corrupt-save recovery, wrong/help state, celebration reload, and stale async callback protection.
+- `tests/adventure-check.mjs`, `tests/reasoning-check.mjs`, `tests/explore-check.mjs`: connected story, reasoning challenges, and the four new curriculum activities.
+- `tests/voice-release-check.mjs`: every new spoken line resolves to a whole-sentence local Kokoro clip except intentional number-counting lists.
 
 Fonts: Fredoka and Nunito (SIL OFL), bundled. Illustrations are original SVG. SFX: Kenney.nl, CC0 (see `assets/sfx/LICENSE.txt`). ElevenLabs browser SDK vendored in `js/vendor/` (MIT).

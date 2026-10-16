@@ -1,4 +1,4 @@
-// QA: service worker v4 served, fresh install, upgrade from an older real build, offline reload.
+// QA: current service worker served, fresh install, upgrade from an older real build, offline reload.
 import { createRequire } from 'node:module';
 import fs from 'node:fs'; import path from 'node:path';
 const require = createRequire(import.meta.url);
@@ -6,7 +6,7 @@ const PW = process.env.PW_PATH || '/home/impmaster/.local/share/mise/installs/np
 const { chromium, webkit, devices } = require(PW);
 const ENGINE = (process.argv.find((a) => a.startsWith('--engine=')) || '--engine=chromium').split('=')[1];
 const LIVE = process.env.SITE || 'https://armutk.github.io/numbat-maths/';
-const VER = process.env.SW_VER || VER;
+const VER = process.env.SW_VER || 'numbat-maths-v6';
 const OLD = process.env.OLD_DIR; // extracted old build
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.webmanifest': 'application/manifest+json' };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -31,7 +31,7 @@ const nShell = (sw.match(/'\.\/[^']+'/g) || []).length;
   await page.reload();
   const i = await waitFull(page);
   console.log('fresh', JSON.stringify(i));
-  rec('fresh install: v4 active, controlling, only v4 cache', /sw\.js/.test(i.active || '') && i.controlled && Object.keys(i.counts).join() === VER, JSON.stringify(i.counts));
+  rec('fresh install: current worker active, controlling, only current cache', /sw\.js/.test(i.active || '') && i.controlled && Object.keys(i.counts).join() === VER, JSON.stringify(i.counts));
   rec(`fresh install: cache holds shell+sfx+voice (>= ${nShell - 5} entries of ${nShell} listed)`, i.counts[VER] >= nShell - 5, `${i.counts[VER]}/${nShell}`);
   // offline reload
   await ctx.setOffline(true);
@@ -79,7 +79,7 @@ for (const [label, dir] of [['d5e3179 (previous deploy)', process.env.OLD_DIR_A]
   const t0 = Date.now();
   while (Date.now() - t0 < 90000) { after = await swInfo(page).catch(() => null); if (after && Object.keys(after.counts).join() === VER && after.counts[VER] >= nShell - 5) break; await sleep(800); }
   console.log(label, 'after', JSON.stringify(after));
-  rec(`upgrade from ${label}: v4 takes over, old caches removed`, !!after && Object.keys(after.counts).join() === VER, JSON.stringify(after?.counts));
+  rec(`upgrade from ${label}: current worker takes over, old caches removed`, !!after && Object.keys(after.counts).join() === VER, JSON.stringify(after?.counts));
   await page.reload(); await page.waitForTimeout(2500);
   const ver = await page.evaluate(() => ({ pipcss: [...document.styleSheets].some((s) => /pip\.css/.test(s.href || '')), ask: !!document.querySelector('.ask-pip'), screens: document.querySelectorAll('.screen').length }));
   rec(`upgrade from ${label}: next open runs the new app (pip.css + Ask Pip present)`, ver.pipcss && ver.ask, JSON.stringify(ver));

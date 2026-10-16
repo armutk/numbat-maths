@@ -16,8 +16,11 @@ import sharing from './modules/sharing.js';
 import groups from './modules/groups.js';
 import numbers from './modules/numbers.js';
 import addsub from './modules/addsub.js';
+import reasoning from './modules/reasoning.js';
+import explore from './modules/explore.js';
+import { getAdventure, buildAdventurePlan } from './adventures.js';
 
-export const MODULES = [sharing, groups, numbers, addsub];
+export const MODULES = [sharing, groups, numbers, addsub, reasoning, explore];
 const TASKS_PER_QUEST = 6;
 const PRAISE = ['Yes!', 'Spot on!', 'You got it!', 'Beauty!', 'Nice one!', 'Too easy!', 'That\'s it!'];
 const ENCOURAGE = ['Not quite. Have another go!', 'Nearly! Let\'s look again.', 'Hmm, let\'s try that again.', 'Good try. Let\'s check it together.'];
@@ -32,6 +35,35 @@ const app = document.getElementById('app');
 let current = null;
 let askPipBtn = null;
 let online = navigator.onLine;
+
+const seededRandom = (seed) => {
+  let a = Number(seed) >>> 0;
+  return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+};
+const freshSeed = () => { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] || 1; };
+function withSeed(seed, fn) {
+  const random = Math.random;
+  Math.random = seededRandom(seed);
+  try { return fn(); } finally { Math.random = random; }
+}
+function stepParts(step) {
+  const mod = MODULES.find((m) => m.id === step.moduleId);
+  const skill = mod?.skills.find((s) => s.id === step.skillId);
+  return { mod, skill };
+}
+function serialisePlan(plan) {
+  return plan.map((step) => {
+    if (step.moduleId && step.skillId) return { ...step, seed: Number(step.seed) || freshSeed() };
+    const mod = step.mod;
+    const skill = step.skill;
+    return { moduleId: mod.id, skillId: skill.id, level: store.skill(skill.id).level, seed: freshSeed(), review: !!step.review };
+  });
+}
+function makeSavedTask(step) {
+  const { mod, skill } = stepParts(step);
+  if (!mod || !skill) throw new Error(`Unknown saved task ${step.moduleId}/${step.skillId}`);
+  return { mod, skill, task: withSeed(step.seed, () => mod.makeTask(skill.id, step.level || 1, { seed: step.seed, ...(step.params || {}) })) };
+}
 
 /* ---------- screen management ---------- */
 function show(el) {
@@ -126,6 +158,7 @@ function home() {
   const cap = mem.capState();
   const hist = mem.getHistory().filter((s) => s.summary);
   const last = hist[hist.length - 1];
+  const savedQuest = store.activeQuest();
   const line = cap.blocked ? `Pip's having a rest now. You can still practise on your own, ${name}.`
     : !online ? `No internet right now, so Pip can't chat. Practise on your own, ${name}!`
     : last ? `Ready for more sharing, ${name}?` : `Tap me and let's do some maths together, ${name}!`;
@@ -138,6 +171,11 @@ function home() {
     h('span', { class: 'pip-cta-icon', html: ICON_CHAT }), h('span', { class: 'pip-cta-text' }, h('b', {}, 'Talk to Pip'), h('small', {}, cap.blocked ? 'Pip is resting' : 'Share things out together')));
   const cam = h('button', { class: 'pip-cta pip-cta-cam', disabled: cap.blocked || !online, onClick: () => startPip('camera') },
     h('span', { class: 'pip-cta-icon', html: ICON_CAM }), h('span', { class: 'pip-cta-text' }, h('b', {}, 'Show Pip something'), h('small', {}, 'Crackers, toys, anything!')));
+  const adventure = h('button', { class: 'adventure-card', disabled: !!savedQuest, onClick: () => startAdventureIntro() },
+    h('span', { class: 'adventure-mark' }, '3'),
+    h('span', { class: 'adventure-copy' }, h('b', {}, "Pip's Picnic Adventure"), h('small', {}, 'Pack, share and count through one story')),
+    h('span', { class: 'adventure-go', html: icons.play }),
+  );
 
   const islands = MODULES.map((m, i) => {
     const levels = m.skills.map((s) => store.skill(s.id).level);
@@ -145,7 +183,7 @@ function home() {
     const maxL = Math.max(...m.skills.map((s) => s.maxLevel || 4));
     const seen = m.skills.some((s) => store.skill(s.id).total > 0);
     const dots = h('span', { class: 'levels' }, ...Array.from({ length: maxL }, (_, k) => h('i', { class: k < Math.round(avg) && seen ? 'on' : '' })));
-    const el = h('button', { class: `island ${m.id === 'sharing' ? 'is-hero' : ''}`, style: { '--island': `var(--${m.colour})`, '--island-deep': `var(--${m.colour}-deep)`, '--island-soft': `var(--${m.colour}-soft)` }, onClick: () => startQuest(m) },
+    const el = h('button', { class: `island ${m.id === 'sharing' ? 'is-hero' : ''}`, disabled: !!savedQuest, style: { '--island': `var(--${m.colour})`, '--island-deep': `var(--${m.colour}-deep)`, '--island-soft': `var(--${m.colour}-soft)` }, onClick: () => startQuest(m) },
       h('div', { class: 'island-art', html: m.art }),
       h('div', { class: 'island-body' }, h('h2', {}, m.title), h('div', { class: 'island-meta' }, h('span', {}, m.tagline), dots)),
     );
@@ -153,19 +191,73 @@ function home() {
     return el;
   });
 
-  const s = h('div', { class: 'home pip-home' },
+  const s = h('div', { class: 'home pip-home', dataset: { scroll: '1' } },
     h('div', { class: 'topbar' }, stars, book, h('div', { class: 'spacer' }), grown),
     h('div', { class: 'home-hero' },
       h('button', { class: 'pip-hero-btn', 'aria-label': 'Talk to Pip', html: mascot(cap.blocked ? 'think' : 'happy', 'mascot is-idle'), onClick: () => (cap.blocked || !online ? null : startPip('lesson')) }),
       h('div', { class: 'speech-bubble' }, h('h1', {}, `G'day, ${name}!`), h('p', {}, line)),
     ),
     h('div', { class: 'pip-ctas' }, talk, cam),
+    savedQuest ? h('div', { class: 'resume-card' },
+      h('div', { class: 'resume-copy' }, h('b', {}, savedQuest.mode === 'adventure' || savedQuest.mode === 'story' ? 'Your adventure is waiting!' : 'Your maths quest is waiting!'), h('span', {}, `Question ${Math.min(savedQuest.idx + 1, savedQuest.plan.length)} of ${savedQuest.plan.length}`)),
+      h('div', { class: 'resume-actions' },
+        h('button', { class: 'btn btn-green', onClick: () => resumeQuest() }, svg(icons.play), savedQuest.mode === 'adventure' || savedQuest.mode === 'story' ? 'Resume adventure' : 'Resume quest'),
+        h('button', { class: 'btn btn-ghost', onClick: () => { store.clearActiveQuest(); show(home()); } }, 'Start something new'),
+      ),
+    ) : null,
+    adventure,
     h('div', { class: 'practise-label' }, 'Practise on my own'),
     h('div', { class: 'world' }, ...islands),
   );
   s._askPip = () => { if (!cap.blocked && online) startPip('lesson'); else { say(line); } };
-  setTimeout(() => say(line), 500);
+  setTimeout(() => { if (current === s) say(line); }, 500);
   return s;
+}
+
+function startAdventureIntro(adventureId = 'picnic-party') {
+  const adventure = getAdventure(adventureId);
+  if (!adventure) { show(home()); return; }
+  const card = h('div', { class: 'center-card mission-intro' },
+    h('div', { html: mascot('happy', 'mascot') }),
+    h('h1', {}, adventure.title),
+    h('p', {}, adventure.intro),
+    h('ol', { class: 'mission-stages' }, ...adventure.stages.map((stage) => h('li', {}, h('b', {}, stage.title), h('span', {}, stage.intro)))),
+    h('div', { class: 'actions' },
+      h('button', { class: 'btn btn-ghost', onClick: () => show(home()) }, svg(icons.home), 'Home'),
+      h('button', { class: 'btn btn-green', onClick: () => startAdventure(adventure.id) }, svg(icons.play), 'Start adventure'),
+    ),
+  );
+  const screen = h('div', { class: 'summary adventure-intro' }, card);
+  screen._askPip = () => say(adventure.intro);
+  show(screen);
+  setTimeout(() => { if (current === screen) say(adventure.intro); }, 400);
+}
+
+function startAdventure(adventureId = 'picnic-party') {
+  const adventure = getAdventure(adventureId);
+  const plan = buildAdventurePlan({ adventureId, seed: freshSeed() });
+  if (!adventure || !plan?.length) { show(home()); return; }
+  const first = MODULES.find((m) => m.id === plan[0].moduleId);
+  startQuest(first, plan, { mode: 'adventure', title: adventure.title, adventureId });
+}
+
+function startMixedAdventure() {
+  const plan = MODULES.map((mod, index) => {
+    const skill = mod.skills.slice().sort((a, b) => (store.accuracy(a.id) ?? 1) - (store.accuracy(b.id) ?? 1))[0];
+    return {
+      moduleId: mod.id, skillId: skill.id, level: store.skill(skill.id).level, seed: freshSeed(),
+      title: mod.title, intro: index ? `Next stop: ${mod.title}.` : `Let's explore ${mod.title} first.`, storyStage: index + 1,
+    };
+  });
+  startQuest(MODULES[0], plan, { mode: 'adventure', title: "Pip's Maths Adventure" });
+}
+
+function resumeQuest() {
+  const q = store.activeQuest();
+  if (!q) { show(home()); return; }
+  const mod = MODULES.find((m) => m.id === q.moduleId) || stepParts(q.plan[0]).mod;
+  if (!mod || !q.plan.every((p) => stepParts(p).mod && stepParts(p).skill)) { store.clearActiveQuest(); show(home()); return; }
+  startQuest(mod, null, { resume: true });
 }
 
 /* ---------- Pip: live tutor screen (lesson or camera) ---------- */
@@ -347,7 +439,7 @@ function restScreen(reason = 'daily_cap') {
   );
   const scr = h('div', { class: 'summary pip-rest' }, card);
   scr._askPip = () => say(line);
-  setTimeout(() => say('Pip needs a rest. You can still practise on your own.'), 400);
+  setTimeout(() => { if (current === scr) say('Pip needs a rest. You can still practise on your own.'); }, 400);
   return scr;
 }
 
@@ -371,14 +463,19 @@ function buildQuest(mod) {
 }
 
 /* ---------- quest runner (offline fallback; recorded voice) ---------- */
-function startQuest(mod, forcedPlan) {
+function startQuest(mod, forcedPlan, options = {}) {
   unlockAudio(); unlockSpeech();
   sfx.whoosh?.();
-  const plan = forcedPlan || buildQuest(mod);
-  const result = { stars: 0, correct: 0, firstTry: 0, levelUps: [], tasks: plan.length, mod };
-  let idx = 0;
+  let quest = options.resume ? store.activeQuest() : null;
+  if (!quest) {
+    const plan = serialisePlan(forcedPlan || buildQuest(mod));
+    quest = store.beginQuest({ v: 1, id: `quest-${Date.now()}-${freshSeed()}`, mode: options.mode || 'standard', moduleId: mod.id, title: options.title || mod.title, plan, idx: 0, wrongs: 0, helpUsed: 0, helpTaps: 0, result: { stars: 0, correct: 0, firstTry: 0, levelUps: [] } });
+  }
+  const plan = quest.plan;
+  let idx = quest.idx;
   let timer = 0;
-  let helpTaps = 0;
+  let helpTaps = quest.helpTaps;
+  let left = false;
 
   const bubbleText = h('p', {}, '');
   const bubble = h('div', { class: 'speech-bubble' }, bubbleText);
@@ -386,44 +483,60 @@ function startQuest(mod, forcedPlan) {
   const speaker = h('button', { class: 'icon-btn', 'aria-label': 'Say it again', onClick: () => { sfx.tap?.(); replay(); } }, svg(icons.speaker));
   onSpeechState((on) => speaker.classList.toggle('is-talking', on));
   const progress = h('div', { class: 'progress' }, ...plan.map(() => h('i')));
+  const missionStrip = quest.mode === 'adventure' || quest.mode === 'story'
+    ? h('div', { class: 'mission-strip' }, h('span', {}, quest.title), h('b', {}, ''))
+    : null;
   const stageInner = h('div', { class: 'stage-inner' });
   const stage = h('div', { class: 'stage' }, stageInner);
   const actions = h('div', { class: 'actions' });
   const homeBtn = h('button', { class: 'icon-btn', 'aria-label': 'Home', onClick: () => { clearInterval(timer); sfx.tap?.(); show(home()); } }, svg(icons.home));
   const screen = h('div', { class: 'quest' },
     h('div', { class: 'topbar' }, homeBtn, progress, speaker),
+    missionStrip,
     h('div', { class: 'prompt' }, mascotWrap, bubble),
     stage, actions,
   );
   show(screen);
   timer = setInterval(() => { if (!document.hidden && current === screen) store.addSeconds(5); }, 5000);
-  screen._leave = () => clearInterval(timer);
+  screen._leave = () => { left = true; clearInterval(timer); };
 
+  const stillHere = () => !left && current === screen && store.activeQuest()?.id === quest.id;
   const setMood = (mood) => { mascotWrap.innerHTML = mascot(mood, 'mascot-sm is-idle'); };
   const setBubble = (text, kind) => {
     bubbleText.textContent = text;
     bubble.classList.remove('is-happy', 'is-hint');
     if (kind) bubble.classList.add(kind);
   };
-  const speak = (text, kind) => { setBubble(text, kind); return say(text); };
+  const speak = (text, kind) => { if (!stillHere()) return Promise.resolve(); setBubble(text, kind); return say(text); };
   let currentHelp = null; // scripted help for the Ask Pip button while offline
 
   screen._askPip = async () => {
-    helpTaps++;
     if (currentHelp) await currentHelp();
   };
 
+  function finishSavedQuest() {
+    if (left || current !== screen || store.activeQuest()?.id !== quest.id) return;
+    const done = store.finishActiveQuest();
+    if (!done) return;
+    const owner = MODULES.find((m) => m.id === done.moduleId) || mod;
+    show(summary({ ...done.result, tasks: done.plan.length, mode: done.mode, adventureId: done.adventureId, mod: { ...owner, title: done.title || owner.title } }, done.helpTaps));
+  }
+
   function runTask() {
+    if (idx >= plan.length) { clearInterval(timer); finishSavedQuest(); return; }
     const step = plan[idx];
     progress.querySelectorAll('i').forEach((i, k) => { i.classList.toggle('done', k < idx); i.classList.toggle('cur', k === idx); });
-    const level = store.skill(step.skill.id).level;
+    if (missionStrip) missionStrip.lastElementChild.textContent = `Stage ${idx + 1} of ${plan.length} · ${step.title || 'Maths challenge'}`;
+    const { mod: stepMod, skill } = stepParts(step);
+    if (!stepMod || !skill) { store.clearActiveQuest(); show(home()); return; }
+    const level = step.level || store.skill(skill.id).level;
     let task;
-    try { task = step.mod.makeTask(step.skill.id, level); } catch (e) { console.error(e); task = step.mod.makeTask(step.mod.skills[0].id, 1); }
+    try { task = makeSavedTask(step).task; } catch (e) { console.error(e); store.clearActiveQuest(); show(home()); return; }
     resetAllDrags?.();
     stageInner.innerHTML = ''; actions.innerHTML = '';
     stage.classList.remove('shake');
     setMood('happy');
-    let wrongs = 0, locked = false, finished = false, cleanup = null, helpUsed = 0;
+    let wrongs = quest.wrongs || 0, locked = false, finished = false, cleanup = null, helpUsed = quest.helpUsed || 0;
 
     const api = {
       name: store.getName(),
@@ -441,14 +554,17 @@ function startQuest(mod, forcedPlan) {
         return b;
       },
       async step(ok, { say: text, hint } = {}) {
+        if (!stillHere()) return false;
         if (ok) {
           sfx.correct?.(); setMood('cheer'); bounce(mascotWrap.firstElementChild);
           await speak(text || pick(PRAISE), 'is-happy');
+          if (!stillHere()) return false;
           await wait(250);
           setMood('happy');
         } else {
-          wrongs++; sfx.wrong?.(); shake(stage); setMood('kind');
+          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); sfx.wrong?.(); shake(stage); setMood('kind');
           await speak(text || pick(ENCOURAGE), 'is-hint');
+          if (!stillHere()) return false;
           await wait(200);
           const hintFn = hint || task.hint;
           if (hintFn) await hintFn.call(task, stageInner, api, wrongs);
@@ -456,31 +572,41 @@ function startQuest(mod, forcedPlan) {
         return ok;
       },
       async finish(ok, { say: text } = {}) {
-        if (locked || finished) return;
+        if (locked || finished || !stillHere()) return;
         locked = true;
         if (ok) {
           finished = true;
+          const first = wrongs === 0;
+          const earned = first ? 2 : 1;
+          const rec = store.completeQuestStep({ questId: quest.id, index: idx, skillId: skill.id, ok: true, firstTry: first, stars: earned, maxLevel: skill.maxLevel || 4 });
+          if (rec.duplicate || rec.invalid) return;
+          quest = rec.quest;
+          idx = quest.idx;
           sfx.complete?.(); setMood('cheer'); bounce(mascotWrap.firstElementChild);
           stage.classList.add('is-win'); setTimeout(() => stage.classList.remove('is-win'), 1200);
           const r = stage.getBoundingClientRect();
           confetti({ x: r.left + r.width / 2, y: r.top + r.height * 0.4, count: wrongs ? 18 : 36 });
-          const first = wrongs === 0;
-          const earned = first ? 2 : 1;
-          result.stars += earned; result.correct++; if (first) result.firstTry++;
-          store.addStars(earned);
-          const rec = store.recordAttempt(step.skill.id, true, first, step.skill.maxLevel || 4);
-          if (rec.levelUp) result.levelUps.push({ skill: step.skill, level: rec.level });
           await speak(text || pick(PRAISE), 'is-happy');
+          if (!stillHere()) return;
+          if (step.outro) await speak(step.outro, 'is-happy');
+          if (!stillHere()) return;
+          if (idx >= plan.length && step.adventureOutro) await speak(step.adventureOutro, 'is-happy');
+          if (!stillHere()) return;
           await wait(rec.levelUp ? 300 : 500);
-          if (rec.levelUp) { sfx.sticker?.(); await speak(`Level up! ${step.skill.name} is getting easier for you.`, 'is-happy'); }
+          if (!stillHere()) return;
+          if (rec.levelUp) { sfx.sticker?.(); await speak(`Level up! ${skill.name} is getting easier for you.`, 'is-happy'); }
           next();
         } else {
-          wrongs++; sfx.wrong?.(); shake(stage); setMood('kind');
+          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); sfx.wrong?.(); shake(stage); setMood('kind');
           await speak(text || pick(ENCOURAGE), 'is-hint');
+          if (!stillHere()) return;
           await wait(150);
           if (wrongs >= 3 && task.reveal) {
             await task.reveal(stageInner, api);
-            store.recordAttempt(step.skill.id, false, false, step.skill.maxLevel || 4);
+            const rec = store.completeQuestStep({ questId: quest.id, index: idx, skillId: skill.id, ok: false, firstTry: false, stars: 0, maxLevel: skill.maxLevel || 4 });
+            if (rec.duplicate || rec.invalid) return;
+            quest = rec.quest;
+            idx = quest.idx;
             await wait(900);
             finished = true;
             next();
@@ -493,11 +619,13 @@ function startQuest(mod, forcedPlan) {
       },
       ask({ options, answer, parent = stageInner, onCorrect, finalSay, text = (v) => String(v), sayOption = (v) => String(v), cls = '' }) {
         const group = h('div', { class: 'choices' });
+        const setBusy = (on) => group.querySelectorAll('.choice').forEach((choice) => { choice.disabled = on || choice.classList.contains('is-wrong') || choice.classList.contains('is-right'); });
         for (const v of options) {
           const b = h('button', { class: `choice ${cls}`, dataset: { value: String(v) } }, text(v));
           b.addEventListener('click', async () => {
             if (locked || b.classList.contains('is-wrong')) return;
             locked = true;
+            setBusy(true);
             sfx.tap?.();
             say(sayOption(v), { interrupt: true });
             if (v === answer) {
@@ -511,7 +639,8 @@ function startQuest(mod, forcedPlan) {
               b.classList.add('is-wrong');
               await wait(650);
               locked = false;
-              api.finish(false);
+              await api.finish(false);
+              if (!finished) setBusy(false);
             }
           });
           group.append(b);
@@ -523,23 +652,29 @@ function startQuest(mod, forcedPlan) {
 
     // Offline Ask Pip: first tap repeats the question with a kind nudge, later taps run the task's own hint ladder.
     currentHelp = async () => {
-      if (locked) return;
+      if (locked || !stillHere()) return;
       helpUsed++;
+      helpTaps++;
+      store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps });
       setMood('kind');
       if (helpUsed === 1 || !task.hint) { await speak(task.say, 'is-hint'); }
       else { locked = true; try { await task.hint.call(task, stageInner, api, Math.min(helpUsed, 3)); } catch {} locked = false; }
       setMood('happy');
     };
 
-    const intro = step.review ? `Quick look back. ${task.say}` : task.say;
-    setTimeout(() => speak(intro), 350);
-    try { cleanup = task.mount(stageInner, api) || null; } catch (e) { console.error('task mount failed', e); next(); }
+    setTimeout(async () => {
+      if (!stillHere()) return;
+      if (step.intro) { await speak(step.intro); await wait(120); }
+      if (!stillHere()) return;
+      await speak(step.review ? `Quick look back. ${task.say}` : task.say);
+    }, 350);
+    try { cleanup = task.mount(stageInner, api) || null; } catch (e) { console.error('task mount failed', e); store.clearActiveQuest(); show(home()); }
 
     function next() {
       if (typeof cleanup === 'function') { try { cleanup(); } catch {} }
       currentHelp = null;
-      idx++;
-      if (idx >= plan.length) { clearInterval(timer); store.finishQuest(); show(summary(result, helpTaps)); }
+      if (left || current !== screen || store.activeQuest()?.id !== quest.id) return;
+      if (idx >= plan.length) { clearInterval(timer); finishSavedQuest(); }
       else setTimeout(runTask, 200);
     }
   }
@@ -554,7 +689,7 @@ function mountTask(skillId, level) {
   startQuest(mod, [{ mod, skill: sk }]);
 }
 if (DEV) {
-  window.__numbat = { MODULES, mountTask, store, startPip, startQuest, mem, tutor, show, home: () => show(home()) };
+  window.__numbat = { MODULES, mountTask, store, startPip, startQuest, startAdventure, startAdventureIntro, startMixedAdventure, resumeQuest, mem, tutor, show, home: () => show(home()) };
 }
 
 /* ---------- summary / done for today ---------- */
@@ -570,9 +705,9 @@ function summary(r, helpTaps = 0) {
   }
   if (r.tasks) mem.addSession({ mode: 'practice', seconds: 0, helpTaps, summary: { what_she_did: `Practised ${r.mod.title} on her own: ${r.correct} of ${r.tasks} right, ${r.firstTry} first go.`, what_clicked: r.firstTry === r.tasks ? 'Every one first go.' : '', what_was_tricky: r.firstTry < r.tasks / 2 ? `${r.mod.title} needed a few goes.` : '', home_activity: '', misconceptions: [], auto: true }, endedAt: Date.now() });
   const starsRow = h('div', { class: 'stars-row' }, ...Array.from({ length: Math.min(12, r.stars) }, (_, i) => { const s = svg(icons.star); s.style.animationDelay = `${i * 90}ms`; return s; }));
-  const title = doneToday ? 'Done for today!' : r.firstTry === r.tasks ? 'Perfect!' : 'Great work!';
+  const title = doneToday ? 'Daily goal reached!' : r.firstTry === r.tasks ? 'Perfect!' : 'Great work!';
   const line = doneToday
-    ? `That's your maths done for today, ${store.getName()}. You earned ${r.stars} stars.`
+    ? `You earned ${r.stars} ${r.stars === 1 ? 'star' : 'stars'}.`
     : `You earned ${r.stars} ${r.stars === 1 ? 'star' : 'stars'}. ${r.firstTry === r.tasks ? 'Every one first go!' : r.levelUps.length ? 'And you moved up a level!' : 'Keep it up!'}`;
 
   const card = h('div', { class: 'center-card' },
@@ -585,13 +720,13 @@ function summary(r, helpTaps = 0) {
     h('p', {}, line),
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn-ghost', onClick: () => { sfx.tap?.(); show(home()); } }, svg(icons.home), 'Home'),
-      doneToday ? null : h('button', { class: 'btn btn-green', onClick: () => startQuest(r.mod) }, svg(icons.play), 'Play again'),
+      h('button', { class: 'btn btn-green', onClick: () => r.mode === 'adventure' ? startMixedAdventure() : doneToday ? startAdventureIntro() : startQuest(r.mod) }, svg(icons.play), r.mode === 'adventure' ? 'Keep exploring' : doneToday ? 'Continue adventure' : 'Play again'),
     ),
   );
   const s = h('div', { class: 'summary' }, card);
   s._askPip = () => say(line);
   setTimeout(() => { sfx.celebrate?.(); confetti({ count: 60, spread: 1.4, y: innerHeight * 0.35 }); }, 300);
-  setTimeout(() => { if (newSticker) sfx.sticker?.(); say(`${title} ${line}${newSticker ? ` You found a new sticker: a ${newSticker.name.toLowerCase()}!` : ''}`); }, 700);
+  setTimeout(() => { if (current === s) { if (newSticker) sfx.sticker?.(); say(`${title} ${line}${newSticker ? ` You found a new sticker: a ${newSticker.name.toLowerCase()}!` : ''}`); } }, 700);
   return s;
 }
 
@@ -613,6 +748,6 @@ function stickerBook() {
   const n = st.stickers.length;
   const line = n ? `You have ${n} ${n === 1 ? 'sticker' : 'stickers'}. Finish your maths each day to find more.` : 'Finish your maths for the day to find your first sticker.';
   s._askPip = () => say(line);
-  setTimeout(() => say(line), 400);
+  setTimeout(() => { if (current === s) say(line); }, 400);
   return s;
 }

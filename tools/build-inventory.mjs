@@ -19,6 +19,9 @@
 //    tracks are enumerated exactly; "Order the numbers" level 3 is combinatorial (any 4 numbers
 //    1..120 pairwise >= 2 apart, ~millions) and is NOT enumerated here - see the report note.
 import fs from 'node:fs';
+import { ADVENTURE_VOICE_LINES } from '../js/adventures.js';
+import { REASONING_VOICE_LINES } from '../js/modules/reasoning.js';
+import { EXPLORE_SPOKEN_LINES } from '../js/modules/explore.js';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const man = JSON.parse(fs.readFileSync(ROOT + 'assets/voice/manifest.json', 'utf8'));
@@ -102,6 +105,12 @@ addFixed(`Pip is just waking up. One moment.`);
 addFixed(`Pip needs a rest. You can still practise on your own.`);
 addFixed(`That was a big session! Pip is having a little rest now.`);
 addFixed(`Pip has done lots of maths today and is having a rest.`);
+addFixed('Daily goal reached!');
+for (const line of [...ADVENTURE_VOICE_LINES, ...REASONING_VOICE_LINES, ...EXPLORE_SPOKEN_LINES]) addFixed(line);
+for (const title of ['Sharing Equally', 'Equal Groups', 'Numbers to 120', 'Add and Take Away', "Pip's Brain Teasers", 'Maths Explorer']) {
+  addFixed(`Let's explore ${title} first.`);
+  addFixed(`Next stop: ${title}.`);
+}
 
 /* ---------------------------------------------------------------- 2. name / skill / sticker templates */
 const T = (pattern, ...vals) => {                       // substitute {slot} tokens in a manifest pattern

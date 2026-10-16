@@ -1,6 +1,6 @@
 // Offline-first service worker: precache the app shell, serve from cache, refresh in the background.
 // Voice clips and SFX are cached best-effort in a second pass so one missing file never blocks install.
-const VERSION = 'numbat-maths-v5';
+const VERSION = 'numbat-maths-v6';
 const SHELL = [
   './',
   './index.html',
@@ -8,7 +8,8 @@ const SHELL = [
   './css/app.css', './css/board.css',
   './js/app.js', './js/ui.js', './js/art.js', './js/audio.js', './js/voice.js', './js/drag.js', './js/store.js', './js/parent.js',
   './js/board.js', './js/tutor.js', './js/memory.js', './js/camera.js', './js/profile-config.js', './js/vendor/elevenlabs-client.mjs',
-  './js/modules/sharing.js', './js/modules/groups.js', './js/modules/numbers.js', './js/modules/addsub.js',
+  './js/adventures.js',
+  './js/modules/sharing.js', './js/modules/groups.js', './js/modules/numbers.js', './js/modules/addsub.js', './js/modules/reasoning.js', './js/modules/explore.js',
   './assets/fonts/Fredoka-latin.woff2', './assets/fonts/Nunito-latin.woff2',
   './assets/icons/icon.svg', './assets/icons/icon-192.png', './assets/icons/icon-512.png', './assets/icons/icon-512-maskable.png', './assets/icons/apple-touch-icon.png',
   './assets/sfx/manifest.json', './assets/voice/manifest.json',
