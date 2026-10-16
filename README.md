@@ -16,8 +16,9 @@ Live at https://armutk.github.io/numbat-maths/ (offline-first PWA: Add to Home S
 | `js/audio.js`, `assets/sfx/` | Web Audio engine (iOS unlock, voice/SFX buses, ducking) and a CC0 SFX set from Kenney.nl. |
 | `js/drag.js` | One hardened touch drag engine for every screen (pointer capture, state machine, watchdog, spring/lift/snap feel). |
 | `js/modules/*` | Six offline practice worlds: sharing, equal groups, numbers, add/subtract, reasoning challenges, and patterns/shapes/measurement/charts. |
-| `js/adventures.js` | Serializable three-stage story missions. The first picnic mission links grouping, fair sharing, and subtraction with visible stage progress. |
-| `js/store.js` | On-device mastery, spaced review, stars/stickers, and resumable quest transactions. Task seeds preserve the same question across Home/reload; completion is idempotent. |
+| `js/adventures.js` | Four serializable connected stories: Picnic, Lost Bilby, Pip's Bakery and Train Rescue, with visible stage progress and chapter-specific resume labels. |
+| `js/demonstrations.js` | Deterministic, concrete worked examples for all 23 practice skills. Show me how has Back/Replay/Next/Skip/Try it controls and never awards progress. |
+| `js/store.js` | On-device mastery, spaced review, stars/stickers, resumable quest transactions, and a rolling seven-day parent-selected school focus. Task seeds preserve the same question across Home/reload; completion is idempotent. |
 | Hermes `/opt/pip-proxy` | `https://hermes.redgumlab.au/pip/{health,see,summary}`. Gemini key stays on the server. Summaries go to Telegram only from the production origin, max one per 30 min. |
 
 The agent: `tools/pip-agent/prompt.md` (persona + pedagogy), `tools/pip-agent/tools.json` (19 client tools), `tools/pip-agent/apply.py` (creates/updates the agent; run on Hermes with `ELEVENLABS_API_KEY=$(secrets get ELEVENLABS_API_KEY) python3 apply.py`). The agent is public but origin-locked to `armutk.github.io` (plus localhost for tests); no key ships in the site.
@@ -35,6 +36,9 @@ Tests (Playwright; Chromium runs natively, WebKit runs through Docker with `test
 - `tests/touch-check.mjs`, `tests/audio-check.mjs`, `tests/voice-check.mjs`, `tests/play.mjs` (scripted practice quest).
 - `tests/quest-persistence.mjs`, `tests/stale-callback-check.mjs`: exact resume, corrupt-save recovery, wrong/help state, celebration reload, and stale async callback protection.
 - `tests/adventure-check.mjs`, `tests/reasoning-check.mjs`, `tests/explore-check.mjs`: connected story, reasoning challenges, and the four new curriculum activities.
+- `tests/chapters-check.mjs`, `tests/chapter-integration.mjs`: all four deterministic chapter routes, picker/start/resume and focus isolation.
+- `tests/demonstrations-check.mjs`, `tests/demo-integration.mjs`, `tests/demo-speech-check.mjs`: 23-skill worked examples, no-reward/help accounting, controls, cancellation and task-speech isolation.
+- `tests/focus-check.mjs`, `tests/focus-ui-check.mjs`: rolling seven-day focus persistence, expiry, safe migration, planner weighting and parent controls.
 - `tests/voice-release-check.mjs`: every new spoken line resolves to a whole-sentence local Kokoro clip except intentional number-counting lists.
 
 Fonts: Fredoka and Nunito (SIL OFL), bundled. Illustrations are original SVG. SFX: Kenney.nl, CC0 (see `assets/sfx/LICENSE.txt`). ElevenLabs browser SDK vendored in `js/vendor/` (MIT).

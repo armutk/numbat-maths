@@ -13,6 +13,55 @@ async function modules() {
 }
 
 const fmtMin = (sec) => sec < 60 ? `${Math.round(sec)} s` : `${Math.round(sec / 60)} min`;
+const FOCUS_TOPICS = [
+  { id: 'fair-sharing', label: 'Fair sharing', skillIds: ['sharing.two', 'sharing.groups'] },
+  { id: 'equal-groups', label: 'Equal groups', skillIds: ['groups.pairs', 'groups.howmany'] },
+  { id: 'tens-ones', label: 'Tens and ones', skillIds: ['numbers.build', 'numbers.read'] },
+  { id: 'number-order', label: 'Number order', skillIds: ['numbers.find', 'numbers.beforeafter', 'numbers.order'] },
+  { id: 'add-subtract', label: 'Add and subtract', skillIds: ['addsub.add', 'addsub.sub', 'addsub.maketen'] },
+  { id: 'patterns-shapes', label: 'Patterns and shapes', skillIds: ['explore.patterns', 'explore.shapes'] },
+  { id: 'measure-charts', label: 'Measure and charts', skillIds: ['explore.measure', 'explore.charts'] },
+  { id: 'maths-reasoning', label: 'Maths reasoning', skillIds: ['reasoning.mistake', 'reasoning.missing', 'reasoning.match'] },
+];
+
+function weeklyFocusCard() {
+  const card = h('div', { class: 'card focus-card' });
+  const heading = h('h2', {}, 'School focus for the next 7 days');
+  const help = h('p', {}, 'Choose up to 3 topics. New practice quests will favour them and still include useful revision.');
+  const status = h('p', { class: 'focus-status' });
+  const choices = h('div', { class: 'focus-choices' });
+  const clear = h('button', { class: 'btn btn-sm btn-ghost' }, 'Clear focus');
+
+  const render = () => {
+    const focus = store.getWeeklyFocus();
+    const selected = new Set(focus?.selections.map((item) => item.id) || []);
+    choices.innerHTML = '';
+    for (const topic of FOCUS_TOPICS) {
+      const on = selected.has(topic.id);
+      choices.append(h('button', { class: `focus-choice ${on ? 'is-on' : ''}`, 'aria-pressed': String(on), onClick: () => {
+        const next = new Set(selected);
+        if (next.has(topic.id)) next.delete(topic.id);
+        else if (next.size >= 3) { toast('Choose up to 3 topics'); return; }
+        else next.add(topic.id);
+        const picked = FOCUS_TOPICS.filter((item) => next.has(item.id));
+        if (picked.length) store.setWeeklyFocus(picked); else store.clearWeeklyFocus();
+        render();
+      } }, topic.label));
+    }
+    if (focus) {
+      const expiry = new Date(focus.expiresAt).toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' });
+      status.textContent = `Current focus: ${focus.selections.map((item) => item.label).join(', ')} · until ${expiry}`;
+      clear.hidden = false;
+    } else {
+      status.textContent = 'No school focus chosen. Practice stays balanced across her current level.';
+      clear.hidden = true;
+    }
+  };
+  clear.addEventListener('click', () => { store.clearWeeklyFocus(); render(); toast('School focus cleared'); });
+  card.append(heading, help, choices, status, clear, h('p', { class: 'muted' }, 'This changes new practice quests only. A saved quest or story chapter keeps its original questions.'));
+  render();
+  return card;
+}
 
 export function parentGate({ show, home, say }) {
   sfx.tap();
@@ -33,7 +82,7 @@ export function parentGate({ show, home, say }) {
   show(s);
 }
 
-async function parentView({ show, home }) {
+export async function parentView({ show, home }) {
   const mods = await modules();
   const st = store.getState();
   const t = store.timeTotals();
@@ -91,6 +140,7 @@ async function parentView({ show, home }) {
         ),
         h('p', { class: 'muted', style: { marginTop: '12px' } }, `${st.quests} quests finished all up · ${st.stars} stars · ${st.stickers.length} stickers. Daily goal is ${store.DAILY_QUESTS} short quests (about 5–10 minutes).`),
       ),
+      weeklyFocusCard(),
       pipNotesCard(),
       h('div', { class: 'card' },
         h('h2', {}, 'What to practise at home'),

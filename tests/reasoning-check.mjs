@@ -18,7 +18,7 @@ function plain(value) {
 }
 
 const picnic = getAdventure('picnic-party');
-assert.equal(ADVENTURES.length, 1);
+assert.equal(ADVENTURES.length, 4);
 assert.equal(picnic.stages.length, 3);
 assert.deepEqual(picnic.stages.map((s) => [s.moduleId, s.skillId]), [
   ['groups', 'groups.howmany'],

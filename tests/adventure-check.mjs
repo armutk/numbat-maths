@@ -21,8 +21,9 @@ if (!/cookies?/.test(leftovers.say)) throw new Error('leftovers stage generated 
 await page.goto(BASE);
 await page.evaluate(() => localStorage.setItem('numbat-maths.v1', JSON.stringify({ profile: { name: 'Arisha', sound: false } })));
 await page.reload(); await page.waitForFunction(() => !!window.__numbat);
-if (!(await page.getByRole('button', { name: /Picnic Adventure/ }).count())) throw new Error('home has no story mission');
-await page.getByRole('button', { name: /Picnic Adventure/ }).click();
+if (!(await page.getByRole('button', { name: /Story adventures/ }).count())) throw new Error('home has no story picker');
+await page.getByRole('button', { name: /Story adventures/ }).click();
+await page.getByRole('button', { name: 'Start the picnic' }).click();
 await page.getByText('Pack the Picnic Bags', { exact: true }).waitFor();
 await page.getByText('Share the Snacks', { exact: true }).waitFor();
 await page.getByText('Count the Leftovers', { exact: true }).waitFor();

@@ -22,6 +22,7 @@ import fs from 'node:fs';
 import { ADVENTURE_VOICE_LINES } from '../js/adventures.js';
 import { REASONING_VOICE_LINES } from '../js/modules/reasoning.js';
 import { EXPLORE_SPOKEN_LINES } from '../js/modules/explore.js';
+import { DEMONSTRATION_VOICE_LINES } from '../js/demonstrations.js';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const man = JSON.parse(fs.readFileSync(ROOT + 'assets/voice/manifest.json', 'utf8'));
@@ -106,7 +107,8 @@ addFixed(`Pip needs a rest. You can still practise on your own.`);
 addFixed(`That was a big session! Pip is having a little rest now.`);
 addFixed(`Pip has done lots of maths today and is having a rest.`);
 addFixed('Daily goal reached!');
-for (const line of [...ADVENTURE_VOICE_LINES, ...REASONING_VOICE_LINES, ...EXPLORE_SPOKEN_LINES]) addFixed(line);
+for (const line of [...ADVENTURE_VOICE_LINES, ...REASONING_VOICE_LINES, ...EXPLORE_SPOKEN_LINES, ...DEMONSTRATION_VOICE_LINES]) addFixed(line);
+addFixed('Choose a story adventure.');
 for (const title of ['Sharing Equally', 'Equal Groups', 'Numbers to 120', 'Add and Take Away', "Pip's Brain Teasers", 'Maths Explorer']) {
   addFixed(`Let's explore ${title} first.`);
   addFixed(`Next stop: ${title}.`);

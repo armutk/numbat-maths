@@ -298,6 +298,12 @@ input { font: inherit; }
 }
 
 .actions { display: flex; justify-content: center; gap: 14px; flex: 0 0 auto; min-height: 72px; align-items: center; }
+.demo-help-button { margin-right: auto; }
+.demo-help-button.is-offered { animation: demoOffer 1.1s ease-in-out infinite; outline: 4px solid var(--yellow); outline-offset: 2px; }
+@keyframes demoOffer { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.demo-overlay { position: absolute; left: 0; right: 0; top: calc(var(--safe-top) + 82px); bottom: 0; z-index: 70; display: grid; place-items: center; padding: 12px calc(var(--safe-right) + 14px) calc(var(--safe-bottom) + 12px) calc(var(--safe-left) + 14px); background: rgba(255,248,236,.94); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
+.demo-shell { width: min(920px, 100%); max-height: 100%; overflow: auto; touch-action: pan-y; }
+.quest.is-demo-open > .stage, .quest.is-demo-open > .actions { pointer-events: none; }
 
 /* Choice buttons (answers) */
 .choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
@@ -503,6 +509,15 @@ input { font: inherit; }
 .mission-stages li { counter-increment: mission; position: relative; display: flex; flex-direction: column; gap: 5px; padding: 16px; border-radius: 20px; background: var(--purple-soft); text-align: left; }
 .mission-stages li::before { content: counter(mission); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: var(--purple); color: #fff; font-weight: 800; }
 .mission-stages span { color: var(--ink-soft); font-size: .95rem; line-height: 1.3; }
+.chapter-picker-card { width: min(980px, 100%) !important; }
+.chapter-picker-card > .mascot { width: clamp(80px, 13vmin, 130px); }
+.chapter-grid { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.chapter-card { display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; gap: 10px 14px; padding: 16px; border-radius: 22px; background: linear-gradient(135deg, var(--purple-soft), var(--blue-soft)); text-align: left; }
+.chapter-number { grid-row: 1 / span 2; align-self: start; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--purple); color: #fff; font-weight: 800; box-shadow: 0 4px 0 var(--purple-deep); }
+.chapter-copy h2 { margin: 0; font-size: 1.3rem; }
+.chapter-copy p { margin: 4px 0; font-size: .95rem; line-height: 1.25; }
+.chapter-copy small { color: var(--purple-deep); font-weight: 800; }
+.chapter-card .btn { grid-column: 2; justify-self: start; }
 .summary .reward-row { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .center-card h1 { margin: 0; font-size: clamp(2rem, 5vmin, 3rem); font-weight: 700; }
 .center-card p { margin: 0; font-size: 1.25rem; color: var(--ink-soft); font-weight: 500; }
@@ -551,6 +566,12 @@ input { font: inherit; }
 .parent ul { margin: 0; padding-left: 20px; }
 .parent li { margin: 4px 0; line-height: 1.45; }
 .parent .danger { color: var(--red); font-weight: 700; }
+.focus-choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+.focus-choice { min-height: 46px; padding: 9px 15px; border-radius: 15px; background: var(--sand); color: var(--ink); font-weight: 700; border: 3px solid transparent; }
+.focus-choice.is-on { background: var(--blue-soft); border-color: var(--blue); color: var(--blue-deep); }
+.focus-choice:focus-visible { outline: 4px solid var(--yellow); outline-offset: 2px; }
+.focus-status { padding: 11px 14px; border-radius: 14px; background: var(--cream); font-weight: 700; }
+.focus-card .btn[hidden] { display: none; }
 .gate-hold { position: relative; overflow: hidden; }
 .gate-hold .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(255, 255, 255, 0.35); transition: width 0.1s linear; }
 
@@ -658,6 +679,7 @@ input { font: inherit; }
   .resume-actions { width: 100%; }
   .resume-actions .btn { flex: 1; }
   .mission-stages { grid-template-columns: 1fr; }
+  .chapter-grid { grid-template-columns: 1fr; }
 }
 @media (max-height: 700px) {
   .home-hero .mascot { width: 96px; }

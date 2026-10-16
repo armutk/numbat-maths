@@ -12,6 +12,7 @@ const blank = () => ({
   stars: 0,
   quests: 0,
   activeQuest: null,
+  weeklyFocus: null,
   completedQuestIds: [],
   log: [],      // last 200 attempts { t, skill, ok, firstTry }
 });
@@ -25,11 +26,22 @@ function load() {
       const s = JSON.parse(raw);
       const next = { ...blank(), ...s, profile: { ...blank().profile, ...s.profile } };
       next.activeQuest = normaliseQuest(next.activeQuest);
+      next.weeklyFocus = normaliseFocus(next.weeklyFocus);
       next.completedQuestIds = Array.isArray(next.completedQuestIds) ? next.completedQuestIds.filter((id) => typeof id === 'string').slice(-20) : [];
       return next;
     }
   } catch {}
   return blank();
+}
+
+function normaliseFocus(focus) {
+  if (!focus || focus.v !== 1 || !Array.isArray(focus.selections) || !Number.isFinite(focus.setAt) || !Number.isFinite(focus.expiresAt) || focus.expiresAt <= focus.setAt) return null;
+  const selections = focus.selections.slice(0, 3).map((item) => ({
+    id: String(item?.id || '').trim().slice(0, 40),
+    label: String(item?.label || '').trim().slice(0, 60),
+    skillIds: [...new Set(Array.isArray(item?.skillIds) ? item.skillIds.filter((id) => typeof id === 'string' && id.includes('.')).slice(0, 8) : [])],
+  })).filter((item) => item.id && item.label && item.skillIds.length);
+  return selections.length ? { v: 1, selections, setAt: focus.setAt, expiresAt: focus.expiresAt } : null;
 }
 
 function normaliseQuest(q) {
@@ -61,6 +73,23 @@ export function reset() { state = blank(); save(); }
 
 export function setName(name) { state.profile.name = name.trim().slice(0, 24); save(); }
 export function getName() { return state.profile.name; }
+
+export function setWeeklyFocus(selections, now = Date.now()) {
+  const setAt = Number(now);
+  const focus = normaliseFocus({ v: 1, selections, setAt, expiresAt: setAt + 7 * DAY });
+  state.weeklyFocus = focus;
+  save();
+  return focus;
+}
+
+export function getWeeklyFocus(now = Date.now()) {
+  const focus = state.weeklyFocus;
+  if (!focus) return null;
+  if (Number(now) >= focus.expiresAt) { state.weeklyFocus = null; save(); return null; }
+  return focus;
+}
+
+export function clearWeeklyFocus() { state.weeklyFocus = null; save(); }
 
 export function skill(id) {
   if (!state.skills[id]) state.skills[id] = { level: 1, history: [], streak: 0, total: 0, correct: 0, firstTry: 0, lastSeen: 0, due: 0, interval: 1 };

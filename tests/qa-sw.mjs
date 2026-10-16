@@ -6,7 +6,7 @@ const PW = process.env.PW_PATH || '/home/impmaster/.local/share/mise/installs/np
 const { chromium, webkit, devices } = require(PW);
 const ENGINE = (process.argv.find((a) => a.startsWith('--engine=')) || '--engine=chromium').split('=')[1];
 const LIVE = process.env.SITE || 'https://armutk.github.io/numbat-maths/';
-const VER = process.env.SW_VER || 'numbat-maths-v6';
+const VER = process.env.SW_VER || 'numbat-maths-v7';
 const OLD = process.env.OLD_DIR; // extracted old build
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.webmanifest': 'application/manifest+json' };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

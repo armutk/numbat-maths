@@ -18,7 +18,8 @@ import numbers from './modules/numbers.js';
 import addsub from './modules/addsub.js';
 import reasoning from './modules/reasoning.js';
 import explore from './modules/explore.js';
-import { getAdventure, buildAdventurePlan } from './adventures.js';
+import { ADVENTURES, getAdventure, buildAdventurePlan } from './adventures.js';
+import { makeDemonstration, mountDemonstration } from './demonstrations.js';
 
 export const MODULES = [sharing, groups, numbers, addsub, reasoning, explore];
 const TASKS_PER_QUEST = 6;
@@ -171,9 +172,9 @@ function home() {
     h('span', { class: 'pip-cta-icon', html: ICON_CHAT }), h('span', { class: 'pip-cta-text' }, h('b', {}, 'Talk to Pip'), h('small', {}, cap.blocked ? 'Pip is resting' : 'Share things out together')));
   const cam = h('button', { class: 'pip-cta pip-cta-cam', disabled: cap.blocked || !online, onClick: () => startPip('camera') },
     h('span', { class: 'pip-cta-icon', html: ICON_CAM }), h('span', { class: 'pip-cta-text' }, h('b', {}, 'Show Pip something'), h('small', {}, 'Crackers, toys, anything!')));
-  const adventure = h('button', { class: 'adventure-card', disabled: !!savedQuest, onClick: () => startAdventureIntro() },
-    h('span', { class: 'adventure-mark' }, '3'),
-    h('span', { class: 'adventure-copy' }, h('b', {}, "Pip's Picnic Adventure"), h('small', {}, 'Pack, share and count through one story')),
+  const adventure = h('button', { class: 'adventure-card', disabled: !!savedQuest, onClick: () => showAdventurePicker() },
+    h('span', { class: 'adventure-mark' }, String(ADVENTURES.length)),
+    h('span', { class: 'adventure-copy' }, h('b', {}, 'Story adventures'), h('small', {}, 'Choose a maths story with Pip')),
     h('span', { class: 'adventure-go', html: icons.play }),
   );
 
@@ -201,7 +202,7 @@ function home() {
     savedQuest ? h('div', { class: 'resume-card' },
       h('div', { class: 'resume-copy' }, h('b', {}, savedQuest.mode === 'adventure' || savedQuest.mode === 'story' ? 'Your adventure is waiting!' : 'Your maths quest is waiting!'), h('span', {}, `Question ${Math.min(savedQuest.idx + 1, savedQuest.plan.length)} of ${savedQuest.plan.length}`)),
       h('div', { class: 'resume-actions' },
-        h('button', { class: 'btn btn-green', onClick: () => resumeQuest() }, svg(icons.play), savedQuest.mode === 'adventure' || savedQuest.mode === 'story' ? 'Resume adventure' : 'Resume quest'),
+        h('button', { class: 'btn btn-green', onClick: () => resumeQuest() }, svg(icons.play), savedQuest.mode === 'adventure' || savedQuest.mode === 'story' ? (savedQuest.resumeLabel || 'Resume adventure') : 'Resume quest'),
         h('button', { class: 'btn btn-ghost', onClick: () => { store.clearActiveQuest(); show(home()); } }, 'Start something new'),
       ),
     ) : null,
@@ -212,6 +213,25 @@ function home() {
   s._askPip = () => { if (!cap.blocked && online) startPip('lesson'); else { say(line); } };
   setTimeout(() => { if (current === s) say(line); }, 500);
   return s;
+}
+
+function showAdventurePicker() {
+  const cards = ADVENTURES.map((adventure) => h('article', { class: 'chapter-card' },
+    h('div', { class: 'chapter-number' }, String(adventure.stages.length)),
+    h('div', { class: 'chapter-copy' }, h('h2', {}, adventure.title), h('p', {}, adventure.intro), h('small', {}, `${adventure.stages.length} stages`)),
+    h('button', { class: 'btn btn-sm btn-purple', onClick: () => startAdventureIntro(adventure.id) }, adventure.buttonLabel || 'Start adventure'),
+  ));
+  const card = h('div', { class: 'center-card chapter-picker-card' },
+    h('div', { html: mascot('happy', 'mascot') }),
+    h('h1', {}, 'Choose a story adventure'),
+    h('p', {}, 'Each story has a few connected maths jobs.'),
+    h('div', { class: 'chapter-grid' }, ...cards),
+    h('button', { class: 'btn btn-ghost', onClick: () => show(home()) }, svg(icons.home), 'Home'),
+  );
+  const screen = h('div', { class: 'summary chapter-picker' }, card);
+  screen._askPip = () => say('Choose a story adventure.');
+  show(screen);
+  setTimeout(() => { if (current === screen) say('Choose a story adventure.'); }, 400);
 }
 
 function startAdventureIntro(adventureId = 'picnic-party') {
@@ -238,12 +258,14 @@ function startAdventure(adventureId = 'picnic-party') {
   const plan = buildAdventurePlan({ adventureId, seed: freshSeed() });
   if (!adventure || !plan?.length) { show(home()); return; }
   const first = MODULES.find((m) => m.id === plan[0].moduleId);
-  startQuest(first, plan, { mode: 'adventure', title: adventure.title, adventureId });
+  startQuest(first, plan, { mode: 'adventure', title: adventure.title, adventureId, buttonLabel: adventure.buttonLabel, resumeLabel: adventure.resumeLabel });
 }
 
 function startMixedAdventure() {
+  const focusIds = new Set(store.getWeeklyFocus()?.selections.flatMap((item) => item.skillIds) || []);
   const plan = MODULES.map((mod, index) => {
-    const skill = mod.skills.slice().sort((a, b) => (store.accuracy(a.id) ?? 1) - (store.accuracy(b.id) ?? 1))[0];
+    const ordered = mod.skills.slice().sort((a, b) => (store.accuracy(a.id) ?? 1) - (store.accuracy(b.id) ?? 1));
+    const skill = ordered.find((item) => focusIds.has(item.id)) || ordered[0];
     return {
       moduleId: mod.id, skillId: skill.id, level: store.skill(skill.id).level, seed: freshSeed(),
       title: mod.title, intro: index ? `Next stop: ${mod.title}.` : `Let's explore ${mod.title} first.`, storyStage: index + 1,
@@ -451,13 +473,20 @@ function buildQuest(mod) {
     if (pa !== pb) return pa - pb;
     return (store.accuracy(a.id) ?? 1) - (store.accuracy(b.id) ?? 1);
   });
+  const focusIds = new Set(store.getWeeklyFocus()?.selections.flatMap((item) => item.skillIds) || []);
+  const focused = mine.filter((skill) => focusIds.has(skill.id));
   const plan = [];
-  for (let i = 0; i < TASKS_PER_QUEST; i++) plan.push({ mod, skill: mine[i % mine.length] });
+  if (focused.length) {
+    for (let i = 0; i < 4; i++) plan.push({ mod, skill: focused[i % focused.length], focus: true });
+    for (let i = 0; i < TASKS_PER_QUEST - 4; i++) plan.push({ mod, skill: mine[i % mine.length] });
+  } else {
+    for (let i = 0; i < TASKS_PER_QUEST; i++) plan.push({ mod, skill: mine[i % mine.length] });
+  }
   const due = store.dueSkills().filter((id) => !mine.slice(0, 2).some((s) => s.id === id));
   if (due.length) {
     const id = due[0];
     const owner = MODULES.find((m) => m.skills.some((s) => s.id === id));
-    if (owner) plan.splice(3, 1, { mod: owner, skill: owner.skills.find((s) => s.id === id), review: true });
+    if (owner) plan.splice(plan.length - 1, 1, { mod: owner, skill: owner.skills.find((s) => s.id === id), review: true });
   }
   return plan;
 }
@@ -469,13 +498,14 @@ function startQuest(mod, forcedPlan, options = {}) {
   let quest = options.resume ? store.activeQuest() : null;
   if (!quest) {
     const plan = serialisePlan(forcedPlan || buildQuest(mod));
-    quest = store.beginQuest({ v: 1, id: `quest-${Date.now()}-${freshSeed()}`, mode: options.mode || 'standard', moduleId: mod.id, title: options.title || mod.title, plan, idx: 0, wrongs: 0, helpUsed: 0, helpTaps: 0, result: { stars: 0, correct: 0, firstTry: 0, levelUps: [] } });
+    quest = store.beginQuest({ v: 1, id: `quest-${Date.now()}-${freshSeed()}`, mode: options.mode || 'standard', moduleId: mod.id, title: options.title || mod.title, adventureId: options.adventureId, buttonLabel: options.buttonLabel, resumeLabel: options.resumeLabel, plan, idx: 0, wrongs: 0, helpUsed: 0, helpTaps: 0, result: { stars: 0, correct: 0, firstTry: 0, levelUps: [] } });
   }
   const plan = quest.plan;
   let idx = quest.idx;
   let timer = 0;
   let helpTaps = quest.helpTaps;
   let left = false;
+  let activeDemo = null;
 
   const bubbleText = h('p', {}, '');
   const bubble = h('div', { class: 'speech-bubble' }, bubbleText);
@@ -498,7 +528,12 @@ function startQuest(mod, forcedPlan, options = {}) {
   );
   show(screen);
   timer = setInterval(() => { if (!document.hidden && current === screen) store.addSeconds(5); }, 5000);
-  screen._leave = () => { left = true; clearInterval(timer); };
+  screen._leave = () => {
+    left = true; clearInterval(timer);
+    activeDemo?.controller?.destroy?.();
+    activeDemo?.overlay?.remove();
+    activeDemo = null;
+  };
 
   const stillHere = () => !left && current === screen && store.activeQuest()?.id === quest.id;
   const setMood = (mood) => { mascotWrap.innerHTML = mascot(mood, 'mascot-sm is-idle'); };
@@ -507,7 +542,7 @@ function startQuest(mod, forcedPlan, options = {}) {
     bubble.classList.remove('is-happy', 'is-hint');
     if (kind) bubble.classList.add(kind);
   };
-  const speak = (text, kind) => { if (!stillHere()) return Promise.resolve(); setBubble(text, kind); return say(text); };
+  const speak = (text, kind) => { if (!stillHere() || activeDemo) return Promise.resolve(); setBubble(text, kind); return say(text); };
   let currentHelp = null; // scripted help for the Ask Pip button while offline
 
   screen._askPip = async () => {
@@ -537,6 +572,45 @@ function startQuest(mod, forcedPlan, options = {}) {
     stage.classList.remove('shake');
     setMood('happy');
     let wrongs = quest.wrongs || 0, locked = false, finished = false, cleanup = null, helpUsed = quest.helpUsed || 0;
+    let demoBtn = null;
+    const offerDemo = () => { if (demoBtn && wrongs >= 2) { demoBtn.classList.add('is-offered'); demoBtn.textContent = 'Show me how?'; } };
+
+    const closeDemo = (demoState) => {
+      if (!demoState || activeDemo !== demoState) return;
+      demoState.controller?.destroy?.();
+      demoState.overlay.remove();
+      activeDemo = null;
+      screen.classList.remove('is-demo-open');
+      stage.inert = false; actions.inert = false;
+      if (stillHere()) { locked = false; setBubble(task.say, 'is-hint'); }
+    };
+
+    const openDemo = () => {
+      if (locked || finished || activeDemo || !stillHere()) return;
+      helpUsed++; helpTaps++;
+      store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps });
+      locked = true; stopSpeech();
+      stage.inert = true; actions.inert = true;
+      screen.classList.add('is-demo-open');
+      const host = h('div', { class: 'demo-host' });
+      const overlay = h('div', { class: 'demo-overlay' }, h('div', { class: 'demo-shell' }, host));
+      screen.append(overlay);
+      const demoState = { overlay, controller: null };
+      activeDemo = demoState;
+      const demo = { ...makeDemonstration(skill.id, level, { seed: (Number(step.seed) ^ 0xa5a5a5a5) >>> 0 }), title: 'Pip shows you how' };
+      const demoHere = () => activeDemo === demoState && stillHere();
+      demoState.controller = mountDemonstration(host, demo, {
+        stillHere: demoHere,
+        say: async (text, { signal } = {}) => {
+          if (signal?.aborted || !demoHere()) return;
+          setBubble(text, 'is-hint');
+          await say(text);
+        },
+        stopSay: stopSpeech,
+        onDone: () => closeDemo(demoState),
+        onSkip: () => closeDemo(demoState),
+      });
+    };
 
     const api = {
       name: store.getName(),
@@ -562,7 +636,7 @@ function startQuest(mod, forcedPlan, options = {}) {
           await wait(250);
           setMood('happy');
         } else {
-          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); sfx.wrong?.(); shake(stage); setMood('kind');
+          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); offerDemo(); sfx.wrong?.(); shake(stage); setMood('kind');
           await speak(text || pick(ENCOURAGE), 'is-hint');
           if (!stillHere()) return false;
           await wait(200);
@@ -576,7 +650,7 @@ function startQuest(mod, forcedPlan, options = {}) {
         locked = true;
         if (ok) {
           finished = true;
-          const first = wrongs === 0;
+          const first = wrongs === 0 && helpUsed === 0;
           const earned = first ? 2 : 1;
           const rec = store.completeQuestStep({ questId: quest.id, index: idx, skillId: skill.id, ok: true, firstTry: first, stars: earned, maxLevel: skill.maxLevel || 4 });
           if (rec.duplicate || rec.invalid) return;
@@ -597,7 +671,7 @@ function startQuest(mod, forcedPlan, options = {}) {
           if (rec.levelUp) { sfx.sticker?.(); await speak(`Level up! ${skill.name} is getting easier for you.`, 'is-happy'); }
           next();
         } else {
-          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); sfx.wrong?.(); shake(stage); setMood('kind');
+          wrongs++; store.updateActiveQuest({ questId: quest.id, wrongs, helpUsed, helpTaps }); offerDemo(); sfx.wrong?.(); shake(stage); setMood('kind');
           await speak(text || pick(ENCOURAGE), 'is-hint');
           if (!stillHere()) return;
           await wait(150);
@@ -669,6 +743,9 @@ function startQuest(mod, forcedPlan, options = {}) {
       await speak(step.review ? `Quick look back. ${task.say}` : task.say);
     }, 350);
     try { cleanup = task.mount(stageInner, api) || null; } catch (e) { console.error('task mount failed', e); store.clearActiveQuest(); show(home()); }
+    demoBtn = h('button', { class: 'btn btn-sm btn-purple demo-help-button', 'aria-label': 'Show me how', onClick: openDemo }, 'Show me how');
+    actions.prepend(demoBtn);
+    offerDemo();
 
     function next() {
       if (typeof cleanup === 'function') { try { cleanup(); } catch {} }
@@ -689,7 +766,7 @@ function mountTask(skillId, level) {
   startQuest(mod, [{ mod, skill: sk }]);
 }
 if (DEV) {
-  window.__numbat = { MODULES, mountTask, store, startPip, startQuest, startAdventure, startAdventureIntro, startMixedAdventure, resumeQuest, mem, tutor, show, home: () => show(home()) };
+  window.__numbat = { MODULES, mountTask, store, startPip, startQuest, startAdventure, startAdventureIntro, showAdventurePicker, startMixedAdventure, resumeQuest, mem, tutor, show, home: () => show(home()) };
 }
 
 /* ---------- summary / done for today ---------- */
@@ -720,7 +797,8 @@ function summary(r, helpTaps = 0) {
     h('p', {}, line),
     h('div', { class: 'actions' },
       h('button', { class: 'btn btn-ghost', onClick: () => { sfx.tap?.(); show(home()); } }, svg(icons.home), 'Home'),
-      h('button', { class: 'btn btn-green', onClick: () => r.mode === 'adventure' ? startMixedAdventure() : doneToday ? startAdventureIntro() : startQuest(r.mod) }, svg(icons.play), r.mode === 'adventure' ? 'Keep exploring' : doneToday ? 'Continue adventure' : 'Play again'),
+      r.mode === 'adventure' ? h('button', { class: 'btn btn-purple', onClick: () => showAdventurePicker() }, 'Next chapter') : null,
+      h('button', { class: 'btn btn-green', onClick: () => r.mode === 'adventure' ? startMixedAdventure() : doneToday ? showAdventurePicker() : startQuest(r.mod) }, svg(icons.play), r.mode === 'adventure' ? 'Mixed practice' : doneToday ? 'Continue adventure' : 'Play again'),
     ),
   );
   const s = h('div', { class: 'summary' }, card);
